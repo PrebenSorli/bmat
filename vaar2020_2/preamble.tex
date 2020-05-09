@@ -1,0 +1,158 @@
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+%\usepackage{stix}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+
+%%% --- From the original amsart template --- %%%
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{problem}{Problem}[section]
+\newtheorem{notation}{Notation}[section]
+
+\newtheorem{application}{Application}[section]
+
+\newtheorem{construction}{Construction}[section]
+
+%\theoremstyle{plain}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem*{corollary}{Corollary}
+
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{recall}{Recall}
+\newtheorem*{note}{Note}
+
+
+%%% --- Packages (all added by us) --- %%%
+
+% TODO: Do we need all these? Remove one-by-one and compile.
+% Note that some of these may not be compatible with amsart; see the Author Handbook link above.
+
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{gensymb} %For degree command
+
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, urlcolor=blue, pdfborder={0 0 0}]{hyperref}
+\usepackage{tikz-cd}
+\usepackage{relsize}
+\usepackage[makeroom]{cancel}
+
+\usepackage{xifthen}
+
+% Packages for tikz
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usepackage{adjustbox}
+\usetikzlibrary{babel}
+\usetikzlibrary{arrows}
+
+%\usepackage{showkeys}
+
+%%% --- End of packages --- %%%
+
+
+%%% --- Packages added by Preben --- %%%
+\usepackage{verbatim}
+
+%%% --- New commands added by Preben --- %%%
+
+\newcommand{\indprod}[1]{\langle #1\rangle}
+\newcommand*\quot[2]{{^{\textstyle #1}\big/_{\textstyle #2}}}
+
+\newcommand{\RomanNumeralCaps}[1]
+    {\MakeUppercase{\romannumeral #1}}
+
+\DeclareMathOperator{\ann}{ann}
+		\newcommand{\transv}{\mathrel{\text{\tpitchfork}}}
+		\makeatletter
+		\newcommand{\tpitchfork}{%
+		  \vbox{
+		    \baselineskip\z@skip
+		    \lineskip-.52ex
+		    \lineskiplimit\maxdimen
+		    \m@th
+		    \ialign{##\crcr\hidewidth\smash{$-$}\hidewidth\crcr$\pitchfork$\crcr}
+		  }%
+		}
+	\makeatother
+
+%\DeclareMathOperator{\max}{max}
+
+
+%%% --- New commands added by us --- %%%
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\PP}{\mathbb{PP}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Fp}{\mathbb{F}_p}
+\newcommand{\Fq}{\mathbb{F}_q}
+
+\newcommand{\defhl}[1]{\textbf{#1}}
+
+\newcommand{\twopartdef}[4]
+{
+	\left\{
+		\begin{array}{ll}
+			#1 & \mbox{if } #2 \\
+			#3 & \mbox{} #4
+		\end{array}
+	\right.
+}
+
+\newcommand{\threepartdef}[6]
+{
+	\left\{
+		\begin{array}{lll}
+			#1 & \mbox{if } #2 \\
+			#3 & \mbox{if } #4 \\
+			#5 & \mbox{} #6
+		\end{array}
+	\right.
+}
+
+\newcommand{\Mod}[1]{\ (\text{mod}\ #1)}
+\newcommand{\tr}{\text{tr}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+
+%\DeclareMathOperator{\transverse}{
+%DeclareUnicodeCharacter{10970}{\transverse}
+%% --- New commands added by Even 🙂 --- %%%
+
+\DeclareMathOperator{\arccosh}{arccosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arccsch}
+\DeclareMathOperator{\arccoth}{arccoth}
+\DeclareMathOperator{\proj}{proj}
+\newcommand{\vct}{\mathbf}
+\newcommand{\vctproj}[2][]{\proj_{\vct{#1}}\vct{#2}}
+\usepackage{physics}
+
+\usepackage{spverbatim}
