@@ -1,0 +1,155 @@
+\title{Forelesninger Week 6 Complex Analysis}
+\maketitle
+\section{11. feb.}
+$$f: \R \to \R, \quad x \mapsto
+\begin{cases}
+  0 \text{ if } x= 0 \\
+  exp(-\frac{1}{x^2}) \text{ if }x \neq 0
+\end{cases}
+$$
+$f$ is of class $C^{\infty}$ and $f^n(0)=0 \forall n \in \Z_{n\geq 0}$.
+\newline $\sum \frac{f^{(n)}}{n!}x^n \equiv 0 \rightarrow $ $f$ is not locally given by a power series.
+
+\subsection*{Taylor expansion of holomorphic functions}
+Let $D\subseteq \C$ open, $f: D \to \C$ holomorphic, $r\in \R_{>0}, z_0 \in D$, and assume $D_r(z_0)\subseteq D$. Then
+  \begin{enumerate}[(a)]
+    \item On $D_r(z_0)$ the function $f$ is given as a power series centered at $z_0$, whose radius of convergence is $\geq r$. In particular, $f$ is infinitely many times complex differentiable and
+      $$f(z)=\sum_{n=0}^{\infty}\frac{f^{(n)}}{n!}(z-z_0)^n, \forall z\in D_r(z_0)$$
+    \item If $0<s<r$, then $\forall n \in \Z_{n\geq0 }$,
+      $$f^{(n)}(z_0)= \frac{n!}{2\pi i}\int_{|w-z_0|=r}\frac{f(w)}{(w-z_0)^{n+1}}dw$$
+  \end{enumerate}
+  \begin{proof}
+    Let $z\in D_r(z_0)$. Pick an $s\in (0,r)$ with $z-z-0|<s$ i.e. $z\in D_s(z_0)$. Since $D_s(z_0)\subseteq D_r$ we can apply the Cauchy Integral formula:
+      $$f(z) = \frac{1}{2 \pi i} \int_{|w-z_0|=s}dw=\frac{1}{2 \pi i}\int_{|w-z_0|=s}\frac{f(w)}{w-z_0} \cdot \frac{1}{1- \frac{z-z_0}{w-z_0}}dw$$
+      $$ \left|\frac{z-z_0}{w-z_0}\right| \leq 1 ??? $$
+      This is a geometric series so
+      $$= \frac{1}{2 \pi i} \int_{|w-z_0|=s}\frac{f(w)}{w-z_0}\sum_{n=0}^{\infty}\left(\frac{z-z_0}{w-z_0}   \right)^n dw$$
+      $$(*)= \frac{1}{2\pi i} \sum_{n=0}^{\infty} \int_{|w-z_0|=s}\frac{f(w)}{w-z_0} \left(\frac{z-z_0}{w-z_0}\right)^n dw $$
+      $$ = \sum_{n=0}^{\infty} \left[  \frac{1}{2 \pi i} \int_{|w-z_0|=s}\frac{f(w)}{(w-z_0)^{n+1}}dw \right] (z-z_0)^n $$
+      The term inside the brackets is constant in $\C$, independent from $z$, and from $s\in(0, r)$ by homotopy invariance.
+      This is a power series around $z_0$, convergence for $x\in D_r(z_0)$ implicit from calculation. By uniqueness of power series it follows that
+        $$f^{(n)}(z_0)= \frac{n!}{2\pi i}\int_{|w-z_0|=s}\frac{f(w)}{(w-z_0)^{m+1}}dw$$
+      Now we have to verify $(*)$: this follows straight away from the dominated convergence theorem:
+        $$|f_n|= \left| \frac{f(re^{i\varphi}+z_0)}{(re^{i\varphi}+z_0)-z_0} \cdot \left(\frac{z-z_0}{re^{i\varphi}+z_0-z_0}\right)^n \cdot ire^{i\varphi}\right|=\left|\frac{f(re^{i\varphi}+z_0) \cdot(z-z_0)^n \cdot r }{re^{i\varphi} \cdot r^n(e^{i\varphi})^n}\right|$$
+        $$= \left|\frac{z-z_0}{r}\right|^n \left|f(re^{i\varphi}+z_0)\right| \leq \left| f(re^{i\varphi}+z_0)\right| \leq max_{0 \leq \varphi \leq 2\pi}\left|f(re^{i\varphi}+z_0)\right|<\infty$$
+          \qedhere
+  \end{proof}
+Assuming $f$ has a power sereies $f(z)=\sum_{n=0}^{\infty}a_n(z-z_0)^n$, we set by termwise differentiation that $a_n=\frac{f^{(n)}(z_0)}{n!}$
+
+\begin{example}
+  $$f: \C \setminus\{-i,i\} \to \C, Z \mapsto \frac{1}{z^2+1}$$
+  $f$ is given as a power series centered in $D_{\sqrt{2}}(1)$.
+\end{example}
+
+\begin{remark}
+    $D \subseteq \C$, $f: D\to \C$ holomorphic, $D_r(z_0)\subseteq D$ for some $z_0 \in D$, $r\in \{R_{>0}$. Then $\forall z \in D_r(z_0)$:
+      $$\forall n \in \Z_{\geq 0}: f^{(n)}(z)=\frac{n!}{2\pi i} \int_{|w-z_0|=r}\frac{f(w)}{(w-z)^{n+1}}dw$$
+    ``Generalized Cauchy Integral formula'' -- observe that $z$ now don't have to be the center of the disk $z_0$, but can take any value in the interior $D_r(z_0)$.
+\end{remark}
+\begin{proof}
+  (Sketch)
+  \newline The proof is by homotopy invariance. $s>0: D_s(z_0)\subseteq D_r(z_0)$. Now we apply our previous theorem
+    $$f^{(n)}(z)=\frac{n!}{22 \pi i} \int_{|w-z| = s }\frac{f(w)}{(w-z)^{n+1}} dw$$
+  Now let $\gamma_1, \gamma_2$ be freely $\C^2$-homotopic in $D\setminus \{z\}$
+    $$=\frac{n!}{2\pi i}\int_{|w-z_0|=r}\frac{f(w)}{(w-z)^{n+1}}dw$$
+\end{proof}
+
+\section{14. feb.}
+\begin{corollary}
+  Let $D \subseteq \C$ open, $f:D\to \C$ a function. TFAE:
+    \begin{enumerate}[(i)]
+      \item $f$ is complex differentiable (holom.)
+      \item $f$ is infinitely many times comp. diff.
+      \item $f$ admits a complex antiderivative locally at every point in $D$
+      \item $f$ can be written as a complex power series loccally at every point in $D$
+      \item $f$ is (real) totally differentiable and satisfies Cauchy-Riemann
+      \item $f$ i of class $c^{\infty}$ and satisfies Cauchy-Riemann
+    \end{enumerate}
+\end{corollary}
+
+\begin{theorem}
+  \textbf{Liouville's theorem}
+  \newline Every bounded holomorphic function $f:\C \to \C$ is constant.
+\end{theorem}
+\begin{proof}
+  $\exists M \in \mathbb{R}_{> 0}:|f(z)|<M \quad \forall z \in \mathbb{C}$. Furthermore $f(z)=\sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n !} z^{n} \quad \forall z \in \mathbb{C}$ and $\forall r>0 \quad \forall n \in \mathbb{Z}_{\geq 1}$
+  $$\left|\frac{f^{(n)}(0)}{n!}\right|=\left|\frac{1}{2\pi i} \int_{|z|=r}\frac{f(z)}{z^{n+1}}dz\right|$$
+  $$\leq \frac{1}{2 \pi} \int_{|z|=r} \left| \frac{f(z)}{z^{n+1}} \right| d z$$
+  $$\nleq \frac{1}{2\pi} \frac{M}{r^{n+1}} \cdot 2 \pi r = \frac{M}{r^n}\xrightarrow{r\to \infty}0$$
+  $$\Rightarrow f(z)\rvert_{D_r}=\sum_{n=0}^{\infty} \frac{f^{(n)}}{n!} z^n \xrightarrow{r\to \infty}f(0)$$
+  \qedhere
+\end{proof}
+\begin{lemma}
+  Let $\emptyset \neq D \subseteq \C$ open, be connected and let $f:D\to \C$ be holomorphic. TFAE:
+    \begin{enumerate}[(i)]
+      \item $f \equiv 0$ on $D$
+      \item $f \rvert_A \equiv 0$ for some set $A\subseteq D$, which has an accumulation point in $D$.
+      \item $\exists z_0 \in D: f^{(n)}(z_0)=0 \forall n \in z_{\geq0}$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+  $((i)\Rightarrow (ii))$ take $A=D$
+  \newline $((ii)\Rightarrow (iii))$ Let $z_0 \in D$ be an accumulation point of $A$. Assume FTSOAC $\exists n \in \Z_{\geq 0}: f^{(n)}(z_0)\neq 0$. Let $n$ be chosen to be minimal with this property
+    $\Rightarrow \exists u \subseteq D$ open with $z_0\in u$, such that $\forall z\in u$:
+      $$f(z)=\sum_{k=n}^{\infty}\frac{f^{(k)}(z_0)}{k!}(z-z_0)^k \Rightarrow g: u \to \C: z\mapsto \sum_{k=0}^{\infty}\frac{f^{(n+k)}(z_0)}{k!}(z-z_0)^k$$
+      is holomorphic on $u$ and $\forall z\in u \setminus\{z_0\} g(z)=\frac{f(z)}{(z-z_0)^n}$
+      \newline $\Rightarrow $ the function $h(z_0): D\to \C, z\mapsto
+        \begin{cases}
+          f(z)/(z-z_0)^n \text{ if }z\neq z_0 \\
+          f^{(n)}/n! \text{ if }z=z_0
+        \end{cases}
+      $.
+      \newline Let $(a_m)_{m\in \Z_{\geq 0}}$ be a sequence in $A\setminus \{z_0\}$ converging to $z_0$. We get
+        $$0 \neq \frac{f^{(n)}(z_0)}{n!}=h(z_0)=\lim_{m\to \infty}h(a_m)= \lim_{m\to \infty}\frac{f(a_m)}{(a_m-z_0)^n}=0$$
+        Contradiction
+      \newline $((iii) \Rightarrow (i))$ $S:= \{.z \in D: f^{(n)}(z)=0 \quad \forall n \in \mathbb{Z}_{\geq 0}\}$. Have to show that $S=D$. $D$ connected $\Rightarrow $ enough to show $a) S\neq \emptyset$ $b) S\subseteq D \text{ closed }, c) S\subseteq D \text{ open}$.
+        \begin{enumerate}[a)]
+          \item $z_0 \in S$
+          \item $f^{(n)}$ is continous $\forall n \in \Z_{\geq 0}$. Let $z\in D$ be the point(?) of a sequence $(s_m)_{m\in \Z_{\geq 0}}\in S$. Then $\forall n$, we have
+            $$f^{(n)}(z)= f^{(n)}\left(\lim_{m\to \infty}s_m\right) (=cont) \quad lim_{m\to \infty}f^{(n)}(s_m)=\lim_{m\to \infty}0=0$$
+            Hence the limit is in $S$ so $\overline{S}=S$, that is $S$ is closed in $D$.
+          \item Let $w \in S \Rightarrow \exists$ open neighborhood $u$ of $w$ in $D$ such that
+          $$\forall z\in u:f(z)=\sum_{n=0}^{\infty}\frac{f^{(n)}(w)}{n!}(z-w)^n=0$$
+          $$\Rightarrow f \equiv 0 \text{ on } U \Rightarrow u \subseteq S$$
+          \qedhere
+        \end{enumerate}
+\end{proof}
+
+\begin{example}
+  \begin{enumerate}[(a)]
+    \item $f: \C \to \C$ holomorphic, $f(\frac{1}{n})=0 \forall n \in \Z_{>0}, A=\{\frac{1}{n} : n \in \Z_{>0}\}$ $\Rightarrow f \equiv 0$
+    \item $g: \C \setminus\{0\} \to \C$ holomorphic, $g(\frac{1}{n})=0 \forall n \in \Z_{>0}$ can choose $g(z)=\sin(\frac{\pi}{2})\not\equiv 0$ but $A=\{\frac{1}{n}: n \in \Z_{Z>0}\}$ has accumulation point -- the problem is that it is in the boundary.
+  \end{enumerate}
+\end{example}
+
+\begin{theorem}
+  \textbf{Identity theorem}
+  \newline Let $D\subseteq \C$ open, be connected. If two holom. functions $f,g: D\to \C$ coincide on a set $A\subseteq D$ which has an accumulation point in $D$, then they coincide on all of $D$.
+\end{theorem}
+\begin{proof}
+  Apply the previous lemma to $f-g$.
+  \qedhere
+\end{proof}
+
+\subsection*{Maximum principle Version 3}
+$D\subseteq \C$ open, connected, $f:D\to \C$ holomorphic. If $|f|$ has a local maximum in $D$.
+
+\begin{corollary}
+  $D\subseteq \C$ open, connected, $f:D\to \C$ holomorphic and non-constant. If $z_0 \in D$ and $f(z_0)=0$, then there exists an open neighborhood $u\subseteq D$ of $z_0$ such that $z_0$ is the only zero of $f\rvert_u$.
+\end{corollary}
+\begin{proof}
+  Do it yourself.
+\end{proof}
+
+\begin{theorem}
+  \textbf{Open mapping theorem}
+  \newline Let $D\subseteq \C$ open, be connected, $f:D\to \C$ holomorphic and non-constant. Then $f(D)$ is open in $\C$.
+\end{theorem}
+\begin{proof}
+  Let $w_0 \in f(D)$, i.e. $z_0 \in D: f(z_0)=w_0$. Since $f-w_0$ is holomorphic and non-constant ont the connected open set $D$, we find $\varepsilon >0$ such that $\overline{D_{\varepsilon}}(z_0)\subseteq D$ and $z_0$ is the only zero of $f-w_0$ on $\overline{D_{\varepsilon}}(z_0)$. Let $\Delta:=min_{z:|z-z_0|=\varepsilon}|f(z)-w_0| >0$.
+  WTS: $D_{\Delta/2}(w_0)\subseteq f(D)$. Let $w\in D_{\Delta/2}(w_0)$ and consider $f-w$. For $z\in D$ with $|z-z_0|=\varepsilon$ we get by triangle inequality
+    $$||f(z)-|w|| \geq |f(z)-w_0|-|w_0-w|\geq \Delta -|w-w_0|>\Delta - \frac{\Delta}{2}=\frac{\Delta}{2}$$
+    But $$|f(z_0)-w|=|w_0-w|<\frac{\Delta}{2}\Rightarrow \left|f\rvert_{\overline{D_{\varepsilon}(z_0)}}-w\right|$$
+    does not attain its minimum on the boundary of $D_{\varepsilon}(z_0)$, which by the maximum principle ($2$nd version) implies that $f\rvert_{\overline{D_{\varepsilon}(z_0)}}-w$ must have a zero $\tilde{z}\in D_{\varepsilon}(z_0)$.
+    \qedhere
+\end{proof}

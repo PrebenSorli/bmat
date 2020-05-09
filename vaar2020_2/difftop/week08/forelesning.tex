@@ -1,0 +1,280 @@
+\title{Lecture week 7}
+\maketitle
+\section{25. feb.}
+\begin{theorem}
+  \textbf{Sard's theorem}
+  \newline Let $f: X \to Y$ be a smooth function, then the set of eigenvalues of $f$ has measure $0$ in $Y$.
+  $f ^{-1}(y)$ is a manifold for almost all $y\in Y$.
+\end{theorem}
+
+\subsection*{Morse functions}
+A function $f: \R^k \to \R$ is \emph{Morse}, if at every critical point $p \in \R^k$.
+  \newline $\left(i.e. df_p =0  \right)$ the hessian matrix of $f$ at $p$ is invertible
+  $$ H(p)=
+  \begin{bmatrix}
+      \frac{\partial^2}{\partial x_i \partial x_j}(p)
+  \end{bmatrix}
+  $$
+We say $p$ is a nondegenerate critical point when $H(p)$ is invertible.
+
+\begin{definition}
+  Let $X$ be a smooth manifold and let $f: X \to \R$ be smooth, we say $f$ is \emph{Morse} if at any critical point $p\in X$ we can find a coordinate system so that $h= f\circ \varphi : \tilde{u}\to \R$ is Morse, i.e., need Hessian
+    $$
+    \begin{bmatrix}
+        \frac{\partial^2}{\partial x_i \partial x_j}(0)
+    \end{bmatrix}
+    $$
+  to be invertible.
+\end{definition}
+
+\begin{proposition}
+  The critical points of a Morse function are \emph{isolated} from one another. In other words, the set of critical points is a discrete subspace of $X$.
+\end{proposition}
+\begin{proof}
+  Say $p \in X$ is a critical point. Find coords around $p$:
+    \newline coords
+    \newline and look at $h= f\circ \varphi : \tilde{u} \to \R$. Define
+      $$g: \tilde{u} \to \R^k
+        x \mapsto
+        \begin{bmatrix}
+          \frac{\partial h}{\partial x_1} (x) \\
+          \vdots \\
+          \frac{\partial h}{\partial x_k}(x)
+        \end{bmatrix}
+      $$
+      $$dg_x =
+      \begin{bmatrix}
+          \frac{\partial^2}{\partial x_i \partial x_j}(0)
+      \end{bmatrix}
+      $$
+      is the Hessian of $h$. So we have
+        $$g(0)=0 ( 0 \text{ is a critical value of } h)$$
+        $dg_0$ is an invertible linear map. Inverse function theorem $\Rightarrow g$ is a local diffoe at $0 \in \tilde{u}$. So in a negiborhood $0 \in \tilde{V}\subseteq \tilde{u}$ where $g: \tilde{V}\to \R^k$ diffeo to its image.
+    \newline Key: $g(x)=0 iff x=0, x\in \tilde{V}$. This means $p\in \varphi (\tilde{V})$ is the only critical value of $f$ in $\varphi (\tilde{V})$, which is an open set, only critical point $p\in \varphi (\tilde{V})$.
+\end{proof}
+
+\begin{proposition}
+  On a compact space $X$, the critical points of a Morse function $f: X \to \R$ is a finite set.
+\end{proposition}
+
+\subsection*{Idea of Morse theory}
+$ X \subseteq \R^n $ compact manifold. $f: X \to \R$ Morse function. (usually think of $f$ as $f(x_1,\dots , x_N)=x_N$). ($f$ is a height function).
+
+  $$T^2\subseteq \R^3$$
+  $x \in X$ is critical when $T_xX \vert z$-axis.
+  \newline  critical points $\leftrightarrow $ local extrema of $f$ on $X$.
+  \newline from calculus, you can determine if $f$ has a local min, max, saddle at a critical point by looking at Hessian of $f$ at $x$.
+  \newline For the torus:
+  \newline Hessian at $x_1$:
+    $$
+    \begin{bmatrix}
+      1 & 0 \\
+      0 & 1
+    \end{bmatrix}
+    $$
+    $\leftrightarrow $ manifold is locally the graph of $x^2+y^2$.
+  \newline Hessian at $x_2$:
+    $$
+    \begin{bmatrix}
+      1 & 0 \\
+      0 & -1
+    \end{bmatrix}
+    \leftrightarrow x^2-y^2
+    $$
+  Fact of Morse theory: If $s,t \in (a,c_1)$ or $(c_1,c_2)$ or $c_2,b$ then the manifolds $f^{-1}((-\infty,s))$ and $f^{-1}((-\infty,t))$ are homotopy equivalent.
+  \newline When we cross $c_1$, the critical point has Hessian
+    $$  \begin{bmatrix}
+        1 & 0 \\
+        0 & -1
+      \end{bmatrix}
+      \leftrightarrow x^2-y^2$$
+    Says we attach a saddle to $f ^{-1}((-\infty,t))$, at next critical value $c_3$, we have to attach anothe saddle, at $c_4$ glue on a disc.
+
+\begin{lemma}
+  \textbf{Morse Lemma}
+    Let $f: X \to \R$ be a Morse function, $p\in X$ a critical point. In coords $\varphi : \tilde{u } \to X, 0 \mapsto p$ you have $h = f \circ \varphi $, Hessian $H(0)=
+    \begin{bmatrix}
+        \frac{\partial^2 h}{\partial x_i \partial x_j}(0)
+    \end{bmatrix}=
+    \begin{bmatrix}
+      h_{ij}
+    \end{bmatrix}
+    $. Morse lemma says there is some coord. system
+      $$\psi: \tilde{V} \to X, 0 \mapsto p$$
+    so that $f \circ \psi (x)=f(p)+ \sum h_{ij} x_ix_j$.
+\end{lemma}
+\textbf{Compare}
+$f: X \to \R$, $p\in X$ a regular point, $Df_p$ surjective. Local submersion theorem says there are coords $\varphi : \tilde{u} \to X, o\mapsto p$ where $f \circ \varphi (x)=f(p)+x_k$.
+
+\begin{example}
+  $$S^2 \subseteq \R^3 \xrightarrow{ h} \R$$
+  $$(x,y,z) \mapsto z$$
+  Is it Morse?
+    $$\varphi _N(x,y) = \frac{1}{1+x^2+y^2}\left(2x,2y,x^2+y^2-1\right)$$
+    $$\varphi _S(x,y)=\frac{1}{1+x^2+y^2}\left(2x,2y,1-x^2-y^2\right)$$
+    $$h_N=h \circ \varphi _N$$
+    $$h_N(x,y)=\frac{x^2+y^2-1}{1+x^2+y^2}$$
+    $$h_s(x,y)=\frac{-(x^2+y^2-1)}{1+x^2+y^2}$$
+    $$dh_N(x,y)=\frac{1}{(1+x^2+y^2)^2}[4x \quad 4y]$$
+    $$dh_s(x,y)=\frac{-1}{(1+x^2+y^2)}[4x \quad 4y]$$
+    Only critical points are
+    $$(0,0) in \varphi _N \leftrightarrow S \in S^2$$
+    $$(0,0) in \varphi _s \leftrightarrow N \in S^2$$
+    $$H_N(0,0) =
+    \begin{bmatrix}
+      4 & 0 \\
+      0 & 4
+    \end{bmatrix}$$
+    $$H_S(0,0)=
+    \begin{bmatrix}
+      -4 & 0 \\
+      0 & -4
+    \end{bmatrix}$$
+\end{example}
+Imagine $f: X \to \R$ with $2$ critical points. $X$ compact.
+\begin{theorem}
+  \textbf{Reeb's theorem} If $X$ is compact $n$-manifold with a Morse function $f: X \to \R$ that has exactly $2$ critical points, then $X$ is homeomorphic to $S^n$.
+\end{theorem}
+\textbf{Exotic spheres: }There are manifolds $X$ that are homeomorphic to $S^7$ but are not diffeomorphic to $S^7$.
+
+\begin{lemma}
+  $u \subseteq \R^k$ open, $f: u \to \R$ smooth. For almost every $a\in \R^k$
+    $$f_a(x)=f(x)+a_1x_1+\dots+a_kx_k$$
+  is Morse.
+\end{lemma}
+\begin{proof}
+  Define
+    $$g(x)=
+    \begin{bmatrix}
+        \frac{\partial f}{\partial x_1}(x) \\
+        \vdots \\
+        \frac{\partial f}{\partial x_k}(x)
+    \end{bmatrix}, g: u \to \R^k$$
+    Recall $dg_x$ is the Hessian of $f$ at $x$.
+      $$(df_a)_x= g(x)+a.$$
+      $$g_a(x)=\begin{bmatrix}
+          \frac{\partial f_a}{\partial x_1}(x) \\
+          \vdots \\
+          \frac{\partial f_a}{\partial x_k}(a)
+      \end{bmatrix}, (dg_a)_x=(dg)_x$$
+      A point $p\in u$ is critical point of $f_a$ iff $(df_a)_p=0=g(p)+a$ iff $g(p)=-a$.
+      \newline Sard's theorem says there exists $-a\in \R^k$ that is a reg. value for $g$. So for any crit. point $p$ of $f_a$, i.e., $g(p)=-a$, we have $(dg)_p$ invertible, Hessian of $f_a$ is invertible.
+        \qedhere
+\end{proof}
+
+\begin{theorem}
+  Say $X \subseteq \R^n$ is a manifold and $f: X \to \R$ smooth. Then for almost every $a \in \R^n, f_a(x)=f(x)+\sum_{i=1}^{n}a_ix_i$ is Morse.
+\end{theorem}
+\begin{lemma}
+  Let $X \subseteq \R^n $ be a $k$-manifold. Then at $p\in X$, there are coords $x_{i_1}, \dots , x_{i_k}$ taken from the standard coords on $\R^n$, that give coords on $X$.
+\end{lemma}
+\begin{proof}
+  $T_xX=Span\{v_1,\dots , v_k\}, v_i\in \R^n$. Look at $[v_1, \dots , v_k]$ $k$-coords are lin.indep.. So can find $k$ rows where the corresponding $k\times k$ submatrix is invertible. Say it is rows $i_1, i_2, \dots , i_k$. Then look at $\pi: \R^n \to \R^k, x\mapsto (x_{i_1}, \dots , x_{i_k})$.
+  $$D\pi \rvert_x : T_xX \xrightarrow{\simeq}T_{\pi(x)}\R^k$$
+  $[v_1,\dots,v_k] \mapsto k\times k\text{ submatrix that is invertible}$, in other words, $\{D\pi x_1, \dots D\pi x_k\}$ is a a basis for $T_{\pi(x)}\R^k$. IFT says $\pi$ is local diffeo.
+  \newline On $u \subseteq X$ with coords $x_1, \dots x_k$ look at functions
+    $$f_{(a,c)}(x)=f(x)+\sum_{i=1}^ka_ix_i+\sum_{i=k+1}^Nc_ix_i$$
+    $f_{(0,c)}(x)$ on $u$, almost all $a\in \R^k$ give a Morse function $f_{(a,c)}(x)$ on $u$.
+\end{proof}
+
+\section{27. feb.}
+\begin{remark}
+  The $2$-torus.
+    $$T^2= S^1 \times S^1 \subseteq \R^4$$
+  But we think of $T^2$ as
+    \newline Image of torus $\subseteq \R^3$
+    \newline a surface of revolution.
+\end{remark}
+What is the underlying structure of the torus shared by all of its representations?
+\newline For a manifold $X$, what kind of embeddings $X\to \R^n$ are possible?
+
+\begin{theorem}
+  \textbf{Whitney embedding theorem}
+  \newline If $X \subseteq \R^n $ a $k$-manifold, then there exists an embedding
+    $$X \xrightarrow{f} \R^{2k+1}.$$
+\end{theorem}
+\subsubsection*{Improvement:}
+Possible to embed $X$ into $X \xrightarrow{f}^{2k}$.
+\newline $S^2 \subseteq \R^3$ Whitney says
+  $$S^2 \xrightarrow{f}\R^5$$
+Klein bottle
+  \newline Insert picture of Klein bottle with rep dia.
+  \newline We'll show Whitney Embedding for $X$ compact.
+    $$f: X \to \R^{2k+1} \text{ embedding.}$$
+  Properness is free.
+  \newline Worry about: injectivity and immersion
+  \newline Introduce the Tangent Bundle to a manifold $X$.
+\begin{definition}
+  $X \subseteq \R^n $ a smooth manifold.
+    $$TX = \cup_{x\in X}T_xX \subseteq \R^n \times \R^n$$
+    $$ = \{ (x,v) \in \R^n \times \R^n | (x,v)\in T_xX\} $$
+\end{definition}
+$TX$ is a smooth manifold.
+\begin{definition}
+  if $f: X \to Y$ smooth, then we get smooth map
+    $$Df: TX \to TY$$
+    $$ (x,v) \mapsto Df_x(x,v)$$
+\end{definition}
+\begin{notation}
+  $$Df_x(x,v) = \left(f(x), df_x(x,v) \right)$$
+  find extension $\tilde{f}$ of $f$ at x
+    $$\left(f(x),d\tilde{f}_x(x,v)\right)= Df_x(v)= \left(f(x), df_x(x,b)\right)$$
+\end{notation}
+\subsubsection*{Properties:}
+\begin{enumerate}[(1)]
+  \item ( Functionality / Chain rule )
+    $$X \xrightarrow{ f}Y \xrightarrow{ g} Z$$
+    $$X \xrightarrow{g\circ f} Z$$
+    commute.
+    $$TX \xrightarrow{ Df} TY \xrightarrow{ Dg}TZ$$
+    $$TX \xrightarrow{D(g\circ f)} TZ$$
+    commute.
+      \begin{proof}
+        $$D(g\circ f)(x,v) ?= D(g)\left(D(f)(x,v)\right)$$
+        $$= \left(g(f(x)), d(g\circ f)_x(v)\right)$$
+        $$= \left(g(f(x)), dg_{f(x)}(df_x(v))\right)$$
+        $$= Dg \left(f(x), df_x(v)\right)$$
+        $$= Dg \circ Df \left(x,v\right).$$
+      \end{proof}
+  \item (Functionality / Chain rule and Identity )
+    $$X\xrightarrow{id}X$$
+    $$TX \xrightarrow{Did}TX$$
+    $$(x,v)\mapsto (x,d(id)_x(v))$$
+    $$D(id_x)=id_{TX}$$
+\subsubsection*{Consequence}
+if $X\xrightarrow{f}Y$ is a diffeo, then
+  $$TX \xrightarrow{Df}TY$$
+is a diffeo.
+  $$X \xrightarrow{f}Y \xrightarrow{f^{-1}}X$$
+  $$X \xrightarrow{ id_x } X$$
+  commute.
+  $$TX \xrightarrow{ Df }TY \xrightarrow{Df^{-1}}TX$$
+  $$X\xrightarrow{id_{TX}}TX$$
+  commute.
+  \item If $f: X \to Y$ is smooth, then
+    $$Df: TX \to TY \text{ is smooth}.$$
+    Need to find a smooth extension around $(x,v)\in TX$.
+    \newline Since $f: X \to Y$ is smooth at $x$, there is $\tilde{u}\subseteq \R^n $
+ open,
+ \newline Diagram
+\newline $T(\tilde{u}\cap X) = TX \cap (\tilde{u}\times \R^n)$.
+\newline What is $D\tilde{f}$?
+  $$ \tilde{f}(x_1,\dots ,x_n) =
+    \begin{bmatrix}
+      \tilde{f_1}(x) \\
+      \vdots
+      \tilde{f_m}(x)
+    \end{bmatrix}
+  $$
+  $$ D\tilde{f}(x_1, \dots, x_n, v_1, \dots, v_n) =
+    \begin{bmatrix}
+      \tilde{f_1}(x) \\
+      \vdots
+      \tilde{f_m}(x) \\
+    \sum \frac{\partial \tilde{f_1}}{\partial x_j}(x) \cdot v_j \\
+    \vdots \\
+  \sum \frac{\partial \tilde{f_m}}{\partial x_j}(x) \cdot v_j
+    \end{bmatrix}
+  $$
+  this is indeed smooth.
+  \end{enumerate}

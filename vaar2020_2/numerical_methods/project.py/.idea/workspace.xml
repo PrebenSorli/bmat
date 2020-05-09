@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="876deaed-9192-4f2c-80a0-a37c48d4cb3a" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ZB2sK01fzRcQf7lu8L6yp6c7ax" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager" selected="Python.lagrange">
+    <configuration name="LaGrange-nicer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project.py" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../LaGrange-nicer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="LaGrange" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="project.py" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/LaGrange.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="lagrange" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="project.py" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/.." />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../lagrange.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.lagrange" />
+        <item itemvalue="Python.LaGrange" />
+        <item itemvalue="Python.LaGrange-nicer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="876deaed-9192-4f2c-80a0-a37c48d4cb3a" name="Default Changelist" comment="" />
+      <created>1584284466578</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584284466578</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1241" y="-289" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1584298408659">
+      <screen x="-2560" y="-640" width="2560" height="1440" />
+    </state>
+    <state x="-1241" y="-289" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1584298408659" />
+    <state x="-1142" y="-210" key="FileChooserDialogImpl" timestamp="1584300158687">
+      <screen x="-2560" y="-640" width="2560" height="1440" />
+    </state>
+    <state x="-1142" y="-210" key="FileChooserDialogImpl/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1584300158687" />
+    <state width="1259" height="111" key="GridCell.Tab.0.bottom" timestamp="1586177670367">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1339" height="276" key="GridCell.Tab.0.bottom/0.0.1280.800/-2560.-640.2560.1440/1280.-290.1920.1080@-2560.-640.2560.1440" timestamp="1585350358991" />
+    <state width="2539" height="292" key="GridCell.Tab.0.bottom/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1585938731959" />
+    <state width="1259" height="111" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1586177670367" />
+    <state width="1259" height="111" key="GridCell.Tab.0.center" timestamp="1586177670365">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1339" height="276" key="GridCell.Tab.0.center/0.0.1280.800/-2560.-640.2560.1440/1280.-290.1920.1080@-2560.-640.2560.1440" timestamp="1585350358990" />
+    <state width="2539" height="292" key="GridCell.Tab.0.center/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1585938731956" />
+    <state width="1259" height="111" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1586177670365" />
+    <state width="1259" height="111" key="GridCell.Tab.0.left" timestamp="1586177670364">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1339" height="276" key="GridCell.Tab.0.left/0.0.1280.800/-2560.-640.2560.1440/1280.-290.1920.1080@-2560.-640.2560.1440" timestamp="1585350358988" />
+    <state width="2539" height="292" key="GridCell.Tab.0.left/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1585938731946" />
+    <state width="1259" height="111" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1586177670364" />
+    <state width="1259" height="111" key="GridCell.Tab.0.right" timestamp="1586177670366">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state width="1339" height="276" key="GridCell.Tab.0.right/0.0.1280.800/-2560.-640.2560.1440/1280.-290.1920.1080@-2560.-640.2560.1440" timestamp="1585350358990" />
+    <state width="2539" height="292" key="GridCell.Tab.0.right/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1585938731957" />
+    <state width="1259" height="111" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1586177670366" />
+    <state width="2539" height="517" key="GridCell.Tab.1.bottom" timestamp="1585928087292">
+      <screen x="-2560" y="-640" width="2560" height="1440" />
+    </state>
+    <state width="1259" height="509" key="GridCell.Tab.1.bottom/0.0.1280.800/-2560.-640.2560.1440/1280.-290.1920.1080@-2560.-640.2560.1440" timestamp="1585350358965" />
+    <state width="2539" height="517" key="GridCell.Tab.1.bottom/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1585928087292" />
+    <state width="2539" height="517" key="GridCell.Tab.1.center" timestamp="1585928087288">
+      <screen x="-2560" y="-640" width="2560" height="1440" />
+    </state>
+    <state width="1259" height="509" key="GridCell.Tab.1.center/0.0.1280.800/-2560.-640.2560.1440/1280.-290.1920.1080@-2560.-640.2560.1440" timestamp="1585350358962" />
+    <state width="2539" height="517" key="GridCell.Tab.1.center/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1585928087288" />
+    <state width="2539" height="517" key="GridCell.Tab.1.left" timestamp="1585928087286">
+      <screen x="-2560" y="-640" width="2560" height="1440" />
+    </state>
+    <state width="1259" height="509" key="GridCell.Tab.1.left/0.0.1280.800/-2560.-640.2560.1440/1280.-290.1920.1080@-2560.-640.2560.1440" timestamp="1585350358961" />
+    <state width="2539" height="517" key="GridCell.Tab.1.left/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1585928087286" />
+    <state width="2539" height="517" key="GridCell.Tab.1.right" timestamp="1585928087290">
+      <screen x="-2560" y="-640" width="2560" height="1440" />
+    </state>
+    <state width="1259" height="509" key="GridCell.Tab.1.right/0.0.1280.800/-2560.-640.2560.1440/1280.-290.1920.1080@-2560.-640.2560.1440" timestamp="1585350358963" />
+    <state width="2539" height="517" key="GridCell.Tab.1.right/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1585928087290" />
+    <state x="-1420" y="-385" key="SettingsEditor" timestamp="1584300457828">
+      <screen x="-2560" y="-640" width="2560" height="1440" />
+    </state>
+    <state x="-1420" y="-385" key="SettingsEditor/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1584300457828" />
+    <state x="-957" y="-428" key="com.intellij.ide.util.TipDialog" timestamp="1585574009019">
+      <screen x="-2560" y="-640" width="2560" height="1440" />
+    </state>
+    <state x="-957" y="-428" key="com.intellij.ide.util.TipDialog/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1585574009019" />
+    <state x="638" y="118" key="com.intellij.ide.util.TipDialog/0.0.1280.800@0.0.1280.800" timestamp="1584974867719" />
+    <state x="-2042" y="-306" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1584469910258">
+      <screen x="-2560" y="-640" width="2560" height="1440" />
+    </state>
+    <state x="-2042" y="-306" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1584469910258" />
+    <state x="-1093" y="-309" width="670" height="676" key="search.everywhere.popup" timestamp="1585163834188">
+      <screen x="-2560" y="-640" width="2560" height="1440" />
+    </state>
+    <state x="-1093" y="-309" width="670" height="676" key="search.everywhere.popup/0.0.1280.800/-2560.-640.2560.1440@-2560.-640.2560.1440" timestamp="1585163834188" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

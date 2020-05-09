@@ -1,0 +1,614 @@
+\title{Kompleks Analyse -- Forelesning}
+\maketitle
+\section{14. jan 2020}
+\begin{definition}
+   Let $D\subseteq \C$. A \emph{path} or \emph{curve} or \emph{arc} in $D$ is a continous map $\gamma: [a,b]\to D$, where $a,b \in \R, a\leq b$.
+\end{definition}
+\begin{remark}
+  We say that $\gamma$ is:
+    \begin{enumerate}[(a)]
+      \item \emph{closed} provided $\gamma(a)=\gamma(b)$.
+      \item \emph{piecewise continously differentiable} (pw$C^1$ for short) provided there exist
+        $a=t_0<t_1 < \dots < t_n=b, \text{ s.t. } \gamma[t_{k-1},t_k]$ is continously differentiable for $k=1,\dots,n$.
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+  Let $a,b\in \R, a\leq b$.
+    \begin{enumerate}[(a)]
+      \item If $\gamma:[a,b]\to \C$ is a pw$C^1$ path, we define the \emph{length} of $\gamma$ as
+        $$L(\gamma)=\int_a^b|\gamma '(t)|dt \in \R_{\geq 0}.$$
+      \item If $f:D\to \C$ is continous, $D$ open subset of $\C$, and $\gamma:[a,b]\to D$ pw$C^1$ path, we define the \emph{path integral} or \emph{complex line integral} of $f$ along $\gamma$ as
+        $$\int_\gamma f(z)\cdot \gamma'(t)dz:=\int_a^bf(\gamma(t))dt \in \C.$$
+        $$= \left( \int_\gamma udx-vdy \right)+i\left(\int_\gamma vdx+udy\right), \text{ where u=Re f, v=Im f}$$
+    \end{enumerate}
+\end{definition}
+
+\subsection*{``pseudo calculations''}
+$$L(\gamma)=\int |\gamma'(t)dt=\int |\frac{dz}{dt}|dt=\int |dz|$$
+$$f(z)dz=f(z)\frac{dz}{dt}dt=\int f(\gamma(t))\cdot \gamma'(t)dt$$
+\begin{example}
+  \begin{enumerate}
+    \item $\gamma:[0,2\pi]\to \C: \quad t\mapsto z_0+r\cdot e^{it}$, $z_0\in \C, r\in \R_{> 0}$.
+    $$L(\gamma)=\int_0^{2\pi}|r\cdot i \cdot e^{it}|dt=\int_0^{2\pi}r dt =2\pi r.$$
+    Let $f:\C\setminus \{z_0\}\to \C: z\mapsto \frac{1}{z-z_0}$. Then
+      $$\int_\gamma fdz=\int_0^{2\pi}\frac{1}{r\cdot e^{it}}r\cdot e^{it}dt=\int_0^{2\pi}idt=2\pi i$$
+    \item If $\gamma:[a,b]\to \C$ is a $C^1$ path along the real axis with $c=\gamma(a), d=\gamma(b)$, and if $f:\R\to\R$ is continous, then:
+      $$\int_\gamma f(z)dz=\int_a^bf(\gamma(d))\cdot \gamma'(dt)=\int_{\gamma(a)}^{\gamma(b)}f(s)dz=\int_c^df(s)ds$$
+  \end{enumerate}
+\end{example}
+
+\begin{remark}
+  $D\subseteq \C, \gamma:[a,b]\to\C$ pw$C^1$ path.
+    If $\psi:[c,d]\to [a,b]$ is increasing and continously differentiable with $\psi(c)=a, \psi(d)=b$ and if $f:D\to \C$ is continous, then
+      $$\int_\gamma f(z)dz=\int_{\tilde{\gamma}}f(z)dz, \text{ where }\tilde{\gamma}=\gamma\circ\psi.$$
+\end{remark}
+\begin{proof}
+  $$\int_{\tilde{\gamma}}f(z)dz=\int_c^d f(\gamma(\psi(t)))\cdot (\gamma\circ)'(t)dt=\int_c^d f(\psi(t))\cdot \gamma'(\psi(t))\cdot\psi'(t)dt$$
+  substitution $s=\psi(t)$
+  $$=\int_a^bf(\gamma(s))\cdot \gamma'(s)ds=\int_\gamma f(z)dz$$
+  \qedhere
+\end{proof}
+\begin{remark}
+  If $\psi:[c,d]\to [a,b]$ is $C^1$, decreasing with $\psi(c)=b, \psi(d)=a$, then
+    $$\int_{\tilde{\gamma}}f(z)dz=-\int_\gamma f(z)dz.$$
+\end{remark}
+
+\begin{remark}
+  If $\gamma:[a,b]\to \C$ is pw$C^1$, then it can be reparametrized into a $C^1$ path.
+\end{remark}
+\begin{proof}
+  Let $a=t_0<t_1 < \dots < t_n=b, \text{ s.t. }\gamma[t_{k-1},t_k]$ is $C^1$ for $k=1,\dots,n$ and set $\tilde{\gamma}=\gamma \circ \psi$.
+  Pick $\psi:[a,b]\to [a,b]$ s.t.
+  \begin{itemize}
+    \item $\psi$ is $C^{\infty}$
+    \item $\psi$ is strictly increasing
+    \item $\psi(t_k)=t_k$ for $k=0,\dots,n$
+    \item $\psi'(t_k)=0$ for $k=0,\dots,n$
+  \end{itemize}
+  On $[t_{k-1},t_k]:\left(\tilde{\gamma}_{\rvert [t_{k-1},t_k]}\right)'(t_k)=\left(\gamma_{\rvert [t_{k-1},t_k]}\right)'(t_k)\psi'(t_k)=0$.
+  Analogously $\left(\tilde{\gamma}_{\rvert[t_{k-1},t_k]}\right)'(t_{k-1})=0$. Hence the parts $(\tilde{\gamma}_{\rvert [t_{k-1},t_k]}$ can be ``pieced together" into a path $\tilde{\gamma}$, which is $C^1$ on $[a,b]$.
+  \qedhere
+\end{proof}
+
+\begin{example}
+  $\gamma:[-1,1]\to \C$
+  $$t\mapsto \begin{cases}
+    t-if, \text{ if }t<0 \\
+    t+if, \text{ if }t\geq 0
+  \end{cases}$$
+  $\gamma$ not differentiable in $0$.
+\end{example}
+
+$$\psi: [-1,1] \to [-1,1], \quad s\mapsto s^3$$
+$$\tilde{\gamma}$$
+
+%sett inn tekst her
+
+\begin{example}
+  $r>0, \gamma_1:[0,2\pi]\to \C$ : $t\mapsto re^{it}$
+  $$\gamma_2:[0,2\pi] \to \C \quad : \quad t\mapsto r$$
+  $\gamma_1(0)=r=\gamma_2(0), \gamma_1(2\pi)=r=\gamma_2(2\pi)$, but
+    $$\int_{\gamma_1}\frac{1}{z}dz=2\pi i\neq 0 = \int_{\gamma_2} \frac{1}{z}dz.$$
+\emph{Hence}:
+\newline
+  Value of path integral does in general not only depend on start and end point.
+\end{example}
+\begin{definition}
+  Let $D$ open subset of $\C$, $f:D\to \C$ (continous). A function $F:D\to \C$ is called a \emph{complex antiderivative} of $f$, provided $F$ is holomorphic on $D$ and $F'(z)=f(z)\forall z\in D$.
+\end{definition}
+
+\begin{lemma}
+  Let $D$ open subset of $\C$, $f:D\to \C$ (continous), $F: D\to \C$ complex antiderivative of $f$. Assume $\gamma[a,b]\to D$ is of class $C^1$. Then
+    $$\int_{\gamma}f(z)dz=F(\gamma(b))-F(\gamma(a)).$$
+  In particular, $\int_{\gamma}fdz$ only depends on start and end point of $\gamma$, and not on the path itself. If $\gamma$ is closed, then $\int_\gamma f(z)dz=0$.
+\end{lemma}
+
+\section{17. jan}
+\begin{lemma}
+  Let $D$ open in $\C$, $f:D\to \C$ (continous), $F:D\to \C$ complex antiderivative of $f$. Assume that $\gamma: [a,b]\to D$ of class $C^1$. Then
+    $$\int_{\gamma}f(z)dz=F(\gamma(b))-F(\gamma(a)).$$
+\end{lemma}
+\begin{proof}
+  $$\int_{\gamma}f(z)dz=\int_{a}^{b}f(\gamma(t))\cdot \gamma'(f)dt=\int_{a}^{b}F'(\gamma(t))\cdot \gamma'(t)dt$$
+  $$F=U+iV$$
+  $$U=Re F, V=ImF$$
+  $$=\int_{a}^{b}\left[\frac{\partial u}{\partial x}(\gamma_1(t),\gamma_2(t))+i\frac{\partial V}{\partial x}(\gamma_1(t),\gamma_2(t))\right]\cdot \left[\gamma_1'(t)+i\gamma_2'(t)\right]dt$$
+  $$=\int_{a}^{b}\left[\frac{\partial u}{\partial x}(\gamma_1(t),\gamma_2(t))\gamma_1'-\frac{\partial V}{\partial x}(\gamma_1(t),\gamma_2(t))\cdot \gamma_2'(t)\right]+i\left[\frac{\partial V}{\partial x}(\gamma_1(t),\gamma_2(t))\cdot \gamma_1'(t) \frac{\partial U}{\partial x}(\gamma_1(t),\gamma_2(t))\gamma_2'(t)\right]dt$$
+  $$=\int_{a}^{b}\left(\left[\frac{\partial U}{\partial x}(\gamma_1(t),\gamma_2(t))\gamma_1'(t)+\frac{\partial U}{\partial y}(\gamma_1(t),\gamma_2(t))\gamma_2'(t)\right]+i\left[\frac{\partial V}{\partial x}(\gamma_1(t),\gamma_2(t))\gamma_1'(t)+\frac{\partial V}{\partial y}(\gamma_1(t),\gamma_2(t))\gamma_2'(t)\right]\right)dt$$
+  $$=\int_{a}^{b}\left[\left(U\circ \gamma\right)'(t)+i \left(V\circ \gamma\right)'(t)\right]dt=[U\circ \gamma]_a^b+i[V\circ \gamma]_a^b $$
+  $$=U(\gamma(b))-U(\gamma(a))+iV(\gamma(b))-iV(\gamma(a))=F(\gamma(b))-F(\gamma(a))$$
+\end{proof}
+
+\begin{corollary}%of proof
+  $D$ open in $\C$, $F:D\to\C$, $\gamma:[a,b]\to D$ of class $C^1$. Then $\forall f\in [a,b]$:
+    $$\left(F\circ \gamma\right)'(t)=F'\left(\gamma(t)\right)\cdot\gamma'(t)$$
+\end{corollary}
+\begin{corollary}%of lemma
+  The holomorphic function $f:\C\setminus{0}\to \C: z\mapsto\frac{1}{z}$ has no complex antiderivative.
+\end{corollary}
+\begin{example}
+  If $n\in \Z$ eith $n\neq 1$, then $F(z)=\frac{(z-z_0)^{n+1}}{n+1}$ defines an antiderivative of $f(z)=(z-z_0)^{n}$ on $\C$ if $n\geq 0$, on $\C\setminus \{ 0\}$ if $n\leq -z$.
+  \newline So if $\gamma[0,2\pi]\to \C$, $t\mapsto z_+r\cdot e^{it}$, then we have for $u\in \Z$:
+    $$\int_{\gamma}(z-z_0)^ndz=
+      \begin{cases}
+          2\pi i, \text{ if }n=-1 \\
+          0 , \text{ if }n\neq -1
+      \end{cases}
+    $$
+\end{example}
+\subsubsection*{Convention}
+If $\gamma: [0,2\pi]\to \C$: $t\mapsto z_0+r\cdot e^{it}$, then we will denote
+  $$\int_{\gamma}...dz \text{ as }\int_{|z-z_0|=r} ... dz$$
+\begin{proposition}
+  Let $D:=\C\setminus\R_{\leq 0}=\{ z=r\cdot e^{\varphi}: r\in \R_{>0}, -\pi\varphi<\pi$ open contained in $\C$.
+  \newline Then
+  \begin{enumerate}[(a)]
+    \item
+      $$\log: D\to \C$$
+      $$r\in \R_{>0}, \varphi \in (-\pi, \pi)$$
+      $$\log(r\cdot e^{\varphi}):=\log(r)+i\cdot\varphi$$
+    is well-defined and holomorphic on $D$. Furthermore $\log'(z)=\frac{1}{z}$ for $z\in D$. This is called the complex logarithm.
+    \item
+      Let $z_1,z_2\in D$ and $\gamma:[a,b]\to \C\setminus \{ 0\}$ be of class $C^1$ with $\gamma(a)=z_1,\gamma(b)=z_2$. Then $\exists k \in \Z$, s.t.
+\begin{equation}
+        \int_{\gamma}\frac{1}{z}dz=\log(z_2)-\log(z_1)+2\pi i\cdot k
+\end{equation}
+      Intuitively speaking the $k$ measures how many times the path winds around zero. (Because of the way the unit circle jumps from $-\pi$ to $\pi$).
+    \item
+      Conversely, given $k\in \Z$, there exists $z_1,z_2\in D$ and a $C^1$ path $\gamma:[a,b]\to \C\setminus\{ 0\}$, s.t. $(1)$ is satisfied.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+  exercise.
+  hint for $b$: compute exp(LHS) and exp(RHS).
+\end{proof}
+
+\begin{definition}
+  Let $U$ open in $\C$ and let $f:U\to \C$ be of class $C^1$. Then $f$ is said to be \emph{conformal} at $z_0\in U$, provided it preserves angles (and orientation thereof) between curves at $z_0$. More precisely, if $\gamma_1:[a_1,b_1]\to U, \gamma_2[a_2,b_2]\to \C$ are of class $C^1$ and if furthermore $t_1\in [a_1,b_1], t_2\in [a_2,b_2]$
+  satisfy $\gamma_1(t_1)=\gamma_2(t_2)=z_0$ and $\gamma_1'(t_1)\neq 0, \gamma_2'(t_2)\neq 0$. Then:
+  \begin{itemize}
+    \item
+      $$(f\circ \gamma_1)'(t_1)\neq 0, (f\circ \gamma_2)'(t_2)\neq 0$$
+    \item
+      if $\gamma_2'(t_2)=r\cdot e^{i\theta}\cdot \gamma_1'(t_1)$ for $r\in\R_{>0},\theta \in \R$, then $\exists s\in \R_{>0}: (f\circ \gamma_2)'(t_2)=s\cdot e^{i\theta}\cdot (f\circ\gamma_1)'(t_1)$.
+  \end{itemize}
+  $f$ is called \emph{conformal} if it is conformal at every point in $U$.
+\end{definition}
+
+\begin{example}
+  $f:\C\to \C$: $z\mapsto \bar{z}$
+  \newline If $\gamma_1,\gamma_2,t_1,t_2, r, \theta $ are as in the definition, then:
+      $$\left(f\circ \gamma_2\right)'(t)=\left(Re(\gamma_2)-Im(\gamma_2)\right)'(t)$$
+      $$=\left(Re(\gamma_2)\right)'(t_2)-i \left(Im(\gamma_2)\right) '(t_2)= \left(Re(\gamma_2)\right) '(t_2)+ i \left(Im(\gamma_2)\right) '(t_2)$$
+      $$=\bar{\gamma_2'(t)}=\bar{r\cdot e^{i\theta}\cdot\gamma_1'(t_1)}=r\cdot e^{-i\theta}\cdot \bar{\gamma_1'(t_1)}$$
+      $$r\cdot e^{i\theta}\cdot \left(f\circ \gamma_1\right)'(t_1)$$
+    $f$ preserves angles, but reverses the orientation $\Rightarrow f$ nor conformal.
+\end{example}
+
+\begin{proposition}
+  Let $U$ open subset in $\C$, let $f:U\to \C$ be of class $C^1$. Then TFAE:
+    \begin{enumerate}[(a)]
+      \item $f$ is conformal
+      \item $f$ is holomorphic and $f'(z)\neq 0 \forall z\in U$
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+  $b)\Rightarrow a)$ Let $z_0 \in U$. Let $\gamma_1,\gamma_2,t_1,t_2,r,\theta$ be as in the definition. Then, by ``Corollary of proof'' %make a hyperlink ref here later
+  , we have
+      $$\left(f\circ \gamma_j\right)'(t_j)=f'\left(\gamma_j(t_j)\right) \cdot\gamma_j'(t_j)=f'\left(z_0\right)\gamma_j'(t_j)\neq 0$$
+    Furthermore,
+      $$\left(f\circ \gamma_2\right)'(t_2)=f'(z_0) \cdot \gamma_2'(t_2)=f'(z_0) \cdot r \cdot e^{i\theta} \cdot \gamma_1'(t_1)$$
+      $$=r \cdot e^{i\theta} \cdot \left(f\circ \gamma_1\right)'(t_1)$$
+      as desired.
+\end{proof}
+
+\section*{21. jan}
+\begin{proposition}
+    $U$ open in $\C$, $f:U\to \C$ of class $C^1$. Then TFAE:
+      \begin{enumerate}[(a)]
+        \item $f$ is conformal
+        \item $f$ is holomorphic and $f'(z)\neq 0 \forall z\in U$
+      \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$(b)\Rightarrow (a)$ Last lecture
+\newline
+$(a)\Rightarrow (b)$ Let $z_0\in U$, $f=u+iv$ as usual.
+\newline
+For $\omega \in \R$, consider $\gamma_\omega:[-\varepsilon , \varepsilon]\to U$, $t\mapsto z_0+te^{i\omega}$ ($\varepsilon>0$ small enough, independent from $\omega$)
+\newline
+$\gamma_\omega(0)=z_0$ and $\gamma_\omega'(0)=e^{i\omega}=\cos \omega +i \sin \omega $
+$$\left(f\circ \omega\right)'(0)=
+\begin{bmatrix}
+  u_x(z_0) & u_y(z_0) \\
+  v_x(z_0) & v_y(z_0)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+    \cos \omega \\
+    \sin \omega
+\end{bmatrix}
+$$
+If $\omega \in \R$, then
+  $$\gamma\omega'(0)=e^{i\omega}=e^{i\omega}\cdot 1=e^{i\omega}\cdot \gamma_0'(0)$$
+Conformality $\Rightarrow  \exists s_\omega\in \R_{>0}$:
+  $$0\neq (f\circ \gamma_\omega)'(0)=s_\omega\cdot e^{i\omega} \cdot  \left(f\circ \gamma_0\right)'(0)$$
+  $$s_\omega\cdot e^{i\omega} \cdot \left(u_x(z_0)+i\cdot v_x(z_0)\right)$$
+In particular $(u_x(z_0))^2+(v_x(z_0))^2>0$. We get
+$$
+\begin{bmatrix}
+  u_x(z_0) & u_y(z_0) \\
+  v_x(z_0) & v_y(z_0)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+  \cos \omega \\
+  \sin \omega
+\end{bmatrix}
+=
+\begin{bmatrix}
+  u_x(z_0) & -v_x(z_0) \\
+  v_x(z_0) & u_x(z_0)
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+  s_\omega\cos \omega \\
+  s_\omega\sin \omega
+\end{bmatrix}
+$$
+$$
+det
+\begin{bmatrix}
+  u_x(z_0) & -v_x(z_0) \\
+  v_x(z_0) & u_x(z_0)
+\end{bmatrix}
+>0,
+$$
+so the matrix is invertible. Let
+$$
+\begin{bmatrix}
+  a & b \\
+  c & d
+\end{bmatrix}
+=M:=
+\begin{bmatrix}
+  u_x(z_0) & -v_x(z_0) \\
+  v_x(z_0) & u_x(z_0)
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+  u_x(z_0) & u_y(z_0) \\
+  v_x(z_0) & v_y(z_0)
+\end{bmatrix}
+$$
+Then, $\forall \omega \in \R:$
+$$
+M\cdot
+\begin{bmatrix}
+  \cos \omega \\
+  \sin \omega
+\end{bmatrix}
+=s_\omega \cdot
+\begin{bmatrix}
+  \cos \omega \\
+  \sin \omega
+\end{bmatrix}
+$$
+Noting that $s_0=1$, we get:
+$$
+\begin{bmatrix}
+  1 \\
+  0
+\end{bmatrix}
+=M\cdot
+\begin{bmatrix}
+  1 \\
+  0
+\end{bmatrix}
+\Rightarrow a=1, c=0
+$$
+For $\omega =\frac{\pi}{2}$, we get
+$$
+s_{\frac{\pi}{2}} \cdot
+\begin{bmatrix}
+  0 \\
+  1
+\end{bmatrix}
+=M \cdot
+\begin{bmatrix}
+  0 \\
+  1
+\end{bmatrix}
+\Rightarrow b=0,
+M=
+\begin{bmatrix}
+  1 & 0 \\
+  0 & d
+\end{bmatrix}
+$$
+For $\omega = \frac{\pi }{4}$, we get
+$$
+s_{\frac{\pi}{2}} \cdot
+\begin{bmatrix}
+  \frac{1}{\sqrt{2}} \\
+  \frac{1}{\sqrt{2}}
+\end{bmatrix}
+=M \cdot
+\begin{bmatrix}
+  \frac{1}{\sqrt{2}} \\
+  \frac{1}{\sqrt{2}}
+\end{bmatrix}
+\Rightarrow s_{\frac{\pi}{4}}=1, d=1,
+M=
+\begin{bmatrix}
+  1 & 0 \\
+  0 & 1
+\end{bmatrix}
+=I
+$$
+$$
+\Rightarrow
+\begin{bmatrix}
+  u_x(z_0) & u_y(z_0) \\
+  v_x(z_0) & v_y(z_0)
+\end{bmatrix}
+=
+\begin{bmatrix}
+  u_x(z_0) & -v_x(z_0) \\
+  v_x(z_0) & u_x(z_0)
+\end{bmatrix}.
+$$
+Cauchy Riemann
+\newline $\Rightarrow f$ complex differentiable in $z_0$. Furthermore, $$f'(z_0)=u_x(z_0)+iv_x(z_0)\neq 0$$
+\end{proof}
+
+$$\hat{\C}:=\C\cup\{\infty\}$$
+$$\mathcal{S^2}=\{x_1,x_2,x_3\in \R: x_1^2+x_2^2+x_3^2=1\}$$
+$$\C\simeq \{(x,y,0)\in \R^3\}$$
+$$\phi: \mathcal{S}^2\to \hat{\C}: \phi(x_1,x_2,x_3)=
+\begin{cases}
+  \infty , \text{ if }(x_1,x_2,x_3)=(0,0,1) \\
+  \frac{1}{1-x_3}(x_1,x_2,0) \text{ otherwise}
+\end{cases}
+$$
+$\phi$ is bijective with $\phi^{-1}: \hat{\C}\to \mathcal{S}^2$ given by
+$$\infty \mapsto (0,0,1), x+iy\mapsto \frac{1}{x^2+y^2+1}(2x,2y,x^2+y^2-1)$$
+This defines a topology on $\hat{\C}$. $\hat{\C}$ equipped with this topology, is called the \emph{extended complex plane} or \emph{the Riemann sphere}.
+%Bijectivity can be shown by computing $\phi \circ \phi^{-1}$ and vice versa and observe it is the identity map.
+%When is this enough for showing bijectivity?
+\begin{remark}
+  The topology on $\C$ induced by $\C\subseteq \hat{\C}$ is the same as the classic topology on $\C$.
+\end{remark}
+$$\frac{az+b}{cz+d}$$
+If $(c,d)=(0,0)$, we get division by $0$, so assume $(c,d)\neq (0,0)$. If
+$$
+det
+\begin{bmatrix}
+  a & b \\
+  c & d
+\end{bmatrix}
+=0,
+$$
+ then $(a,b)=\gamma \cdot(c,d)$ for some $\gamma \in \C$, so $\frac{az+b}{cz+d}=\frac{\gamma cz+\gamma d}{cz+d}\equiv \gamma$.
+
+\begin{definition}
+  Given $a,b,c,d \in \C$ with
+  $$
+  det
+  \begin{bmatrix}
+    a & b \\
+    c & d
+  \end{bmatrix}
+  \neq0,
+  $$
+the uniquely determined continuous map $f:\hat{\C}\to \hat{\C}$ given by
+  $$f(z)=\frac{az+b}{cz+d} \forall z\in \C \text{ with }cz+d\neq 0$$
+  is called a \emph{linear fractional transformation} or \emph{Mobius transformation}.
+  \newline
+  We denote this map as $T_{
+  \begin{bmatrix}
+    a & b \\
+    c & d
+  \end{bmatrix}}$.
+\end{definition}
+\begin{remark}
+  $$T_{
+  \begin{bmatrix}
+    a & b \\
+    c & d
+  \end{bmatrix}}:z \mapsto
+  \begin{cases}
+    \frac{a}{b}z+\frac{b}{d} \text{, if }c=0, z\neq \infty \\
+    \infty                   \text{, if } c=0, z=\infty \\
+    \frac{az+b}{cz+d}        \text{, if }c\neq 0, z\neq \infty, z\neq \frac{-d}{c} \\
+    \frac{a}{z}              \text{, if }c\neq 0, z=\infty \\
+    \infty                   \text{, if }c\neq 0, z=-\frac{d}{c}
+  \end{cases}
+  $$
+\end{remark}
+
+\subsubsection*{Notation}
+$$GL_2(\C)=\{M\in \C^{2\times 2}: det M\neq 0\}$$
+
+\begin{lemma}
+  Let $\mathcal{T}:=\{T_M: M\in GL_2(\C)\}$ be the set of Mobius transformations. Then $(\mathcal{T},\circ)$ is a group and
+    $$GL_2(\C)\to \mathcal{T}:M\mapsto T_M \text{ is a group homomorphism}.$$
+  In particular, $T_M$ is bijective for all $M\in GL_2(\C)$ and $(T_M)^{-1}=T_{M^{-1}}$. And furthermore $T_M\circ T_N=T_{M\cdot N}\forall M,N \in GL_2(\C)$.
+\end{lemma}
+\begin{remark}
+  Not isomorphism. if $\alpha \neq 0$, $M\in GL_2(\C)$, then $T_M=T_{\alpha M}$.<>
+\end{remark}
+
+\section{24. jan}(week 3 friday)
+\begin{recall}
+  Given $A\in GL_2(\C)$, the continuous map
+    $$T_A: \hat{\C}\to \hat{\C}: z\mapsto\frac{az+b}{az+d}, \forall z\in \C \text{ with }cz+d\neq 0$$
+  is called a \emph{Mobius transformation}. If $M,N\in GL_2(\C):$
+    \begin{itemize}
+      \item $T_M$ is bijective, $T_M=T_{M^{-1}}$.
+      \item $T_M\cdot T_N=T_{MN}$
+    \end{itemize}
+\end{recall}
+
+\begin{remark}
+  Every Mobius transformation has a finite composition of Mobius transforms of the following type:
+    \begin{itemize}
+      \item translation
+        $$\C \ni z\mapsto z+b$$
+        $$b\in \C, \infty \mapsto \infty$$
+      \item rotation
+        $$\C \ni z\mapsto e^{i\theta} \cdot z$$
+        $$\theta \in \R, \infty \mapsto \infty$$
+      \item Holomorphic transformation
+        $$\C \ni z\mapsto r \cdot z, r\in \R_{>0}$$
+        $$\infty \mapsto \infty$$
+      \item inversion
+        $$\C\setminus\{0\}\ni z \mapsto \frac{1}{z}$$
+        $$0\mapsto \infty$$
+        $$\infty \mapsto 0$$
+    \end{itemize}
+\end{remark}
+Consider $T_M:\hat{\C}\to \C$ for $M\in GL_2(\C)$.
+\newline Invertible $\Rightarrow M$ finite product of matrices of the following form:
+  \begin{itemize}
+    \item
+    $$
+    \begin{bmatrix}
+        \alpha & 0 \\
+        0 & 1
+    \end{bmatrix},
+    \begin{bmatrix}
+        1 & 0 \\
+        0 & \alpha
+    \end{bmatrix},
+    \alpha \in \C\setminus{0}
+    $$
+    \item
+    $$
+    \begin{bmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{bmatrix}
+    $$
+    \item
+    $$
+    \begin{bmatrix}
+      1 & \beta \\
+      0 & 1
+    \end{bmatrix},
+    \begin{bmatrix}
+      1 & 0 \\
+      \beta & 1
+    \end{bmatrix}
+    , \beta \in \C
+    $$
+  \end{itemize}
+
+\begin{definition}
+  Let $\mathcal{C}_{\mathcal{L}}= \{ \{z\in \C : |z-z_0|=r \}: r\in \R_{>0} , z_0\in \C \}$
+    $$\cup \{\{ \infty \}\cup \{ ax+b: x\in \R \}: b\in \C, a\in \C\setminus\{0\}\}.$$
+  We include $\{\infty\}$ so that $\mathcal{C}_{\mathcal{L}}$ is compact, as it must be because Riemann sphere is compact.
+\end{definition}
+
+\begin{definition}
+  A circle on $\mathcal{S}^2$ is a set $C$ of the form $C=\mathcal{S}^2\cap H$, where $H$ is an affine hyperplane in $\R^3$ and $C$ har more than one point. The set of those cirlces i denoted as $\mathcal{C}_{\mathcal{S}^2}$.
+\end{definition}
+
+\begin{remark}
+  $\varphi : \mathcal{S}^2\to \hat{\C}$ induces a bijection $\mathcal{C}\mathcal{L}\xleftarrow{|:|}\mathcal{C}_{\mathcal{S}^2}$.
+\end{remark}
+
+\begin{note}
+  Given $\alpha, \beta, \gamma \in \hat{\C}$ pairwise distinct, $\exists ! A\in \mathcal{C}\mathcal{L}$ such that $\alpha,\beta,\gamma \in A$.
+\end{note}
+
+\begin{definition}(kind of a remark as well?)
+  \newline
+  Let $z_2,z_3,z_4\in \hat{C}$ be pairwise distinct. Then there exists a a uniquely determined Mobius transformation
+    $$D( \cdot,z_2,z_3,z_4):\hat{\C}\to\hat{\C} \text{ mapping }1,0,\infty \text{ respectively.}$$
+  Given $z_1\in \C$ we call $D(z_1,z_2,z_3,z_4)$ the \emph{cross ratio of} $z_1,z_2,z_3,z_4$.
+\end{definition}
+\begin{proof}
+  WTS: Existence,
+\begin{enumerate}[Case (1)]
+  \item
+  $$z_2=\infty \rightarrow
+   \text{ set } D( \cdot,z_2,z_3,z_4):=T_{
+\begin{bmatrix}
+    1 & -z_3 \\
+    1 & -z_4
+\end{bmatrix}}
+  $$, which is well-defined.
+  \item
+  $$z_3=\infty \rightarrow \text{ set } D( \cdot,z_2,z_3,z_4):=T_{
+  \begin{bmatrix}
+      0 & z_2-z_4 \\
+      1 & -z_4
+  \end{bmatrix}}
+  $$, which is also well defined.
+  \item
+  $$z_4=0 \rightarrow \text{ set } D( \cdot,_2,z_3,z_3):=T_{
+  \begin{bmatrix}
+      1 & \cdot z_3 \\
+      0 & z_2-z_3
+  \end{bmatrix}
+  },$$
+  also well-defined.
+  \item
+  $$z_2,z_3,z_4\in \C \rightarrow \text{ set } D( \cdot,z_2,z_3,z_4):=T_{
+    \begin{bmatrix}
+        1 & -z_3 \\
+        \frac{z_2-z_3}{z_2-z_4} & -z_4\frac{z_2-z_3}{z_2-z_4}
+    \end{bmatrix}
+  }$$
+  is also well-defined.
+\end{enumerate}
+We have shown existence.
+\newline WTS: Uniqueness
+\newline Let $S:\hat{\C}\to \hat{\C}$ be a mobius transf. mapping $z_2,z_3,z_4$ to $1,0,\infty$ respectively. Then
+  $$T:=D( \cdot, z_2,z_3,z_4)\circ S ^{-1}: \hat{\C}\to \hat{\C}$$
+is a Mobius transf. with $T(1)=1, T(0)=0$ and $ T(\infty)=\infty$.
+\newline To prove, $T=id_{\hat{\C}}$
+\newline Let $T=T_M$, where $M=
+\begin{bmatrix}
+    a & b \\
+    c & d
+\end{bmatrix}\in GL_2(\C)$. Since $T(\infty)=\infty$, we get $c=0$. Since $ad-bc\neq 0$, we get $a,d \neq 0$, $\rightarrow $ WLOG $a=1,$ so $M=
+\begin{bmatrix}
+    1 & b \\
+    0 & d
+\end{bmatrix}$ with $d\in \C\setminus\{0\}$.
+  $$0=T(0)=\frac{1\cdot0+b}{d}=\frac{b}{d}\Rightarrow b=0,$$
+  $$1=T(1)=\frac{1\cdot1+0}{d}=\frac{1}{d}\Rightarrow d=1$$
+  $$\Rightarrow M=
+\begin{bmatrix}
+    1 & 0 \\
+    0 & 1
+\end{bmatrix}$$
+\qedhere
+\end{proof}
+
+\begin{lemma}
+  If $z_2,z_3,z_4\in \hat{\C}$ pairwise distinct, $z_1\in \hat{\C}$, $T:\hat{\C}\to \C$ Mobius transformation, then $D(z_1,z_2,z_3,z_4)=D(T(z_1),T(z_2),T(z_3),T(z_4))$.
+\end{lemma}
+\begin{proof}
+  $D( \cdot ,z_2,z_3,z_4)\circ T ^{-1}$ maps $T(z_2),T(z_3),T(z_4)$ to $1,0,\infty$ respectively. Hence, by uniqueness:
+    $$D( \cdot, z_2,z_3,z_4)\circ T ^{-1}=D( \cdot, T(z_2),T(z_3),T(z_4))$$
+  Now evaluate $T(z_1)_i$ which is trivial.
+\end{proof}
+
+\begin{proposition}
+  Let $z_1,z_3,z_4\in \hat{\C}$ be pairwise distinct and $z_1\in \hat{\C}$. Then $D(z_1,z_2,z_3,z_4)\in \R\cup \{\infty\} $
+    $$\Leftrightarrow \exists A\in \mathcal{CL}: z_1,z_2,z_3,z_4\in A$$
+\end{proposition}
+\begin{theorem}
+  If $T:\hat{\C}\to \hat{\C}$ is a Mobius transf. and $A\in \mathcal{CL}$, then $T(A)\in \mathcal{CL}$.
+\end{theorem}
+\begin{proof}
+  (assuming proposition)
+  \newline Let $A\in \mathcal{CL}$ and let $z_2,z_3,z_4\in A$  be pairwise distinct. Since $T$ bijective, $T(z_2),T(z_3),T(z_4)$ pairwise distinct $\Rightarrow \exists ! B\in \mathcal{CL}$ s.t. $T(z_2),T(z_3),T(z_4)$ are in $B$. To prove $T(A)\supseteq B:$ If $z\in A$, then $D(z,z_2,z_3,z_4)\in \R\cup\{\infty\}$ by prop.
+  so $D(T(z),T(z_2),T(z_3),T(z_4))\in \R\cup\{\infty\}$ by lemma. So by proposition and uniqueness of $B$, we get $T(z)\in B \Rightarrow T(A)\subseteq B$. If $w\in B$, then $\exists z\in \hat{\C}$ with $T(z)=w.$ To show $z\in A$, $D(z,z_2,z_3,z_4)=D(w,T(z_2),T(z_3),T(z_4))\in \R\cup\{\infty\}$
+  since $w\in B$. $\Rightarrow \exists C\in \mathcal{CL}$ s.t. $z,z_2,z_3,z_4\in C$. But $z_2,z_3,z_4\in A$ are pairwise distinct. By uniqueness $C=A \Rightarrow z\in A$.
+  \qedhere
+\end{proof}

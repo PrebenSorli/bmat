@@ -1,0 +1,442 @@
+\title{Lecture week 3 Difftop}
+\maketitle
+\section{21. jan}
+\begin{definition}
+  (Topological manifold)
+  \newline
+  A subspace $X\subseteq \R^n$ is a topological manifold if at any $x\in X$ there exists an open set $U\subseteq X$ and an open set $V \subseteq \R^k$ and a homeomorphism $\varphi:V\to U$.
+\end{definition}
+%consider inserting illustrations from book
+
+Continuous maps can behave poorly. Instead of using continuity alone, we'll use differentiability.
+\begin{definition}
+  $U \subseteq \R^n ,f: U \to \subseteq \R^m $, we can write it as
+    $$f(x_1,\dots,x_n)=f(
+    \begin{bmatrix}
+        x_1 \\
+        \vdots \\
+        x_n
+    \end{bmatrix}
+    )=
+    \begin{bmatrix}
+        f_1(x_1) \\
+        \vdots \\
+        f_n(x_n)
+    \end{bmatrix}\in \subseteq \R^m$$
+  $f$ is \emph{smooth} if $\forall a\in U$, the partial derivatives of $f$ exists at all $a\in U$.
+    \newline
+  $\frac{\partial f_i^n}{\partial x_{j_i}\cdots \partial x_{j_n}}(a)$ all exist.
+  \newline
+  $\frac{\partial f_i}{\partial x_j}(a)=\lim_{t\to 0}\frac{f(a+te_j)-f(a)}{t}$.
+\end{definition}
+Ultimately we want to replace ``homeomorphism'' with ``diffeomorphism'' in definition of manifold.
+\begin{definition}
+  Let $X \subseteq \R^n $ any subspace and consider a function
+    $$f:X\to \R^m$$
+  We say that $f$ is smooth if $\forall x\in X$, there is an open set $U \subseteq X$ (rel. $X$), an open set $\tilde{U} \subseteq \R^n $ and a smooth function $\tilde{f}:\tilde{U}\to \R^m$.
+  $$U=\tilde{U}\cap X$$
+  so that $\forall a\in U$, $\tilde{f}(a)=f(a)$.
+  %Insert diagram
+
+  \begin{tikzcd}
+  \R^n \supseteq \tilde{U} \arrow[rrrdddd, "\tilde{f}"]     &  &  &      \\
+                                                  &  &  &      \\
+  x\in U \arrow[rrrdd, "f_{\rvert u}"] \arrow[uu] &  &  &      \\
+                                                  &  &  &      \\
+  X \arrow[rrr, "f"] \arrow[uu, "\supseteq"]      &  &  & \R^m
+  \end{tikzcd}
+$\tilde{f}$ smooth, then we say $f_{\rvert u}$ smooth.
+\end{definition}
+\begin{example}
+  $f:S^1\to \R^1$, $f(x,y)=x$ when $x^2+y^2=1$.
+  \newline
+  How can we see that $f$ is smooth?
+  \newline
+  Observe that we can extend $f$ to all of $\R^2$:
+    $$\tilde{f}:\R^2 \to \R, (x,y)\mapsto x$$
+  $\tilde{f}$ is clearly smooth and $\tilde{f_{\rvert s^1}}=f$, we conclude $f$ is smooth.
+\end{example}
+
+\begin{example}
+  $X=S^1\cap \{ (x,y) | y>0\}$
+  $$L=\{(x,1)|x\in \}$$
+  $Y=\R^2$. Define $f(x,y)$ to be the unique point common with $L$ and $\{ t(x,y)| t\in \R \}$.
+  \newline
+  $f$ is smooth because we observe
+    $$f(x,y)=$$
+  Find $t$
+    $$t(x,y)\in \{ (x,1)| x\in \R\}$$
+  We need $ty=1$, so $t=\frac{1}{y}$ if $y\neq 0$. Hence $f(x,y)=(\frac{x}{y},1)$. This description of $f$ can clearly be extended to $\tilde{U}=\{(x,y)\in \R^2 | y>0\}$
+      $$\tilde{f}:\tilde{U} \to \R$$
+      $$(x,y)\mapsto (\frac{x}{y},1)$$
+    Clearly smooth, so hence $f$ is also smooth.
+\end{example}
+
+\begin{definition}
+  If $X \subseteq \R^n$ and $Y\subseteq \R^m$ are subspaces then a function $f:X\to Y$ is smooth iff
+    $$X\xrightarrow{f} Y \xrightarrow{\subseteq} \R^m$$
+  is smooth.
+\end{definition}
+
+\begin{definition}
+  $f:X\to Y$ is a diffeomorphism if $f$ is smooth, $f$ is bijective and $f^{-1}$ is smooth.
+\end{definition}
+\begin{remark}
+  If $f:X\to Y$ is a diffeomorphism, then $f:X\to Y$ is a homeomorphism.
+  \newline
+  BUT the converse need not be true. In fact there does not need exist any diffeomorphism at all. (not only $f$)
+\end{remark}
+
+\begin{example}
+  There are uncountably many spaces $X_{\alpha}$, and each is homeomorphic to $\R^4$.
+    $$f_\alpha: X_\alpha \to \R^4 $$
+  but no two $X_\alpha$ and $X_\beta$ are diffeomorphic.
+\end{example}
+
+\begin{definition}
+  $X\subseteq \R^n$ is a \emph{smooth manifold} if $\forall x\in X$ there exists an open set $x\in U\subseteq X$ and an open set $V\in \R^k$, and a diffeomorphism
+    $$\varphi:V\to U$$
+\end{definition}
+
+\begin{example}
+  $S^1$ is a smooth manifold.
+  \newline
+  Use the $exp:\R \to S^1, \theta \mapsto (\cos (\theta ), \sin (\theta))$.
+  \newline
+  Use two ``local parametrizations'' of $S^1$
+    $$exp: (0,2\pi)\xrightarrow{diffeo} S^1\setminus\{(1,0)\}$$
+    $$exp: (\pi,3\pi)\xrightarrow{diffeo} S^1\setminus\{(-1,0)\}$$
+  all that is left is to prove
+    $$exp: (0,2\pi)\xrightarrow{diffeo} S^1\setminus\{(1,0)\}$$ is a diffeo.
+  \begin{itemize}
+    \item
+      $$exp(\theta)=(\cos (\theta ), \sin (\theta))$$
+    so $exp$ is smooth.
+    \item
+      basic trig says $exp$ is bijective.
+    \item
+      Show $exp^{-1}:S\setminus\{(1,0)\}\to (0,2\pi)$ is smooth.
+  \end{itemize}
+  $\arccos(x):S^1\cap \{(x,y)|y>0\} \to (0,\pi)$, to see it is smooth,
+    \newline
+    Let's take
+      $$g:\R^2\cap \{(x,y)|y>0\} \to (0,\pi)$$
+        $$(x,y)\mapsto \arccos(\frac{x}{\sqrt{x^2+y^2}})$$
+    defined on open subset of $\R^2$.
+      $$g=exp^{-1} \text{ on }S^1\cap \{(x,y)|y>0\}$$
+      for $S^1\cap \{(x,y)| y<0\}$, use
+        $$exp^{-1}((x,y))=2\pi-\arccos(x)$$
+      extends to
+        $$g(x,y)=2\pi-\arccos(\frac{x}{\sqrt{x^2-y^2}})$$
+\end{example}
+
+\subsection*{Directional derivatives}
+Let $f:U \text{ open in }\R^n \to \R^m$ be smooth has \emph{directional derivatives} $a\in U$ in the direction $v\in \R^n$ if
+  $$df_a(v)=\lim_{t\to 0}\frac{f(a+tv)-f(a)}{t}$$
+exists.
+\newline
+$df_a(v)$ always exists when $f$ is smooth
+\newline
+$df_a(v): \R^n\to \R^m$ is in a fact linear map.
+  $$df_a(av+w)=cdf_a(v)+df_a(w)$$
+$df_a$ is represented by a matrix, use standard basis $\{ e_1,\dots,e_n\}$ and $\{ e_1,\dots , e_m\}$. Then
+$$
+df_a=
+\begin{bmatrix}
+  \frac{\partial f_1}{x_1}(a) & \cdots & \frac{\partial f_1}{x_n}(a) \\
+  \vdots & \cdots & \vdots \\
+  \frac{\partial f_m}{x_1}(a) & \cdots & \frac{\partial f_m}{x_n}(a)
+\end{bmatrix}
+$$
+and
+$$
+df_a(v)=
+\begin{bmatrix}
+  \frac{\partial f_1}{x_1}(a) & \cdots & \frac{\partial f_1}{x_n}(a) \\
+  \vdots & \cdots & \vdots \\
+  \frac{\partial f_m}{x_1}(a) & \cdots & \frac{\partial f_m}{x_n}(a)
+\end{bmatrix}
+(v)
+$$
+
+\begin{theorem}
+    (Chain rule)
+    \newline
+    $$U \xrightarrow{f} V \xrightarrow{g}\R^p$$
+    $U$ open in $\R^n$, $V$ open in $\R^m$, $f$ and $g$ smooth. Then $g\circ f$ is smooth and
+      $$d(g\circ f)_a=(dg)_{f(a)}\circ (df)_a$$
+    (composition of linear functions or simply matrix multiplication).
+\end{theorem}
+\begin{theorem}
+    Let $U \subseteq \R^n $ open and $V \subseteq \R^m $ be open. Suppose
+    \newline
+    $f:U\to V$ is a diffeo. Then $n=m$.
+    \newline (no Peano space filling curve can give a diffeomorphism!)
+\end{theorem}
+\begin{proof}
+  $$U\xrightarrow{f}V\xrightarrow{f^{-1}}U$$
+  $$f^{-1}\circ f = Id_u$$
+  So take the directional derivatives at $a\in U$.
+  $$\R^n \xrightarrow{df_a}\R^m\xrightarrow{df^{-1}_a} \R^m$$
+  $$d(Id)_a$$
+  $Id_u(x_1,\dots ,x_n)=(x_1,\dots , x_n)$
+  $$
+(dId_u)_a=
+\begin{bmatrix}
+    1 & 0 & \cdots \\
+    0 & 1 & \cdots \\
+    0 & 0 &  \ldots  \\
+    0 & \cdots & 1
+\end{bmatrix}
+  $$
+  \underline{Chain rule}
+  \newline
+  $\left(df^{-1}\right)_{f(a)}\circ df_a =Id_{n\times n}$.
+  Similarly
+    $$V\xrightarrow{f^{-1}}U\xrightarrow{f}V$$
+    shows
+    $$df_{f^{-1}(b)}\circ df^{-1}_b=Id_{m\times m}$$
+    i.e., $df_a \circ df^{-1}_{f(a)}=Id_{m\times n}$.
+    \newline
+    Since $df_a$ is both $n\times n$ and $m\times m$ invertible matrix, must be that $n=m$.
+\end{proof}
+
+\subsection*{Tangent spaces:}
+The vectors $v\in \R^n$ used in directional derivative, all directions we could move in at a point.
+\newline
+\begin{definition}
+  Let $U \subseteq \R^n $ be an open subset. We define the tangent space to $U$ at $a\in U$ by
+    $$T_aU= \{(a,v) | v\in \R^n\}$$
+\end{definition}
+Eig: at $(1,1)\in \R^2$ a tangentt vector looks like $\left((1,1),(v_1,v_2)\right)$.
+\newline
+$T_aU$ is a vector space
+  $$(a,v)+(a,w)=(a,v+w)$$
+  $$(a,(0,0)) \text{ is the additive identity.}$$
+\begin{definition}
+  Total tangent space
+    $$TU=\{ (a,v) | a\in U, (a,v)\in T_aU\}$$
+\end{definition}
+
+\subsection*{Extend to manifolds}
+Let $X \subseteq \R^n  $ be a smooth manifold, $a\in X$. There exists open $a\in U \subseteq X$ and exists $V \subseteq \R^k $ open and $\varphi: V\to U$ diffeomorphism.
+$$\varphi(y)=a$$
+\newline Define
+  $$T_aX=\{(a,d\varphi_y(v)) | v\in \R^k \}$$
+Note that $d\varphi_y(a):\R^k \to \R^n$ is linear and its images $k$-dimensional.
+
+\section{23. jan}
+\begin{itemize}
+  \item Coordinate systems
+  \item Tangent spaces
+  \item Derivatives
+\end{itemize}
+
+\begin{definition}
+  Let $X \subseteq \R^n$ be a smooth manifold, we define $T_xX$ for $x\in X$ by finding a local parametrization
+    $$ \varphi: \tilde{u}\to u : x\in u \subseteq X, \tilde{U} \subseteq \R^n $$
+    $$ \varphi(y)=x, \varphi \text{ diffeo }$$
+  Define $T_xX=\{(x,d\varphi_y(v)) | v \subseteq \R^k\}$. Related to image$(d\varphi_y:\R^k\to \R^n )$,
+  \newline This is a linear subspace of $\R^n$, so it is a vector space. Hence $T_xX$ is a vector space too.
+    $$ \left(x,u\right)+\left(x,v \right)=\left(x,u+v\right)$$
+\end{definition}
+Terminology
+\newline  If $X \subseteq \R^n $ is a smooth manifold, $x\in X$ we know there exists $\varphi:\tilde{u}\to u$ with $x\in u, \tilde{u} \text{ open }\subseteq \R^k$.
+\newline We call $\varphi $ a ``local parametrization of $X$ at $x\in X$''. But this is equivalent ot giving a diffeo
+  $$\varphi^{-1}u %(open in X)
+  \to \tilde{u} %open in R^k
+  \subseteq \R^k$$
+  $\varphi^{-1}$ is called a coordinate chart for $X$ at $x\in X$.
+\newline We call thi generally a ``local coordinate system at $x$''.
+\newline Pick $1\leq i \leq k$, and some $z\in \Z^k$, $z=(z_1,z_2,\dots,z_k)$, and consider the lines
+  $$L_{i,z}= \{ z+te_i |t\in \R \}\subseteq \R^k$$
+Study the images $\varphi(L_{i,z}\cap \tilde{U})\subseteq X$.
+\newline So $\varphi^{-1}$ gives us coordinates to points on $u$. We often write
+  $$\varphi^{-1}(p)=\left(x_1(p),x_2(p),\dots,x_k(p)\right)$$
+$x_i$ is the $i^{th}$ coordinate function of $\varphi^{-1}$. If we are really sloppy we will say
+  $$p=(x_1,x_2,\dots,x_k)$$
+\begin{example}
+  \textbf{Polar coordinates}
+  \newline A system of local coordinates for $\R^2$ given by the diffeomorphism
+    $$ \psi \left(-\pi,\pi\right)\times \left(0,\infty\right)\to \R^2\setminus\{(x,0) | x\geq 0\}$$
+    $$ \left(\theta, r\right)\to \left(r\cos(\theta),r\sin(\theta)\right)$$
+\end{example}
+
+\begin{lemma}
+  Let $X \subseteq \R^n $ smooth manifold. $\forall x\in X$ there always exists a local coordinate system at $x$,
+    \newline $\varphi:\tilde{u}\to u$ with $u\subseteq X, \tilde{u} \text{ open }\subseteq \R^k$ satisfying $\varphi (0)=x$.
+\end{lemma}
+\begin{proof}
+  We know there exists \emph{some} coordinate system at $x$. Call it $\R^k\supseteq\psi: \tilde{V}\to V\subseteq X$.
+  \newline Write $y=\psi^{-1}(x)\in \tilde{V}\subseteq \R^k$. Translation is a diffeomorphism!
+  \newline Consider
+    $$t_y: \R^k\to \R^k$$
+    $$v\mapsto v+y$$
+    is a diffeomorphism!
+    \newline
+    We take $\tilde{u}=t^{-1}_y(\tilde{V})=\{z-y | z\in \tilde{V}\}$.
+    \newline
+    We take $u=V$ and finally
+      $$\varphi = \psi\circ t_{y_{\rvert_{\tilde{u}}}}: \tilde{u}\to u$$
+      $$\tilde{u}\xrightarrow{t_y}\tilde{V}\xrightarrow{\psi}u=V$$
+      and this entire thing is a diffeo.
+\end{proof}
+
+\begin{lemma}
+  Let $X \subseteq \R^n $ be a smooth manifold. For any $x\in X$ there is a coordinate system
+    $$\varphi : B^k(0;\varepsilon) \to u$$
+  at $x$.
+\end{lemma}
+\begin{proof}
+  Homework problem.
+  \newline We know there is a coordinate system $\varphi :\tilde{u}\to u, 0\in \tilde{u} \mapsto x\in u$.
+  \newline $\tilde{u}$ is open, so $\exists \varepsilon >0$ with $B^k(0;\varepsilon)\subseteq \tilde{u}$. Restrict $\varphi $ to $B^k(0;\varepsilon)$.
+    $$\varphi\rvert_{B^k(0;\varepsilon)}: B^k(0;\varepsilon) \to \varphi \left(B^k(0;\varepsilon)\right)\subseteq X.$$
+\end{proof}
+
+\begin{lemma}
+  Let $X \subseteq \R^n $ be a smooth manifold and $x\in X$, let
+    $$\varphi :\tilde{u}\to u \text{ and }\psi:\tilde{v}\to v$$
+  be coordinate systems at $x\in X$.
+    \newline $\varphi ^{-1}\left(u\cap v\right)$ is diffeomorphic to $\psi^{-1}\left(u\cap v\right)$ with diffeomorphism given by $\psi^{-1}\circ \varphi $ with restriction $\left(\varphi\rvert_{\varphi^{-1}(u\cap v)}\right)$
+     or $\varphi ^{-1}\circ \psi$ with restriction $\left(\psi\rvert_{\psi^{-1}(u\cap v)}\right)$.
+  \end{lemma}
+  \begin{proof}
+      $\psi^{-1}\circ\varphi\rvert_{\varphi^{-1}(u\cap v)}$ is inverse to $\varphi^{-1}\circ \psi\rvert_{\psi^{-1}(u\cap v)}$.
+      $$\left(\varphi^{-1}\circ \psi\right)\circ \left(\psi^{-1}\circ \varphi\right)(z)$$
+      $$=\varphi^{-1}\left(\psi \left(\psi^{-1} \left(\varphi(z)\right)\right)\right)$$
+      $$=\varphi^{-1}\left( \varphi (z)\right)=z$$
+    To see $\varphi ^{-1}\circ \psi$ is diffeo check they are smooth.
+  \end{proof}
+
+\begin{proposition}
+  Let $X \subseteq \R^n$ be a smooth manifold and $x\in X$. Then $T_xX$ is well defined: independent of the choice of coordinate chart.
+  \newline We can assume $\varphi (0)=\psi(0)=x$. We then have two definitions for $T_xX$:
+    $$\{\left(x,d   \varphi_{0}(v) \right) | v\in \R^k\}$$
+    or
+    $$\{\left(x,d\psi_{0}(v)| v\in \R^k\right)\}$$
+    i.e., is
+      $$im \left(d\varphi_0:\R^k\to \R^n\right)$$
+      equal to
+      %some inclusions here
+      $$im \left(d\psi_0:\R^k\to \R^n \right)?$$
+    We can use the diffeo's $\psi^{-1}\circ \varphi$ and $\varphi ^{-1}\circ \psi$ as follows.
+    %diagram her
+    Let's say we have $d \varphi _0(v)\in im(d\varphi_0(v))$.
+      $$ d \varphi _0(v)=d \left(\psi \circ \psi ^{-1}\circ \varphi \right)_0(v) $$
+      $$=d(\psi)_0 \cdot d \left(\psi ^{-1}\circ \varphi  \right)(v).$$
+    %diagram her
+    To finish, suppose
+      $$d\psi_0(w)=d \left(\varphi \circ \varphi ^{-1}\psi\right)_0(w)$$
+      $$=d \varphi _0 \left(d(\varphi ^{-1}\circ \psi)_0(w)  \right).$$
+      $$\in im \left(d \varphi_0\right)$$
+      \qedhere
+\end{proposition}
+
+\begin{example}
+  \textbf{Tangent Spaces to $S^1$}
+  \newline Pick coordinates
+    $$ exp: (0,2\pi): \to S^1\setminus\{(1,0) \}$$
+    $$ exp:(-\pi,\pi)\to S^1\setminus\{(-1,0)\} $$
+  Consider $(x,y)\in S^1$. What is $T_{(x,y)}S^1$?
+    $$(dexp)=
+    \begin{bmatrix}
+        -\sin(\theta) \\
+        \cos(\theta)
+    \end{bmatrix}
+    $$
+    if $exp(\theta)=(x,y)$, then
+      $$ T_{(x,y)}S^1= \{(x,y), (dexp_{\theta})(v)|v\in \R \} $$
+    $$ im(dexp_{\theta})=Span_{\R}\{\begin{bmatrix}
+        -\sin(\theta) \\
+        \cos(\theta)
+    \end{bmatrix}\} $$
+\end{example}
+%Remember to fix the differential operators so they are standing up.
+\begin{example}
+  $S^4$, $x=(1,0,0,0,0)$.
+  \newline What is $T_xS^4$?
+  \begin{itemize}
+    \item Find local coord. system of $S^4$ at $x$
+  \end{itemize}
+    $$
+      \varphi : B^4(0;1) \longrightarrow u\subseteq S^4
+    $$
+    $$
+      (x_1,x_2,x_3,x_4) \longmapsto \left(\sqrt{1-x_1^2-x_2^2-x_3^2-x_4^2},x_1,x_2,x_3,x_4\right)
+    $$
+    Observe that $x_1^2+x_2^2+x_3^2+x_4^2<1$, so $\sqrt{1-x_1^2-x_2^2-x_3^2-x_4^2}$.
+    \newline observe $\varphi $ is the graph og
+      $$f:B^4(0;1)\to \R$$
+      $$(x_1,x_2,x_3,x_4)\mapsto \sqrt{1-x_1^2-x_2^2-x_3^2-x_4^2}.$$
+      Calculate $d \varphi _0$ as $\varphi (0,0,0,0)=x$.
+    $$d \varphi_{(0,0,0,0)}$$
+$$
+     =
+\begin{bmatrix}
+    \frac{-x_1}{\sqrt{1-x_1^2-x_2^2-x_3^2-x_4^2}}\to 0  & \frac{-x_2}{\sqrt{1-x_1^2-x_2^2-x_3^2-x_4^2}}\to 0 & \frac{-x_3}{\sqrt{1-x_1^2-x_2^2-x_3^2-x_4^2}}\to 0 & \frac{-x_4}{\sqrt{1-x_1^2-x_2^2-x_3^2-x_4^2}} \to 0  \\
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+\end{bmatrix}
+    $$
+  So
+  $$
+  Im(d \varphi _0)=span\{
+\begin{bmatrix}
+  0\\
+  1\\
+  0\\
+  0\\
+  0
+\end{bmatrix},
+\begin{bmatrix}
+  0\\
+  0\\
+  1\\
+  0\\
+  0
+\end{bmatrix},
+\begin{bmatrix}
+  0\\
+  0\\
+  0\\
+  1\\
+  0
+\end{bmatrix},
+\begin{bmatrix}
+  0\\
+  0\\
+  0\\
+  0\\
+  1
+\end{bmatrix}
+  \}
+  $$
+  $$T_xS^4=\{x\}x im (d \varphi _0)$$
+\end{example}
+
+$$T_xS^n=\{(x,v) | v\in \R^{n+1} \text{ s.t. } v \cdot x =0 \}$$
+Let $f:X\to Y$ be a smooth map where $X \subseteq \R^n , Y \subseteq \R^n $ are smooth manifolds.
+\newline How to define the derivative of $f$?
+\newline What we want:
+  \begin{enumerate}[(1)]
+    \item $\forall x\in X$ we get a linear map
+      $$Df_x: T_xX \to T_{f(x)}Y.$$
+    \item if $f:u \to v$, $u \subseteq \R^n $ open, $V \subseteq \R^n $ open, $f$ smooth, then expect
+      $$Df_x: T_xu \to T_{f(x)}V$$
+      $$(x,v)\mapsto \left(f(x),df_x(v)\right)$$
+    \item $D$ should satisfy the chain rule
+      $$X\xrightarrow{f}Y\xrightarrow{g}Z$$
+      $$
+        T_xX \xrightarrow{Df_x}T_{f(x)}Y \xrightarrow{Dg_{f(x)}}T_{g(f(x))}Z
+      $$
+      $$  D(g\circ f )_x$$
+    $$D(g\circ f)_x=(Dg)_{f(x)}\circ Df_x $$
+    \item if $\varphi :\tilde{u}\to u\subseteq X$ is a local coordinate system for $X$
+      $$
+        D \varphi _xT_x\tilde{u}\to T_xX \subseteq T_x\R^n
+      $$
+
+  \end{enumerate}

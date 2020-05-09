@@ -1,0 +1,94 @@
+\title{Lecture week 10}
+\maketitle
+\section{10. March}
+Came a little late to class. Get notes for the first 15 minutes.
+\newline Realize $\R P^2$ as a quotient of $S^2$. $S^2\subseteq \R^3\setminus\{0\}$ has an induced equivalence relation from $\sim$ on $\R^3\setminus\{0\}$.
+  $$(x,y,z) \sim (\lambda x, \lambda y, \lambda z) \lambda \in \R\setminus\{0\}$$
+  but if $(x,y,z), (\lambda x, \lambda y, \lambda z)\in S^2, \lambda = \pm 1$.
+  \newline diag 1
+  \newline
+   To see $\bar{\pi}$ is a homeo
+  \newline diag 2
+  \newline $(x,y,z)\sim (\lambda x, \lambda y, \lambda z)$
+  $$\pi \circ f(x,y,z) = \pi \circ f(\lambda x, \lambda y, \lambda z)$$
+  $$u_0=\{[x_0,x_1,x_2] | x_0 \neq 0 \}$$
+  $$u_1 \subseteq S^2/\sim$$
+  $$[x_0,x_1,x_2], x_1 \neq 0$$
+  $$\left(\frac{x_0}{x_1}, \frac{x_2}{x_1}\right)\in \R^2$$
+  \begin{theorem}
+    $\R P^n$ is a compact connected abstract smooth manifold
+  \end{theorem}
+  \begin{proof}
+    We have a continuous surjection $\pi : S^n \to \R P^n, (x_0,\dots, x_n)\mapsto [x_0,x_1, \dots , x_n]$. Since $S^n$ is connected and compact, $\pi (S^n)=\R P^n$ is also connected and compact.
+  \end{proof}
+
+  Better pictures?
+  \newline $H=\{(x,y,z) \in S^2 | z\geq 0\}$, $\sim$ on $H, (x,y,0)\sim (\lambda x, \lambda y, 0), \lambda = \pm 1$, $(x,y,z)\sim (x,y,z)$.
+  \newline $\R P^2$ doesn't appear to have an embedding into $\R^3$. But it can be embedded in $\R^4$.
+  \newline \textbf{Goal:} Embed a compact abstract smooth manifold into $\R^N$, for $N>>0$.
+  \begin{definition}
+    $f: X\to \R$ smooth. \emph{suppoert} of $f$ is
+      $$supp(f)= \bar{\{x\in X | f(x) \neq 0 \}}$$
+  \end{definition}
+\begin{example}
+  $f(x)=
+    \begin{cases}
+      e^{- l x } \qquad x>0 \\
+      0 \qquad \leq 0
+    \end{cases}
+  $
+  $supp(f)=[0,\infty)$.
+\end{example}
+\begin{definition}
+  $X$ an abstract manifold, $\{u_{\alpha}\}$ an open cover of $X$. Type $1$: Partition of unity subordinate to $\{u_\alpha \}$ a collection of cuntions $p_{\alpha}: X\to \R$.
+    \begin{enumerate}[(1)]
+      \item $(\forall \alpha)(\forall x) 0 \leq p_\alpha (x)\leq 1$
+      \item $\forall x\in X$ $\exists u$ open, $x\in u$ and only finitely many $p_\alpha$ are nonzero on $u$
+      \item $(\forall x)$ $\sum_{\alpha \in A}p_{\alpha}(x)=1$
+      \item $supp(p_\alpha)\subseteq u_\alpha$
+    \end{enumerate}
+  Type $2$: Partition of unity with compact supports subordinate ot $\{u\alpha\}$.
+  \newline $p_i: X\to \R, i \in \N$.
+    \newline (1), (2), (3)
+  \begin{enumerate}[(4)]
+    \item $supp(p_i)\subseteq u_\alpha$ for some $\alpha$ and $supp(p_i)$ is compact.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  $P, O, U$ of either type always exist on an abstract manifold.
+\end{remark}
+
+\begin{theorem}
+  Let $X$ be a compact abstract smooth manifold, then there is an embedding $X\to \R^N$ for $N>>0$.
+\end{theorem}
+\begin{proof}
+   let $$\varphi_{\alpha}: \R^n \supseteq\tilde{u}_\alpha \to u_\alpha \subseteq X$$
+   be a collection of coordinate charts that cover $X$. By compactness, we only need finitely many of these to cover $X$.
+    $$X= \cup u_\alpha$$
+  So we have $\varphi_i:\tilde{u_i}\to u_i$ coordinates. Assume $\tilde{u_i}\subseteq \R^n$ open. There is a partition of unity subordinate to $\{ u_1, u_2, \dots, u_k\}$ we get $\rho_i: X\to \R, supp(\rho_i)\subseteq u_i$.
+    $$\varphi_i^{-1}: u_i \xrightarrow{\simeq}\tilde{u_i}\subseteq \R^n$$
+    locally embedding $X$ into $\R^n$. Use P.O.U. to extend $\varphi^{-1}$ to all of $X$:
+  $$g_i(x)=
+  \begin{cases}
+      \rho_i(x)\varphi^{-1}(x) \text{ if } x\in u_i \\
+      0 \text{ if } x\neq u_i
+  \end{cases}$$
+  $g_i: X\to \R^n$ is smooth.
+  \newline Define $G:X\to \R^k \times \R^{n \cdot k}$
+    $$G(x)=(\rho_1(x), \dots \rho(x), g_1(x), \dots, g_k(x))$$
+    I claim $G$ is an embedding.
+     \newline $G$ is smooth, since all component functions are smooth.
+     \newline \textbf{Injectivity:} if $G(x)= G(y), x,y \in X$ then $\rho_i(x)=\rho_i(y) 1\leq i \leq k$. So if $\rho_i(x)\neq 0$, then $\rho_i(y)\neq 0$ and $x,y\in supp(\rho_i)\subseteq u_i$. But $g_i(x)=g_i(y)$ so $\rho_i(x)\varphi_i^{-1}(x)= \rho_i(y)\varphi_i^{-1}(y)$.
+     So $x,y \in u_i \xrightarrow{\simeq , \varphi_i^{-1}}\tilde{u_i}$ $\varphi_i^{-1}(x)=\varphi_i^{-1}(y)$
+     $$\Rightarrow x=y \text{ as } \varphi_i^{-1} \text{ is a bijection.}$$
+\end{proof}
+$G$ is an immersion. $x\in X$, there is some $i$ with $\rho_i(x)\neq 0$. $x\in supp(\rho_i)\subseteq u_i$. There is an open set $x\in u\in supp(\rho_i)$ where $\forall y \in u$, $\rho_i(y)\neq 0$.
+  $$u \xrightarrow{G}\R^k \times \R^{n \cdot k} \xrightarrow{H_i}\R^n$$
+  $$(x_1, \dots, x_k, w_1, \dots, w_k) \mapsto \frac{w_i}{x_i}$$
+  Note $\rho_i(y)\neq 0 \forall y \in u$, so $H_i(G(y))$ well-defined.
+  On $u$, $H_i \circ G(y)= \frac{g_i(y)}{\rho_i(y)}$
+$$=\frac{\rho_i(y) \cdot \varphi_i^{-1}(y)}{\rho_i(y)}$$
+$$=\varphi_i^{-1}(y).$$
+Hence $D(H_i \circ G)_y = D(\varphi_i^{-1})_y$ is an isomorphism. Finally use chain rule
+  $$D(H_i)_{G(y)} \circ DG_y = (D\varphi_i^{-1})_y$$

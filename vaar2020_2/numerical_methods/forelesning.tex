@@ -1,0 +1,300 @@
+\title{Forelesning Numeriske Metoder}
+\maketitle
+\section*{15. jan}
+First part of the lecture was about Newton iteration, fixed point iteration and a simple version of Brouwer's fixed point theorem.
+\begin{example}\label{ex1}
+  \begin{enumerate}[(a)]
+    \item
+      $f(x)=e^x-2x-1$ on $[1,2]$
+      Does it have a zero on $[1,2]$?
+      \newline
+      \textbf{Solution:}
+      Use Thm. 1.1 (checking if it change signs)
+      $$f(1)=e-2-1 <0$$
+      $$f(2)=e^2-4-1 >0$$
+      It has a zero.
+    \item
+      Rewrite $f(x)=0$ as a fixed point equation.
+      \newline
+      \textbf{(1) Possible solution:}
+      $$x=\frac{e^x-1}{2}$$
+      $$g(x)=\frac{e^x-1}{2}$$
+      ``Stupid way of doing it''
+      \textbf{(2) Possible solution:}
+      $$e^x-2x-1=0 \Leftrightarrow e^x=2x+1 \Leftrightarrow x=\log(2x+1)$$
+      Recall Thm. 1.2 (Brouwer), we have $g(x)=\log(2x+1)$.
+      \begin{enumerate}[(1)]
+        \item
+          $$g([1,2])\not\subseteq [1,2]$$
+          $$g(1)=\frac{e-1}{2}<1$$
+          $$g(1)\not\in [1,2]$$
+          So we cannot use (1).
+        \item
+          Observe that $g(1)=\log(2+1)=\log(3)>1$ and $g(2)=\log(5)<2$. So we can use (2).
+          $$x_{k+1}=g(x_k) \qquad g=\log(2x+1)$$
+      \end{enumerate}
+  \end{enumerate}
+\end{example}
+\begin{remark}
+  The example above shows how there are ``quality differences'' between rewrites of fixed point problems.
+\end{remark}
+\begin{definition}
+  \textbf{Contraction (p.6)}
+  \newline
+  Let $g:[a,b]\to \R$ continuous on $[a,b]$. $g$ is a \emph{contraction} if $\exists L$ s.t. $0<L<1$ s.t.
+    $$\forall x,y\in [a,b], \quad |g(x)-g(y)| \leq L|x-y|$$
+\end{definition}
+
+\begin{theorem}\label{contractionmap}
+  \textbf{1.3 Contraction mapping theorem}
+  \newline
+  Let $g:[a,b]\to \R$ continuous.
+  Let $g([a,b])\subseteq [a,b]$.
+  Assume $g$ is a contraction on $[a,b]$.
+  \newline
+  Then $\exists !$ fixed point $\zeta \in [a,b]$ such that $\zeta=g(\zeta)$. The sequence $\{x_k\}_\alpha$ $x_{k+1}=g(x_k)$ converges to $\zeta$.
+    $$\lim_{k\to\infty}x_k=\zeta$$
+\end{theorem}
+\begin{proof}
+  Existence we get for free from Brouwer's fixed point theorem.
+  \newline
+  \textbf{Uniqueness:} Suppose there are two fixed point $\zeta,\eta$.
+    $$|\zeta-\eta|=|g(\zeta)-g(\eta)|\leq L|\zeta-\eta| \Rightarrow (1-L)|\zeta-\eta|\leq 0$$
+    But $1-L>0$ so $|\zeta-\eta|$ must be $0$ implying $\zeta=\eta$ proving uniqueness.
+  \newline
+  \textbf{Convergence:} $x_{k+1}=g(x_k)$ Let $x_0\in [a,b]$ (observe that this sequence never leaves $[a,b]$).
+    $$|x_k-\zeta|=|g(x_{k-1})-g(\zeta)|\leq L|x_{k-1}-\zeta|\leq L^2|x_{k-2}-\zeta|$$
+  Can be proven by induction that $|x_{k}-\zeta|\leq L^k|x_0-\zeta|$. The limit for $\lim_{k\to\infty}L^k=0$
+    $$\Rightarrow \lim_{k\to\infty}|x_k-\zeta|=0 \Rightarrow \lim_{k\to\infty}x_k=\zeta.$$
+\end{proof}
+\begin{theorem}
+  \textbf{Mean value theorem (App.3 in the book.)}
+    $$f:[a,b]\to \R \text{ continuous}$$
+  assume $f$ is differentiable on $(a,b)$.
+  \newline
+  Then $\exists \eta \in (a,b)$ such that $f(b)-f(a)=f'(\eta)(b-a)$.
+\end{theorem}
+Now we go back to example \ref{ex1}:
+  $$f(x)=e^x-2x-1, f(x)=0 \Leftrightarrow x=g(x)$$
+  $$g(x)=\log(2x+1)$$
+  $$g(x)-g(y)=g'(\eta)(x-y) \forall x,y\in [1,2]$$
+  $$g'(x)=\frac{2}{2x+1}$$
+Observe that $g'$ monotonically decreasing on $[1,2]$.
+  $$g'(1)=\frac{2}{3}\geq g'(\eta)\geq g'(2)=\frac{2}{5}$$
+  $$|g'(\eta)\leq \frac{2}{3}<1$$
+We have $\forall x,y\in [1,2]$ that
+  $$|g(x)-g(y)|=|g'(\eta)||x-y|\leq \frac{2}{3}|x-y|$$
+so $g$ is a contraction on $[1,2]$. Applying the Contraction mapping theorem\ref{contractionmap} gives us convergence.
+
+\section*{22. jan}
+Norms in $\R^N, N\geq 2$.
+\newline $|| \cdot ||: \R^n \to \R$ nonnegative.
+\newline $|| X ||_{\infty}:=max_{1\leq i \leq N}|X_i|$ is a norm.
+\newline $V$ a vector space with a norm is called normed space. TOPOLOGY in normed spaces.
+\begin{definition}
+  $U$ is an open set in $\R^N$ iff $\forall x\in U \exists \varepsilon >0 \text{ s.t. } B_x(\varepsilon)\subset U$.
+  $$B_x(\varepsilon)=\{ y\in \R^N | ||x-y|| <\varepsilon \}$$
+\end{definition}
+
+\begin{definition}
+  $C$ closed.
+  \newline $C$ is the complement of any open set.
+    $$C=\R^N\setminus U $$
+\end{definition}
+
+\begin{definition}
+  \emph{Equivalent norms}
+  \newline $|| \cdot ||, ||| \cdot |||$ two norms in $\R^N$. They are equivalent iff $\exists C_1>0, C_2>0$ such that
+    $$C_1 || x || \leq |||x||| \leq C_2 ||x||, \forall x\in \R^N$$
+\end{definition}
+\begin{theorem}
+  All norms are equivalent in $\R^N$.
+\end{theorem}
+
+\begin{definition}
+  \emph{Cauchy sequence}
+  \newline $\{ x_k \}_k ,x_k\in \R^N$ is a \emph{Cauchy sequence} $\Leftrightarrow \forall \varepsilon >0 \exists k_0=K_0(\varepsilon)$ positive integer such that
+    $$||x_k-x_m||_{\infty}<\varepsilon \forall K,m \geq K_0(\varepsilon)$$
+\end{definition}
+
+\begin{theorem}
+    All Cauchy sequences converge in $\R^N$.
+\end{theorem}
+
+\begin{definition}
+  Let $g: D\subset \R^N \to \R^N$, $D$ closed subset of $\R^N$.
+  \newline If $\exists 0<L<1 $ s.t.
+      $$||g(x)-g(y)||_{\infty}\leq L||x-y||_{\infty} \forall x,y \in D$$
+    then $g$ is called a \emph{contraction} on $D$ with respect to $|| \cdot ||_{\infty}$.
+\end{definition}
+
+\begin{theorem}%4.1 p.110 (Contraction mapping theorem)
+  Let $D \subseteq \R^N $ be closed, $g: D \subseteq \R^N \to \R^N$ a contraction on $D$ in $\| \cdot  \|_{\infty } $ and $g(D)\subset D$. Then
+    $$\exists ! \bar{x}\in D \text{ s.t. } \bar{x}=g(\bar{x}) \text{ and }\{x_K\}_k, x_{k+1}=g(x_k)$$
+  converges to $\bar{x} \forall x_0 \in D$.
+\end{theorem}
+\begin{proof}
+  Let $\{x_k\}_k, x_{k+1}=g(x_k)$.
+      $$ \| x_k-x_{k-1} \|_{ \infty}= \| g(x_{k-1})-g(x_{k-2}) \|_{ \infty } \leq L \| x_{k-1}-x_{k-2} \|_{ \infty }$$
+  By induction
+    $$\| x_k-x_{k-1} \|_{ \infty } \leq L^{k-1}\| x_1-x_0 \|_{ \infty }$$
+  $m\geq k$
+    $$\| x_m-x_k \|_{  \infty}= \| (x_m-x_{m-1})+(x_{m-1}\cdots)\cdots -x_{k+1}+(x_{k+1}-x_k) \|_{ \infty }$$
+    $$\leq \| x_m-x_{m-1} \|_{ \infty } + \cdots + \| x_{K+1}-x_k \|_{ \infty } $$
+    $$\leq L^{m-1}\| x_1-x_0 \|_{ \infty } + \cdots +  L^k \| x_1-x_0 \|_{ \infty }$$
+    $$=L^k \left(L^{m-1-k}+L^{m-2-k}+\cdots+1\right)\| x_1-x_0 \|_{ \infty } $$
+    Observe that the paranthesis sum to $\frac{1-L^{m-k}}{1-L}$ (partial sum of geometric series)
+    $$=L^k\frac{1-L^{m-k}}{1-L} \| x_1-x_0 \|_{ \infty } \leq L^k\frac{1}{1-L}\| x_1-x_0 \|_{\infty}$$
+    $L^k \to 0$ as $k\to \infty$, then $\{x_k\}_k$ is Cauchy sequence. Then $\exists \bar{x}=\lim_k x_k$.
+    \newline
+    $g$ is continuous
+      $$\Rightarrow \bar{x}=\lim_k x_k=\lim_k g(x_{k-1})=g(\lim_{x_{k-1}})=g(\bar{x}).$$
+    Since $g$ is a contraction
+        $$x\in D \forall \varepsilon >0 \exists \delta >0 s.t. \| x-y\|_{\infty}<\delta \Rightarrow \| g(x)-g(y) \|_{\infty}<\varepsilon$$
+      can take $\delta = \frac{\varepsilon}{2L}$
+          $$\| g(x)-g(y) \|_{\infty} \leq L \| x-y \|_{\infty} <L\frac{\varepsilon}{2L}$$
+    Lemma 4.1 gives us that $\bar{x}\in D$ (because $D$ is closed.)
+\end{proof}
+
+\subsection*{Matrix norms}
+$$\| \cdot \|: \R^{N\times N}\to \R \text{ nonnegative}$$
+Axioms:
+\begin{enumerate}[(1)]
+  \item $\| A \|=0 \Leftrightarrow A=0 $
+  \item $\| \alpha A \|=|\alpha|\| A \| \forall \alpha \in \R, A\in \R^{N\times N} $
+  \item $\| A+B \|\leq \| A \|+\| B \| \forall A,B \in \R^{N\times N}$
+  \item $\| A \cdot B \|\leq \| A \|\| B \|  $
+\end{enumerate}
+$A, m\times n$
+
+\begin{example}
+  $$\| A \|_{F} = \left(\sum_{i=1}^N \sum_{j=1}^N |a_{ij}|^2  \right)^{\frac{1}{2}}=||vec(A)||_2$$
+  $A, n\times n$, Frobenius norm.
+\end{example}
+\begin{example}
+  $\| A \|_{1}:=max_{1\leq j \leq N}\sum_{i=1}^N |a_{ij}| $
+\end{example}
+\begin{example}
+  $\| A \|_{\infty} :=max_{1\leq i \leq N}\sum_{j=1}^N|a_{ij}|$
+\end{example}
+\begin{definition}
+  \emph{Spectral radius}
+  \newline $B, N\times N$
+    $$\rho (B)=max_{1\leq i \leq N} |\lambda_i |$$
+\end{definition}
+\begin{example}
+  $\| A \|_{2} := \rho(A^TA)^{\frac{1}{2}}$.
+\end{example}
+
+\subsubsection*{Subordinate matrix norms}
+Suppose $\| \cdot \| $ is a norm in $\R^n$
+  $$\| A \|:=max_{x\in \R^n, x\neq 0}\frac{\| Ax\|}{\| x \| }$$
+\begin{proposition}
+  Subordinate matrix norms are matrix norms.
+\end{proposition}
+
+\section{29. jan}
+\subsection*{SYMMETRIC AND DEF MATRICES (SPD)}
+\begin{definition}
+  $A \in \R^{n\times n}$ symmetric is said SPD
+    $$\Leftrightarrow \forall \vct{v}\in \R^n, \vct{v}\neq 0, \vct{v}^TA\vct{v}>0$$
+\end{definition}
+\begin{theorem}
+  $A\in \R^{n\times n}$
+    $$A \text{ SPD } \Leftrightarrow \text{ all eigenvalues are positive.}$$
+\end{theorem}
+\begin{proof}
+  $$(\Rightarrow)$$
+  $\forall \vct{v}\neq 0, \vct{v}^TA\vct{v}>0$, consider $w_i$ eigenvector of $A$ with eigenvalue $\lambda_i$, $w_i\neq 0$, $w_i^TAw_i>0=\lambda_iw_i^Tw_i=\lambda_i \| w_i \|_{2} ^2$
+    $$\Rightarrow \lambda_i>0$$
+  $$(\Leftarrow)$$
+  $A$ symmetric, $\exists w_1,\dots,w_n$ a basis of orthonormal eigenvectors for $A$
+    $$W=[w_1 | w_2 | \cdots | w_n] \qquad Aw_i=\lambda_iw_i$$
+    $$W^TAW=\Lambda_{n\times n}=
+\begin{bmatrix}
+  \lambda_1 & 0 & \cdots & 0 \\
+  0 & \lambda 2 & \cdots & 0 \\
+  \vdots & 0 & \ddots & 0 \\
+  0 & \cdots & 0 & \lambda_n
+\end{bmatrix}
+    $$
+    from spectral theorem for symmetric matrices.
+    $$\vct{v}\in \R^n,\vct{v}\neq 0, \vct{v}=Wz$$
+    $$\vct{v}^TA\vct{v}=z^TW^TAWz=z^T\Lambda z=\sum_{i=1}^nz_i^2\lambda_i >0$$
+\end{proof}
+
+\begin{exercise}
+  $A\in \R^{n\times n}$ SPD, then
+    $$k_2(A)=\| A \|_{2} \| A ^{-1} \|_{2} = \frac{max_{\lambda \in \sigma(A)}|\lambda|}{min_{\lambda\in \sigma(A)}|\lambda|}$$
+\end{exercise}
+\begin{proof}
+  $\| A \|_{2} =\sqrt{\rho(A^TA)}=\sqrt{\rho(A^2)}=\sqrt{\rho(A)^2}=\rho(A)=max_{\lambda\in \sigma(A)}$
+  $$\lambda \text{ eigenvalue of }A \Rightarrow \lambda^2 \text{ eigenvalue of }A^2$$
+  $$\lambda \text{ eigenvalue of }A \Rightarrow \frac{1}{\lambda} \text{ eigenvalue of }A ^{-1}$$
+  $$\| A \|_{2} =max_{\lambda\in\sigma(A)}|\lambda|$$
+  $$\| A^{-1} \|_{2} =\rho(A ^{-1} )=max_{\mu\in\sigma(A^{-1})}|\mu|=max_{\lambda\in \sigma(A)}|\frac{1}{\lambda}|=min_{\lambda\in \sigma(A)}\frac{1}{|\lambda|}$$
+  $$k_2(A)=\| A \|_{2} \| A^{-1} \|_{2} $$
+    \qedhere
+\end{proof}
+\begin{remark}
+  $$A^2w=\lambda Aw=\lambda^2 w$$
+  $$Aw=\lambda w$$
+  $$\frac{1}{\lambda}w=wA ^{-1}$$
+\end{remark}
+Want to solve $Ax=b$ when $A\in \R^{m\times n}, m>n, b\in\R^m\times \R^n$.
+\newline These kind of problems arise in problems of data fitting.
+\newline The system har solutions iff $b\in Range(A)=span\{a_1,\dots,a_n\}$.
+\begin{definition}
+  residual $T:=b-Ax$
+\end{definition}
+LEAST SQUARE PROBLEM
+\newline Find $x\in \R^n$ s.t. $\| b-Ax \|_{2} =min_{y\in \R^n}\| b-Ay \|_{2}$.
+$$\| b-Ax \|_{2}^2=(b-Ax)^T(b-Ax)$$
+$$=b^Tb-2b^TAx+x^TA^TAx$$
+$$C(X):=b^Tb-2b^TAx+x^TA^TAx \text{ cost function}$$
+$$C: \R^n\to\R$$
+\begin{recall}
+  If $g:D\subset \R^n\to \R$ $2$ times continuously differentiable and has a local minimizer $x^*\in D$ then $\nabla g(x)\rvert_{x=x^*}=0$ and $\nabla^2g(x)\rvert_{x=x^*}$ positive semidefinite.
+\end{recall}
+\begin{theorem}
+  \textbf{Sufficient conditions of existence of minimizer}
+  If $g:D\subset \R^n\to \R$ $2$ times continuously differentiable in a neighborhood of $x^*$ and s.t.
+    $$\nabla g(x)\rvert_{x=x^*}=0.$$
+    Then if $\nabla^2g(x)\rvert_{x=x^*}$ is positive definite, $x^*$ is a local minimizer.
+\end{theorem}
+Let $A^Tb=g, A^TAx=B$ \newline
+Impose necessary optimality conditions for $C(x): \nabla C(x)=0 \Leftrightarrow Bx=g$ (normal equations).
+  $$\nabla C(x)=-2A^Tb+2A^TAx$$
+  Normal equations can be ill-conditioned.
+  \begin{example}
+    $$A=
+    \begin{bmatrix}
+        \varepsilon & 0 \\
+        0 & 1
+    \end{bmatrix}, 0 <\varepsilon <1$$
+    $$k_2(A)=\frac{1}{\varepsilon}$$
+    $$A^TA=A^2=
+    \begin{bmatrix}
+        \varepsilon^2 & 0 \\
+        0 & 1
+    \end{bmatrix}$$
+    $$k_2(A)=\frac{1}{\varepsilon^2}$$
+    $$C(x) B_{ij}=\left(A^TA\right)_{ij} B=B^T$$
+    $$C(x)=\sum_{i=1}^m b_i^2-2\sum_{i=1}^n b_i\sum_{j=1}^n a_{ij}x_j+\sum_{i=1}^n\sum_{j=1}^n x_iB_{ij}x_j$$
+    $$\frac{\partial C(x)}{\partial x_k}=-2\sum_{i=1}b_i\sum_{j=1}^na_{ij}\delta_{jk}+\sum_{i=1}^n\sum_{j=1}^n \left(\delta_{ik}B_{ij}x_j+x_iB_{ij}\delta_{kj}\right)$$
+    $$=-2\sum_{i=1}^nb_ia_{ik}+\sum_{j=1}^nB_{kj}x_j+\sum_{i=1}^nx_iB_{ik}$$
+    $$=-2\sum_{i=1}^n a_{ik}b_i + 2\sum_{j=1}^nB_{kj}x_j$$
+    $$=-2(A^Tb)_k+2(Bx)_k$$
+  \end{example}
+ALTERNATIVES TO NORMAL EQUATION, QR AND SVD
+\begin{theorem}
+  $A\in\R^{m\times n}, m\geq n$. Then $A=\hat{Q}\hat{R}$ where $\hat{Q}$ $m\times n$ matrix s.t. $\hat{Q}^T\hat{Q}=I_{n\times n}$.
+  \newline $\hat{R}$ $n\times n$ upper triangular.
+  \newline If $rank(A)=n$, then $\hat{R}$ is invertible.
+\end{theorem}
+\begin{theorem}
+  $A\in \R^{m\times n}, m\geq n, rank(A)=n$, then
+  $\exists !$ solution $x$ s.t. $\| b-Ax \|_{} =min_{y\in \R^n}\| b-Ay \|_{2} $ and $x$ is s.t. $\hat{R}x=\hat{Q}^Tb$ where $\hat{Q},\hat{R}$ are from the preceding theorem.
+\end{theorem}
+$A=U_{m \times n}\Sigma_{n\times n} V^T_{n\times n}$ $x$ least squares solution
+  $$x=V\Sigma^{-1}U^Tb$$

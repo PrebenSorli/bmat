@@ -1,0 +1,343 @@
+\title{Forelesning DiffTop}
+\maketitle
+\section{14.jan}
+
+How can we tell when two spaces are not equivalent?
+(
+$X,Y$ are topologically equivalent or homeomorphic if there is a homeomorphism
+$$f:X\to Y$$
+$f$ is continuous, bijective, and $f^{-1}$ is continuous too.
+)
+\newline
+Can I prove that $S^1$ is not equivalent to $[0,1]$?
+One idea: How many ``connected pieces''  is the space made of.
+
+\begin{definition}
+  Let $X\subseteq \R^n$ be a subspace. $X$ is \emph{disconnected} if there exist open sets $E\subseteq X, F\subseteq X$ such that
+    \begin{enumerate}
+      \item $F \cup E = X$
+      \item $E \cap F = \emptyset$
+      \item $E\neq \emptyset, F\neq \emptyset$
+    \end{enumerate}
+  We say $(E,F)$ is a separation of $X$.
+\end{definition}
+
+\begin{definition}
+  $X$ is connected iff $X$ is not disconnected.
+  \newline
+  That is, if whenever $E,F \subseteq X$ open, $E\cup F=X$ and $E\cap F=\emptyset$ then either $E$ or $F$ is empty.
+\end{definition}
+
+\begin{theorem}
+  Connectedness is a topological property.
+  \newline
+  if $f:X \to Y$ is a homeomorphism, then $X$ is connected iff $Y$ is connected. Equivalently $X$ is disconnected iff $Y$ is disconnected.
+\end{theorem}
+\begin{proof}
+  $f:X\to Y$ is a bijection and its continuous. So if $Y$ is disconnected , so we have $E \subseteq Y, F\subseteq Y$. $E$ and $F$ are open relative to $Y$. $f^{-1}(E), f^{-1}(F)$ are open relative to $X$ and as $f$ is a bijection:
+  $$f^{-1}(E)\cup f^{-1}(F)=X$$
+  $$f^{-1}(E)\cap f^{-1}(F)= \emptyset$$
+  $$f^{-1}(E)\neq \emptyset, f^{-1}(F)\neq \emptyset$$
+  So $X$ is disconnected. $f^{-1}$ is bijective and continuous.
+  \qedhere
+\end{proof}
+
+\begin{theorem}
+  Any interval in $\R$ is connected.
+  $$(a,b), [a,b], [a,b), (a,b], \text{ where }-\infty \leq a \leq b \leq \infty$$
+  Furthermore, these are all of the connected subsets of $\R$.
+\end{theorem}
+
+\begin{example}
+  $X=(0,1)$ and $Y=(0,1/2)\cup (1/2,1)$ are not homeomorphic.
+\end{example}
+\begin{lemma}
+  If $X\subseteq \R^n$ is a subspace, if $X$ is the union of connected subspaces $X_\alpha, (\alpha\in \mathcal{A})$
+    $$\left(X=\cup_{\alpha \in \mathcal{A}}X_\alpha\right)$$
+  and there is a point $x_0\in X_\alpha$ for all $\alpha\in \mathcal{A}$, then $X$ is connected.
+\end{lemma}
+\begin{proof}
+  Suppose $E,F\subseteq X$ open, and suppose
+    $$E\cup F = X$$
+    $$E \cap F= \emptyset$$
+ We will show $E=\emptyset$ or $F=\emptyset$. For any $\beta\in \mathcal{A}$, $X_\beta$ is connected.
+    $E\cap X_\beta $ and $F\cap X_\beta$ open relative to $X_\beta$.
+      $$\Rightarrow (E\cap X_\beta) \cup (F\cap X_\beta)=X_\beta$$
+      $$\Rightarrow (E\cap X_\beta) \cap (F \cap X_\beta)=\emptyset$$
+      $$\Rightarrow E\cap X_\beta=\emptyset \text{ or } F\cap X_\beta=\emptyset$$
+    Let's say $E\cap X_\beta =\emptyset$, so $F\cap X_\beta=X_\beta$ containing $x_0$ so $x_0\in F$, but now for any $\alpha\in \mathcal{A}$, $(E\cap X_\alpha, F_\alpha)$ is also a separation of $X_\alpha.$ $x_0\in F\cap X_\alpha=X\alpha$ and $E\cap X_\alpha =\emptyset$. Hence $\forall \alpha\in \mathcal{A}, X_\alpha \in F$
+    $$\Rightarrow F=\cup X_\alpha = X, E=\emptyset.$$
+  \qedhere
+\end{proof}
+
+\begin{example}
+  $X=B^n(0;1)$, $\vct{v}\in S^{n-1}$
+  $$X_{\vct{v}}= \{t\cdot \vct{v} | t\in (-1,1) \}$$
+  $X_{\vct{v}}$ is homeomorphic to $(-1,1)$.
+  $$f: (-1,1) \to X$$
+  $$t\mapsto t\vct{v}$$
+  and $\forall \vct{v}\in S^{n-1}$, $(0,0)\in X_{\vct{v}}$. So lemma proves $B^n(0;1)$ is connected.
+\end{example}
+
+\begin{example}
+  $S^{n}\subseteq \R^{n+1}$ is connected.
+\end{example}
+
+\begin{proposition}
+  ``The continuous image of a connected space is connected"
+  \newline
+  $f: X\to Y$ continuous, and $X$ is connected, then the image
+    $$f(X)=im(f)=\{f(x)\in Y | x\in X\}\subseteq Y$$
+  is connected.
+\end{proposition}
+\begin{proof}
+  Suppose $f(X)$ is disconnected. So say $f(X)=E\cup F$
+    $$E\cap F = \emptyset $$
+    $$E \neq \emptyset, F \neq \emptyset$$
+  and $E$ and $F$ are open relative to $f(X)$. $E$ and $F$ may not be open relative to $Y$!
+  There are open sets $\tilde{E}\subseteq Y, \tilde{F}\subseteq Y$ with
+    $$ \tilde{E} \cap f(X) = E, \tilde{F}\cap f(X)=F.$$
+  We will then have
+    $$f^{-1}(E)=f^{-1}(\tilde{E}) \text{ is open }$$
+    $$f^{-1}(F)=f^{-1}(\tilde{F}) \text{ is open }$$
+  these are nonempty, disjoint, union is $X$. This is a separation of $X$, so $X$ is disconnected.
+  \qedhere
+\end{proof}
+
+\begin{lemma}
+  $X$ is disconnected iff $X$ admits a continuous surjection
+    $$f:X\to \{0,1\}, \qquad \{0,1\}\subseteq\R$$
+\end{lemma}
+\begin{proof}
+  If $X$ is disconnected, we have a separation of $X$.
+    $$X=E\cup F, E\cap F=\emptyset, E\neq \emptyset, F\neq \emptyset$$
+  $$f:X\to \{0,1\}, f(E)=0, f(F)=1.$$
+  \newline
+  Conversely, we have
+    $$f:X\to \{0,1\}$$
+  continuous surjection
+    $$f^{-1}(\{0\})=E$$
+    $$f^{-1}(\{1\})=F$$
+    are open. Surjective implies nonempty, $E\cup F=X,$ $X$ is disconnected.
+\end{proof}
+
+\subsection*{Connected Components}
+how many pieces is a space made of?
+\begin{definition}
+  Define an equivalence relation on $X$.
+  for $a,b\in X$, we write $a\sim b$ if there is a connected subset $U\subseteq X$ with $a,b\in U.$
+\end{definition}
+Check that this is an equivalence relation:
+\begin{enumerate}[(1)]
+  \item $a\sim a$ use $U=\{a\}$
+  \item if $a\sim b$ then $b\sim a$.
+    $$a,b\in U, b,a\in U$$
+  \item Transitivity. $a\sim b, b\sim c$, show $a\sim c$. We have $a,b \in U_1$ connected, $b,c \in U_2$ connected. $a,b,c\in U_1 \cup U_2$ connected by Lemma.
+\end{enumerate}
+The equivalence classes of $\sim $ give the connected components of $X$.
+$$X/\sim = \{[x]|x\in X\}$$
+$$[x]=\{y\in X|x\sim y\}$$
+
+\begin{lemma}
+  If $X$ and $Y$ homemorphic,then $f$ gives a bijection of sets of connected components.
+    $$[f]: X/\sim \to Y/\sim $$
+    $$[x]\mapsto [f(x)]$$
+\end{lemma}
+Takeaway: If $X$ and $Y$ are homeomorphic, they have the same number of connected components.
+
+\begin{proposition}
+  \begin{enumerate}[(1)]
+    \item  $U\subseteq X$ is a connected component $\left(U=[x]\right)$ iff $U$ is connected, nonempty and for any subset $A\subseteq X$ connected with $A\cap U\neq \emptyset$ then $A\subseteq U$.
+    \item The connected components partition in space $X$.
+      $$[x]\cap [y] = \emptyset \text{ or } [x]=[y]$$
+      and $X=\cup[x]$.
+    \item $[x]$ is both open and closed.
+  \end{enumerate}
+\end{proposition}
+\subsection*{Goal: Distinguish}
+$[0,1]$ from $S^1$.
+\begin{definition}
+  A point $x\in X$ is a \emph{cut point} if $X\setminus \{x\}$ is disconnected.
+\end{definition}
+cut points of $[0,1]$ is $(0,1)$ (all interior points.)
+\newline
+cut points of $S^1$: $\emptyset$.
+\newline
+Conclude: There is no homeomorphism
+  $$f:[0,1]\to S^1$$
+because of the different cut sets.
+$$Cut(X)=\{x\in X | x \text{ is a cut point}\}$$
+\begin{theorem}
+  if $f:X\to Y$ is a homeomorphism then if $x\in Cut(X)$ then $f(x)\in Cut(Y)$ and further
+    $$f_{\rvert_{Cut(X)}}:Cut(X)\to Cut(Y)$$
+  is a homeomorphism.
+\end{theorem}
+\begin{proof}
+  $x\in Cut(X)$. Then $X\setminus \{x\}=E\cup F$.
+  $$E\cap F = \emptyset, E\neq \emptyset, F\neq \emptyset$$.
+  $$(f{-1})^{-1}(E), (f^{-1})^{-1}(F) \subseteq Y$$
+  $$(f{-1})^{-1}(E) \cup (f^{-1})^{-1}(F) = f(X)\setminus f(x)=Y\setminus f(x).$$
+  So $f(x)$ is a cut point of $Y$. So $f(x)\in Cut(Y)$. if $y\in Cut(Y)$, then $f^{-1}(y)$ is a cut point of $X$.
+    $$Cut(X)\to(f) Cut(Y)$$
+    $$Cut(Y)\to (f^{-1})Cut(X)$$
+  $f$ is a bijection between $Cut(X)$ and $Cut(Y)$. In fact both $f:Cut(X)\to Cut(Y)$ and $f^{-1}:Cut(Y)\to Cut(X)$ continuous too.
+  Let $U\subseteq Cut(Y)$ be open relative to $Cut(Y)$. Then
+    $$U=\tilde{U}\cap Cut(Y), \tilde{U}\subseteq Y \text{ open.}$$
+    $$f^{-1}(U)=f^{-1}(\tilde{U})\cap Cut(X)$$
+    $f^{-1}(\tilde{U})$ open in $X$ as $f$ is continuous $\Rightarrow $ open relative to $Cut(X)$.
+\end{proof}
+
+\section{16. Jan}
+\begin{definition}
+  Let $X\subseteq \R$ be a subspace, and suppose $x\in X$ is a cut point. We say $x$ is an $n$-fold cut point if $X\setminus \{x\}$ consists of $n$ connected components.
+\end{definition}
+
+\begin{proposition}
+  If $f:X\to Y$ is a homeomorphism, then $X$ has an $n$-fold cut point iff $Y$ has an $n$-fold cut point.
+\end{proposition}
+\begin{proof}
+  Since $f:X\to Y$ is a homeo
+    $$x\leftrightarrow f(x)$$
+  We restrict $f$ to $X\setminus \{x\}$.
+    $$f_{\rvert X\setminus\{x\}}: X\setminus\{x\} \to Y\setminus\{f(x)\}$$
+  if $x$ is an $n$-fold cut point, $X\setminus\{x\}$ consists of $n$ connected components. So $Y\setminus\{f(x)\}$ consists of $n$ components too.
+  \qedhere
+\end{proof}
+
+All cut points of the latin letter $P$ are $2$-fold.
+``Connectedness proof''
+\newline
+Start sith $X$ a connected space. Say we want to prove $\left(\forall x\in X\right)\left(P(x)\right)$.
+  \begin{enumerate}[(1)]
+    \item
+      $$E=\{x\in X | P(x)\}$$
+      $$F=\{x\in X |\not P(x)\}$$
+      $$E \cup F = X$$
+      $$E \cap F = \emptyset$$
+    \item
+      Prove that there exists one $x_0\in X$ with $x_0\in E$, i.e., $P(x_0)$ is true.
+    \item
+      Prove that both $E$ and $F$ are open sets.
+    \item Draw the conclusion that $F=\emptyset$. (if $F\neq \emptyset $, then $(E,F)$ is a separation of $X$, showing $X$ is disconnected).
+  \end{enumerate}
+\subsection*{Compactness}
+\begin{example}
+  The closed interval $[\cdot,\cdot]$, $S1,S^n$ are all compact. $(\cdot,\cdot), (\cdot,\cdot], B^n(0;1), \R^n$ are not compact.
+\end{example}
+  \begin{definition}
+    \textbf{Sequential compactness}
+    \newline
+    $X\subseteq \R^n$ is sequentially compact if for any sequence $x_n\in X$, there exists a convergent subsequence $x_n, x_{n_k}$ so that
+      $$\lim_{k\to \infty}\bar{x}\in X$$
+  \end{definition}
+\begin{example}
+  $x_n=\frac{1}{n}$ for $n\geq 2$
+  $$\in (0,1)$$
+  $$\lim_{n\to \infty}x_n=0$$
+  Every subsequence of $\frac{1}{n}$ converges to $0$ too. So $(0,1)$ is not compact.
+  \newline
+  Maybe $[0,1)$ would be sequentially compact? No:
+  $$a_n=
+    \begin{cases}
+        \frac{1}{n} \text{ if }n \text{ even} \\
+        1-\frac{1}{n} \text{ if }n \text{ odd}
+    \end{cases}
+  $$
+$a_n$ is not a convergent sequence. But there are convergent subsequences.
+  $$a_{2n}=\frac{1}{2n}\to 0; \quad a_{2n+1}=1-\frac{1}{2n+1}\to 1$$
+\end{example}
+
+\begin{theorem}
+  \textbf{Heine-Borel}
+  \newline
+  $x\subseteq \R^n$ a subspace is sequentially compact iff $X$ is both closed as a subset of $\R^n$ and bounded.
+    i.e.,$\exists N>0$ so that $X\subseteq B^n(0;N)$.
+\end{theorem}
+
+$S^2$ is closed:
+$$\R^3\setminus S^2 = (B^3(0;1))\cup (\R^3\setminus D^3(0;1))$$
+these are both open so $\R^3\setminus S^2$ must be open and hence $S^2$ is closed.
+
+\begin{proposition}
+  Let $f: X\to Y$ be a continuous map and suppose $X$ is sequentially compact. Then $f(X)$ is also sequentially compact.
+\end{proposition}
+\begin{proof}
+  Consider a sequence $y_n\in f(x)$. Pick $x_n \in X$ so that $f(x_n)=y_n$. So we have $x_n\in X$.
+  \newline
+  Sequentially compact implies $x_n$ has a convergent subsequence
+    $$ \lim_{k\to \infty}x_{n_k}=\bar{x}\in X$$
+  but $f$ is continuous, so
+    $$\lim_{k\to \infty}f(x_{n_k})=f(\lim_{k\to \infty}x_{n_k})=f(\bar{x})\in f(X)=\lim y_{n_k}$$
+  Conclusion: $y_{n_k}$ is a subsequence converging to $f(\bar{x})\in f(X)$.
+\end{proof}
+Consequence: if $X\subseteq \R^n, Y\subseteq\R^m$, $f:X\to Y$ continuous, $X$ seq. comp., then $f(X)\subseteq \R^m$ is closed and bounded.
+
+\begin{definition}
+  $X\subseteq \R^n$ a subspace is compact iff for any open cover $\mathcal{V}=\{U_{alpha}\subseteq X|\alpha \in \Lambda\}$ such that $X=\cup_\alpha \in \Lambda U_\alpha$ there exists a finite subcover of $\mathcal{V}$. That is, there are:
+    $$U_{\alpha_1},U_{\alpha_2},\dots, U_{\alpha_k}\in \mathcal{V}$$
+  and $X=U_{\alpha_1}\cup U_{\alpha_2} \cup \dots \cup U_{\alpha_n}$
+\end{definition}
+
+\begin{example}
+  $(0,1)$ is not compact.
+  \newline
+  Find an open cover $\mathcal{V}$ of $(0,1)$ that has no open subcover.
+    $$\mathcal{V}=\{ (\frac{1}{n}) | n\geq 2, n\in \N \}$$
+First, $\mathcal{V}$ is an open cover of $(0,1)$.
+  $$(0,1)=\cup_{n\geq 2}(\frac{1}{n},1)$$
+For any $x, 0<x<1$, $\exists N\in \N$ so $\frac{1}{N}<x$, in that case, $x\in (\frac{1}{N},1)$. But no finite subcollection of $\mathcal{V}$ will still cover $(0,1)$.
+  $$(\frac{1}{n},1),(\frac{1}{n_2},1), \dots ,(\frac{1}{n_k},1)$$
+Well there is a largest value of $n_1,\dots , n_k$, call it $n_i$. And we then have
+  $$\cup_{i=1}^k(\frac{1}{n_i},1)\subseteq (\frac{1}{n_i},1)\neq (0,1)$$
+\end{example}
+
+\begin{theorem}
+  $[0,1]$ is compact.
+\end{theorem}
+\begin{proof}
+  We'll use the fact that $[0,1]$ is connected. Consider
+    $$\mathcal{U}=\{U_\alpha \subseteq [0,1] | \alpha \in \mathcal{A}\}$$
+  open cover of $[0,1]$.
+    $$E=\{x\in [0,1] | [0,x] \text{ admits a finite cover by }\mathcal{U} \}$$
+  i.e. there are $U_{alpha_1},\dots , U_{alpha_k}\in \mathcal{U}$ where $[0,x]\subseteq U_{\alpha_1} \cup \cdots \cup U_{\alpha_k}$.
+  Want to show $x=1\in E$.
+  \begin{enumerate}[(1)]
+    \item     Observe $0\in E$. Because $[0,0]=\{0\}$ and $0\in U_\beta$ for some $\beta$ as $\cup_{\alpha\in \mathcal{A}}=[0,1]$. So $[0,0]\subseteq U_\beta$.
+    \item     Show $E$ and $[0,1]\setminus E$ are open. Suppose $x\in E$. So there are sets $U_{\alpha_1},\dots , U_{\alpha_k}$
+      $$[0,1] \subseteq U_{\alpha_1},\dots , U_{\alpha_k}.$$
+    $x\in U_{\alpha_i}$ for some $i$, and $U_{\alpha_i}\subseteq [0,1]$ is open. So we can find $\epsilon >0$ so that
+      $$(x-\epsilon, x+\epsilon)\cap [0,1]\subseteq U_{\alpha_i}$$
+    So now, consider any $y\in ((x-\epsilon, x+\epsilon)\cap [0,1])$. We observe
+      $$[0,y]\subseteq U_{\alpha_1} \cup \cdots \cup U_{\alpha_k}$$
+      $$[0,y]\subseteq [0,x]\cup \left((x-\epsilon, x+\epsilon)\cap [0,1])\right)$$
+    so then $(x-\epsilon, x+\epsilon)\cap [0,1])\subseteq E$. which is open in $[0,1]$. A similar argument will show $[0,1]\setminus E$ is open.
+    \item Connectedness of $[0,1]$ implies $E=[0,1]$. $1\in E$, hence $[0,1]$ is covered by $U_{\alpha_1} \cup \cdots \cup U_{\alpha_k}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+  $$X\subseteq \R^n$$
+  $X$ is compact iff $X$ is sequentially compact iff $X$ is closed in $\R^n$ and bounded.
+\end{theorem}
+
+\begin{proposition}
+  $f:X\to Y$ is a homeomorphism, then $X$ is compact iff $Y$ is compact.
+\end{proposition}
+\begin{proof}
+  If $X$ is compact, $f(X)=Y$ is compact.
+  \newline
+  Conversely if $Y$ is compact, $f^{-1}$ is continuous
+    $$X=f^{-1}(Y) \text{ is compact.}$$
+\end{proof}
+
+\begin{theorem}
+  \textbf{Borsuk-Ulam}
+  \newline
+    $f:S^1\to \R$ continuous. There is some $p\in S^1$ such that $f(p)=f(-p)$.
+\end{theorem}
+\begin{proof}
+  Define $D: S^1\to \R$ by $D(p)=f(p)-f(-p)$, if there is $p\in \S^1$ with $D(P)=0=f(p)-f(-p)$, then $f(p)=f(-p)$. Since $S^1$ is connnected and compact $D(S^1)=[a,b]$ where $a\leq b$.
+  \newline
+  I claim $0\leq b$ and $a \leq 0$. Let's say $D(p)=f(p)-f(-p)\leq 0$ then $D(-p)=f(-p)-f(p)=-D(p)\geq 0$. So $0\in D(S^1)$.
+  \qedhere
+\end{proof}

@@ -1,0 +1,120 @@
+\title{Lecture week 5}
+\maketitle
+\section{4. feb}
+\begin{corollary}
+  If $D\subseteq \C$ open, is simply connected (path-connected, every closed $C^0$-path is $C^0$-contractible in $D$), then the complex line integral of holomorphic functions on $D$ only depends on start- and end point.
+\end{corollary}
+\begin{proof}
+  $$0=\int_{\gamma}f(z)dz-\int_{\tilde{\gamma}}f(z)dz$$
+\end{proof}
+
+\begin{proposition}
+  Let $D\subseteq \C$ open, be simply connected. Then every holomorphic function $f:D\to \C$ admits a complex antiderivative.
+\end{proposition}
+\begin{proof}
+  Exercise.
+  Hint:
+\begin{itemize}
+  \item fix $z_0\in D$.
+  \item for $z\in D$ pick arbitrary $C^1$-curve $\gamma_z$ from $z_0$ to $z$
+  \item define $F:D\to \C: z\mapsto \int_{\gamma}f(z)dz$
+  \item
+    $$\frac{F(z+h)-F(z)}{h}=\frac{\int_{\gamma_{z+h}}f(z)dz-\int_{\gamma_z}f(z)dz}{h}=\frac{1}{h}\int_{\text{ straight line segment from z to z+h}}f(z)dz$$
+\end{itemize}
+
+\end{proof}
+
+\begin{theorem}\label{CauchyIntForm}
+  \textbf{Cauchy Integral Formula}
+  \newline Let $D\subseteq \C$ open, $z_0\in D$ and assume $\overline{D_r(z_0)}=\{z\in \C:|z-z_0|\leq r\}\subseteq D$. If $f:D\to \C$ is holomorphic, then we have $\forall z\in D_r(z_0):$
+    $$f(z)=\frac{1}{2\pi i}=\int_{|w-z_0|=r}\frac{f(w)}{w-z}dw$$
+    In particular, the values of $f$ inside the disc are uniquely determined by the values in the boundary of the disc.
+\end{theorem}
+
+\section{7.feb}
+\begin{theorem}
+  \textbf{Cauchy Integral Formula}
+  \newline Let $D\subseteq \C^n, z_0\in D, r\in \R_{>0}, \overline{D_r(z_0)}\subseteq D$.
+  \newline If $f:D\to \C$ is holomorphic, then, $\forall z\in D_r(z_0)$
+    $$f(z)=\frac{1}{2\pi i} \int_{|w-z_0|=r}\frac{f(w)}{w-z}dw.$$
+  If $\gamma$ is a closed $C^1$ curve homotopic to $|w-z_0|=r$ in $D\setminus \{z\}$, then $f(z)=\frac{1}{2\pi \varepsilon}\int_{\gamma}\frac{f(w)}{w-z}dw$.
+\end{theorem}
+\begin{proof}
+  Fix a path $z\in D_r(z_0)$. Then $w\mapsto \frac{f(w)}{w-z}$ is holomorphic in $D\setminus\{z\}$. So by invariance of complex line integral under homotopies, we have for
+    $0<\varepsilon<< 1: \overline{D_{\varepsilon}(z)}\subseteq D_r(z_0)$ and
+    $$\frac{1}{2\pi i}\int_{|w-z_0|=r}\frac{f(w)}{w-z}dw=\frac{1}{2\pi i}\int_{|w-z|=\varepsilon}\frac{f(w)}{w-z}dw$$
+    $$=\frac{1}{2\pi i}\int_{|w-z|=\varepsilon}\frac{f(w)-f(z)}{w-z}dw+\frac{1}{2\pi i}\int_{|w-z|=\varepsilon}\frac{f(z)}{w-z}dw$$
+    Let's look at just $\frac{1}{2\pi i}\int_{|w-z|=\varepsilon}\frac{f(z)}{w-z}dw$
+    $$=\frac{1}{2\pi i}f(z) \cdot\int_{|w-z|=\varepsilon}\frac{1}{w-z}dw$$
+    $$=\frac{1}{2\pi i}f(z) \cdot \int_{0}^{2\pi }\frac{1}{\varepsilon \cdot e^{i\theta}} \cdot \varepsilon \cdot i \cdot e^{i\theta}d\theta$$
+    $$=f(z)$$
+    Define
+    $$g:D\to\C:w\mapsto
+\begin{cases}
+  \frac{f(w)-f(z)}{w-z} \text{ if }w\neq z \\
+  f'(z) \text{ if } w=z
+\end{cases}
+    $$
+    $g$ is continuous $\Rightarrow \exists M\in \R_{>0}:|g|\leq M$ on $\overline{D_r(z_0)}$.
+    $$\Rightarrow \left|f(z)-\frac{1}{2\pi i} \int_{|w-z_0|=r}\frac{f(w)}{w-z}dw  \right|$$
+    $$\left|\frac{1}{2\pi i} \int_{|w-z|=\varepsilon}g(w)dw\right|\leq \frac{1}{2\pi i}(2\pi \varepsilon) \cdot max_{w:|w-z|=\varepsilon}|g(w)|$$
+    $$\leq \varepsilon \cdot M \to 0$$
+    as $\varepsilon \to 0$.
+\end{proof}
+
+$$D=\C\setminus\{0\}, f:D\to \C: w\mapsto \frac{1}{w}$$
+Given $z\in D_1(0)\cap D=D_1(0)\setminus\{0\}$, do we have
+  $$\frac{1}{z}= \frac{1}{2\pi i}\int_{|w|=1}\frac{f(w)}{w-z}dw??$$
+  $$|\frac{1}{z}|\xrightarrow{z\to 0}\infty,$$
+  but
+  $$\left|\frac{1}{2\pi i}\int_{|w|=1}\frac{f(w)}{w-z}dw\right|\leq \frac{1}{2\pi } \left| \int_{0}^{2\pi}\frac{1}{e^{i\theta} \cdot (e^{i\theta}-z)} \cdot i \cdot e^{i\theta}d\theta \right|$$
+  $$\leq \frac{1}{2\pi } \int_{0}^{2\pi}\frac{1}{|e^{i\theta}-z|}d\theta \leq (0<z<1) \frac{1}{2\pi } \cdot \int_{0}^{2\pi}\frac{1}{|e^{i\theta}|-|z|}d\theta$$
+  $$=\frac{1}{2\pi}\frac{1}{1-|z|}d\theta$$
+  $$=\frac{1}{1-|z|}\xrightarrow{z\to 0}1$$
+
+\begin{lemma}
+  Let $D\subseteq \C$ open, $f:D\to \C$ holomorphic, $\overline{D_r(z_0)}\subseteq D$.
+  \newline Then $f(z_0)=\frac{1}{2\pi}\int_{0}^{2\pi}f(z_0+r \cdot e^{i\theta})d\theta$.
+\end{lemma}
+\begin{proof}
+  $$f(z_0)=\frac{1}{2\pi i} \int_{0}^{2\pi }\frac{f(z_0+r e^{i\theta})}{r \cdot e^{i\theta}} \cdot r \cdot i \cdot e^{i\theta}d\theta$$
+  $$=\frac{1}{2\pi}\int_{0}^{2\pi}f(z_0+r \cdot e^{i\theta})d\theta$$
+\end{proof}
+
+\begin{proposition}
+  \subsubsection*{Maximum Principle, 1st version}
+  $D\subseteq \C$ open, $f:D\to \C$ holomorphic. Further, let $z_0\in D$ be a local maximum of $|f|$. Then $f$ is constant in a neighborhood of $z_0$.
+\end{proposition}
+\begin{proof}
+  $\exists \varepsilon >0: $ the restriction of $|f|$ to $\overline{D_{\varepsilon}|z_0|}$ has a global maximum in $z_0$. Hence, $\forall 0<r\leq \varepsilon:$
+    $$|f(z_0)|=\left| \frac{1}{2\pi}\int_{0}^{2\pi}f(z_0+r \cdot e^{i\theta})d\theta \right|\leq \frac{1}{2\pi} \int_{0}^{2\pi}|f(z_0+r \cdot e^{i\theta})|d\theta$$
+    $$\leq \frac{1}{2\pi} \int_{0}^{2\pi}|f(z_0)|d\theta=|f(z_0)|$$
+    $$\Rightarrow 0=\int_{0}^{2\pi}\left(|f(z_0)|-|f(z_0+r \cdot e^{i\theta})|\right)d\theta$$
+    So, by continuity:
+      $$|f(z_0)|=|f(z_0 + r \cdot e^{i\theta})| \forall \theta \in[,0,2\pi].$$
+      $$\Rightarrow f \text{ constant on }\overline{D_{\varepsilon}(z_0)}.$$
+    Exercise Week $3$ $\Rightarrow f$ constant on $D_{\varepsilon}(z_0)$, since the latter set is open, connected.
+    \qedhere
+\end{proof}
+
+\begin{corollary}
+  $D\subseteq \C$ open, $f:D\to \C$ holomorphic. If $|f|$ has a local minimum in $z_0$, then $f(z_0)=0$ or $f$ is constant in a neighborhood of $z_0$.
+\end{corollary}
+\begin{proof}
+  If $f(z_0)\neq 0$, then $\frac{1}{f}$ is holomorphic in a neighborhood of $z_0$.
+  \qedhere
+\end{proof}
+
+\begin{proposition}
+  \subsubsection*{Maximum Principle, 2nd version}
+  $D\subseteq \C$ open, $D$ bounded, $f:D\to \C$ is continuous on $\overline{D}$, holomorphic on $D$. Then $\exists p \in \partial D$ s.t.
+    $$|f(p)|=max_{z\in \overline{D}}|f(z)|.$$
+  If furhtermore $f$ has no zero on $D$, then $\exists q\in \partial D$, s.t. $|f(q)|=min_{z\in \overline{D}}|f(z)|$.
+\end{proposition}
+\begin{proof}
+  $\overline{D}$ is compact, $|f$ is continuous $\Rightarrow M=max_{z\in \overline{D}}|f(z)|\in \R_{\geq 0}$ well-defined. Let $K:=|f|^{-1}(\{M\})\subseteq \overline{D}$ closed. So $K$ is compact and non-empty. If $K\cap \partial D \neq \emptyset $, we are done, so assume FTSOAC that $K\cap \partial D = \emptyset$. Then $K\subseteq D$.
+  Let $a\in \partial_{\C}K\subseteq K\subseteq D$.
+  \newline $a\in K\subseteq D$, so $|f|$ has a local maximum at $a\in D$.
+  \newline $\Rightarrow$ constant in a neighborhood in $\C$ of $a$ $\Rightarrow $ an open (in $\C$) neighborhood of $a$ is contained in $K$
+  \newline $a\notin \partial_{\C}K$. Contradiction.
+\end{proof}

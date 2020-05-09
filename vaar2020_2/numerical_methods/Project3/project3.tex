@@ -1,0 +1,714 @@
+\title{Project 3 Numerical Methods}
+\maketitle
+
+\newpage
+\section{Problem 1 Nonlinear equations}
+We shall reformulate the following equation into a fixed-point equation
+\begin{equation} e^{-x}-\arccos (2 x)=0 \end{equation}\label{arccos}
+\begin{proof}
+By definition $\arccos$ only takes values $[-1,1]$, so we restrict $x\in[-\frac{1}{2}, \frac{1}{2}]$. For fixed-point iteration we need an expression of the form $x=g(x)$, we rewrite \ref{arccos}:
+\begin{align*}
+   & e^{-x}-\arccos(2x)=0  \\
+   \Leftrightarrow \quad & e^{-x}=\arccos(2x) \\
+   \Leftrightarrow \quad & \cos(e^{-x})=2x \\
+   \Leftrightarrow \quad & \frac{1}{2}\cos(e^{-x})=x
+\end{align*}
+giving us $x=g(x)=\frac{1}{2}\cos(e^{-x})$ as desired. It is clear that $g(x)$ is a real-valued continuous function (it is the composition of the two continous functions $e^x$, $\cos(x)$), hence, showing $g(x)$ is a contraction on $[-\frac{1}{2}, \frac{1}{2}]$ would imply it satisfies the contraction mapping theorem.(Thm. 1.3 in Suli \& Meyers$^{\ref{NumAnal}}$
+\newline We need to prove the existence of a $L\in (0,1)$ such that
+  \begin{equation}
+    |g(x)-g(y)|\leq L|x-y| \quad\forall\quad x,y\in[-\frac{1}{2}, \frac{1}{2}].
+  \end{equation}\label{contractiondef}
+By the mean value theorem we have
+  $$ \forall x,y \quad \exists \quad c\in[x,y] \text{ s.t. } \frac{g(x)-g(y)}{x-y}=g'(c) $$
+\begin{align*}
+  & \Rightarrow \quad |g(x)-g(y)|=|g'(c)||x-y| \\
+  & \Rightarrow \quad |\cos(e^{-x})-\cos(e^{-y})|=|\sin(e^{-x})e^{-x}||x-y| \\
+  & \Rightarrow \quad |\cos(e^{-x})-\cos(e^{-y})|\leq |e^{-x}||x-y| \\
+  & \Rightarrow \quad |\cos(e^{-x})-\cos(e^{-y})|\leq |e^{\frac{1}{2}}||x-y| \\
+  & \Rightarrow \quad |g(x)-g(y)| \leq \frac{e^{\frac{1}{2}}}{2}|x-y|
+\end{align*}
+which proves \ref{contractiondef} by choosing any $L$ from $(\frac{e^{\frac{1}{2}}}{2}, 1)$. The last step comes from the fact that $e^x$ is strictly increasing, while the preceding steps are rewrites of the implications of the mean value theorem.
+\newline This concludes the proof.
+\end{proof}
+\section{Problem 2 Numerical linear algebra}
+\begin{enumerate}[a)]
+  \item
+We choose the following matrix for our singular value decomposition ($A=U\Sigma V^T$)
+\begin{equation}
+  A =
+  \begin{bmatrix}
+    2 & 0 & -1 \\
+    0 & 1 & 0 \\
+    -1 & 0 & 2
+  \end{bmatrix}
+\end{equation}
+Before we continue, we note that we are deliberately making the task a little easier by choosing a symmetric matrix for this task as diagonalizibility of $A$ enables some of the computation normally done when calculating SVDs redundant.
+\newline
+Now, let's calculate $A^TA$
+$$
+A^TA = A^2 =
+\begin{bmatrix}
+  5 & 0 & -4 \\
+  0 & 1 & 0 \\
+  -4 & 0 & 5
+\end{bmatrix}
+$$
+This gives us
+\begin{align*}
+det(A^TA - \lambda I) = det
+\begin{bmatrix}
+  5 & 0 & -4 \\
+  0 & 1 & 0 \\
+  -4 & 0 & 5
+\end{bmatrix}
+ & = (5-\lambda)(-\lambda+1)(-\lambda+5)-4\cdot 4(-\lambda+1) \\
+ & =-\lambda^3+11\lambda^2-19\lambda+9 \\
+ & = -(\lambda-9)(\lambda-1)^2
+\end{align*}
+
+Which has roots $\lambda_1 = 1$ and $\lambda_2 = 9$, hence, we have singular values $\sigma_1=\sqrt{1}=1$ and $\sigma_2=\sqrt{9}=3$.
+We will find the corresponding eigenvectors by row reduction, and normalize them:
+$$
+\begin{bmatrix}
+  5-\lambda_1 & 0 & -4 \\
+  0 & 1-\lambda_1 & 0 \\
+  -4 & 0 & 5-\lambda_1
+\end{bmatrix}
+\sim
+\begin{bmatrix}
+  4 & 0 & -4 \\
+  0 & 0 & 0 \\
+  0 & 0 & 0
+\end{bmatrix}
+\sim
+\begin{bmatrix}
+  1 & 0 & -1 \\
+  0 & 0 & 0 \\
+  0 & 0 & 0
+\end{bmatrix}
+\Rightarrow v_1 =
+\begin{bmatrix}
+  1/2 \\
+  1/\sqrt{2} \\
+  1/2
+\end{bmatrix}
+$$
+
+$$
+  \begin{bmatrix}
+    5-\lambda_2 & 0 & -4 \\
+    0 & 1-\lambda_2 & 0 \\
+    -4 & 0 & 5-\lambda_2
+  \end{bmatrix}
+  \sim
+  \begin{bmatrix}
+    -4 & 0 & -4 \\
+    0 & -8 & 0 \\
+    0 & 0 & 0
+  \end{bmatrix}
+  \Rightarrow v_2=
+  \begin{bmatrix}
+    1/\sqrt{2} \\
+    0 \\
+    -1/\sqrt{2}
+  \end{bmatrix}
+$$
+We must find a third vector $v_3$ completing an orthornormal basis for $\R^3$. Let
+$$
+v_3 =
+  \begin{bmatrix}
+    \alpha \\
+    \beta \\
+    \gamma
+  \end{bmatrix}
+$$
+Then we have
+  \begin{align*}
+    \indprod{v_2, v_3} & = \frac{\alpha}{\sqrt{2}} \qquad -\frac{\gamma}{\sqrt{2}} = 0 \Longrightarrow \alpha = \gamma \\
+    \indprod{v_1, v_3} & = \frac{\alpha}{2}+\frac{\beta}{\sqrt{2}}+ \frac{\gamma}{2} = 0 \Longrightarrow \frac{\beta}{\sqrt{2}} = -\alpha \\
+     & \Longrightarrow \quad v_3 =
+      \begin{bmatrix}
+        \frac{1}{2} \\
+         -\frac{1}{\sqrt{2}} \\
+        \frac{1}{2}
+      \end{bmatrix}
+  \end{align*}
+Note that $v_3$ is also an eigenvector corresponding to $\lambda_1=1$.
+This set of orthonormal vectors gives the columns of the matrix $V$ and further $V^T$ in the SVD for $A$:
+$$V=
+\begin{bmatrix}
+  \frac{1}{2}  & \frac{1}{\sqrt{2}} & \frac{1}{2} \\
+  \frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}} \\
+  \frac{1}{2} & -\frac{1}{\sqrt{2}} & \frac{1}{2}
+\end{bmatrix}
+=V^T
+\begin{bmatrix}
+  \frac{1}{2}  & \frac{1}{\sqrt{2}} & \frac{1}{2} \\
+  \frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}} \\
+  \frac{1}{2} & -\frac{1}{\sqrt{2}} & \frac{1}{2}
+\end{bmatrix}
+$$
+Here $V$ turned out to be symmetric, which is extremely convenient. We have $VV^T=I$ by construction, which now implies $V=V^{-1}=U$. Our $\Sigma$ is
+$$
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 3 & 0 \\
+  0 & 0 & 1
+\end{bmatrix},
+$$
+note that the double appearance of $1$ comes from the algebraic multiplicity of $\lambda_1=1$ being $2$. For different reasons one usually want the singular values to appear in descending order on the diagonal, but I was lazy and sacrificed that construction for the convenience of a symmetric $V$ matrix.
+\newline
+Putting it all together, we have
+$$
+A = U\Sigma V^T=
+\begin{bmatrix}
+  \frac{1}{2}  & \frac{1}{\sqrt{2}} & \frac{1}{2} \\
+  \frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}} \\
+  \frac{1}{2} & -\frac{1}{\sqrt{2}} & \frac{1}{2}
+\end{bmatrix}
+\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 3 & 0 \\
+  0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+  \frac{1}{2}  & \frac{1}{\sqrt{2}} & \frac{1}{2} \\
+  \frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}} \\
+  \frac{1}{2} & -\frac{1}{\sqrt{2}} & \frac{1}{2}
+\end{bmatrix}.
+$$
+
+  \item
+See the Jupyter notebook.
+
+  \item
+Let $A\in \R^{n\times m}, b\in \R^{n}$. A typical least square problem will be:
+  \begin{equation}
+    \text{Find $x^*$ s.t. } \norm{Ax^* - b}_2 = \min_{x\in\R^m}\norm{Ax-b}_2.
+  \end{equation}
+We know of a few different ways to solve such a problem.
+  \begin{enumerate}[(1)]
+    \item Normal equations:\footnote{Fridberg, Insel, Spence, 2014, page 362, \ref{ma1202}} From linear algebra we can guarantee the existence of the vector $x^*$ minimizing $\norm{Ax-b}_2$ and that it is of the form $x^* = \left(A^TA\right)^{-1}A^Tb$ if $A$ is of rank $n$. What we would call the normal equation would in this case be
+      \begin{equation}
+        A^TAx^* = A^Tb.
+      \end{equation}
+    As we can see, the normal equation is not hard to find, as calculating $A^T$ is cheap, but we would be at an immediate disadvantage if our matrix $A$ is not of rank $n$. Another disadvantage with using normal equations appear when we have large condition numbers $\mathcal{K}_2(A)$ as $\mathcal{K}_2(A^TA)$ will grow with approximately the square of $\mathcal{K}_2(A)$ making the precision of our calculations increasingly problematic for matrices with large condition numbers.
+
+    \item QR-factorization:\footnote{Suli \& Meyers, 2006, page 78, \ref{NumAnal}}
+    QR-factroization is the decomposition of $A$ into the product $A = QR$, where $Q$ orthonormal and $R$ upper triangular.
+
+     Unlike normal equations, QR-factorization don't rely as much on rank and invertibility, and it's precision does not suffer equally much when $\mathcal{K}_2(A)$ is large. Nevertheless it is not always as easy to do the factorization as simply transposing and computing $A^TA$ as the factorization oftentimes will rely on orthogonalization. Orthogonalization can be problematic to do numerically because our inner products will usually compute to very small numbers close to zero, but seldom exactly zero. This unfortunately makes Gram-Schmidt an unstable algorithm, but it's fast and simple which is one of the advantages of QR-decomposition.
+
+
+    There are other factorization methods which are more stable, but these won't run as fast as the ones using Gram-Schmidt.
+
+  \end{enumerate}
+\end{enumerate}
+
+\section{Problem 3 Condition numbers}
+Might replace this proof with one using the characteristic polynomials instead of diagonalizability.
+\newline The spectral theorem tells us that any normal matrix, and then especially any symmetric matrix, is diagonalizable. We get
+  $$ A^n = PD^nP^{-1} \quad \forall \quad n \in \Z .$$
+Hence, there exists a bijection between the eigenvalues of $A$ and $A^n$ by $\lambda \mapsto \lambda^n$.
+  $$ \mathcal{K}_2:= \| A \|_2 \| A^{-1} \|_2 $$
+  $$ = \rho(A^TA)^{\frac{1}{2}}\rho((A^{-1})^TA^{-1}) $$
+Because our matrix is symmetric and the inverse of a symmetric matrix is also symmetric, we get
+  $$ A^TA = A^2, \qquad (A^{-1})^TA^{-1}=A^{-2}. $$
+This gives us
+  $$ \rho(A^TA)^{\frac{1}{2}}\rho((A^{-1})^TA^{-1})^{\frac{1}{2}} = \rho(A^2)^{\frac{1}{2}}\rho(A^{-2})^{\frac{1}{2}} $$
+\begin{align*}
+  & = \left(\max_{\lambda\in \sigma(A^2)}|\lambda|\right)^{\frac{1}{2}} \cdot \left(\max_{\lambda\in\sigma(A^{-2)}}|\lambda|\right)^{\frac{1}{2}} \\
+  & = \left(\max_{\lambda\in\sigma(A)}|\lambda^2|\right)^{\frac{1}{2}} \cdot \left(\max_{\lambda\in\sigma(A)}|\lambda^{-2}|\right)^{\frac{1}{2}} \\
+  & = \max_{\lambda\in\sigma(A)}|\lambda| \cdot \max_{\lambda\in\sigma(A)}|\lambda^{-1}| \\
+  & = \frac{\max_{\lambda\in\sigma(A)}|\lambda| }{ \min_{\lambda\in\sigma(A)}|\lambda| }
+\end{align*}
+
+\section{Problem 4 }
+Generalization of the preceding problem. Writing $A$ as SVD or using Jordan Blocks should help with identifying the eigenvalues in a similar manner as in the preceding problem.
+\begin{lemma}\label{eigenvaluescommute}
+  Let $X,Y$ be two $n\times n$-matrices. Then $XY$ and $YX$ has the same eigenvalues.
+\end{lemma}
+\begin{proof}
+  Let $\lambda=0$ be an eigenvalue of $XY$, then
+    \begin{equation} 0 = det(XY)=det(X)det(Y)=det(YX) = 0, \end{equation}
+  so $0$ is an eigenvalue of $YX$. Hence, we assume $\lambda\neq 0$ with $\vec{v}$ it's corresponding eigenvector. Then $Y\vec{v}\neq 0$ and further
+    \begin{equation} \lambda Y\vec{v}=Y(XY\vec{v})=(YX)Y\vec{v}, \end{equation}
+  which means $Y\vec{v}$ is an eigenvector for $YX$ with the same $\lambda$ as it's eigenvalue.
+\end{proof}
+
+By definition the singular values of a positive, real matrix $A$ are just the square roots of the eigenvalues of $B = A^TA$, and by Theorem $2.9$ (Suli \& Meyers), if $\lambda_i$ are the eigenvalues of $B$, then $\|A\|_2 = \max_{i=1}^n\lambda_i^{1/2}$ or equivalently the biggest singular value of $A$, $\sigma_{\max}$. Now, the condition number $\mathcal{K}_2(A):=\|A^{-1}\|_2\|A\|_2$, so we need to find $\|A^{-1}\|_2$.
+Again, by theorem $2.9$, we have
+  \begin{align*}
+    \|A^{-1}\| _2 & \stackrel{\textbf{by }2.9}{=} \max_{ \lambda\in\sigma({A^{-1}}^{T} A^{-1} ) } \sqrt{\lambda} \\
+    & \stackrel{\textbf{by }\ref{eigenvaluescommute}}{=} \max_{ \lambda\in\sigma((A^TA)^{-1}) } \sqrt{\lambda} \\
+    & = \max_{ \lambda\in\sigma(A^TA)} \sqrt{\frac{1}{\lambda}} \\
+    & = \frac{1}{\min{\lambda\in\sigma(A^TA)}\sqrt{\lambda}} \\
+    & \stackrel{\textbf{by def}}{=} \frac{1}{\sigma_{\min}}
+  \end{align*}
+Putting this together, we get
+  $$ \mathcal{K}_2(A):=\|A^{-1}\|_2\|A\|_2 = \sigma_{\max}\frac{1}{\sigma_{\min}}, $$
+completing the proof.
+\qed
+
+\section{Problem 5}
+\begin{proposition}
+  Let $A\in GL_n(\R)$, with $\mathcal{K}_{2}(A)=\|A\|_{2}\left\|A^{-1}\right\|_{2}$. Then
+    $$ \min \left\{\frac{\|\delta A\|_{2}}{\|A\|_{2}} | \operatorname{det}(A+\delta A)=0\right\}=\frac{1}{\mathcal{K}_{2}(A)} $$
+  where $\delta A\in \R^{n\times n}$
+\end{proposition}
+\begin{proof}
+  Assume $\operatorname{det}(A+\delta A)=0$. This means we can find some vector $\vec{v}\neq 0$ such that $(A+\delta A)\vec{v}=0, \|\vec{v}\|_2=1$.
+    \begin{align*}
+      & (A+\delta A)\vec{v}=0 \\
+      \Rightarrow \quad & A\vec{v}=-\delta A\vec{v} \\
+      \Rightarrow \quad & \|A\vec{v}\|_2 = \|\delta A\vec{v}\|_2 \\
+      \Rightarrow \quad & \|\delta A\|_2 \geq \|\delta A\vec{v}\|_2 = \|A\vec{v}\|_2 \geq \inf_{\|\vec{x}\|_2=1}\|A\vec{x}\|_2 = \frac{1}{\|A^{-1}\|_2} \\
+      \Rightarrow \quad & \|\delta A\|_2 \geq \frac{1}{\|A^{-1}\|_2} \\
+      \Rightarrow \quad & \frac{\|\delta A\|_2}{\|A\|_2} \geq \frac{1}{\|A^{-1}\|_2\|A\|_2} = \frac{1}{\mathcal{K}_2(A)}.
+    \end{align*}
+  Now that we have established a lower bound, all that's left is prove existence of a $\delta A$ such that we have equality.
+    \newline By theorem 2.14 in Suli \& Mayers$^{\ref{NumAnal}}$, $A$ can be expressed as $A=U\Sigma V^T$, where $\Sigma$ is a diagonal matrix with $\sigma_ii$ being the singular values of $A$ on its diagonal and $U,V$ are such that $U^TU=I_n=V^TV$. Now picking $\delta A=U\Sigma_{\delta}V^T$
+    where $\Sigma_{\delta}$ has entries:
+     $$ {\Sigma_{\delta}}_{ij} =
+  \begin{cases}
+    -\sigma_{nn} \text{ if }ij=nn \\
+    0 \text{ elsewhere }
+  \end{cases}
+     .$$
+     Observe that we have picked $\delta A$ such that
+  \begin{align*}
+    \operatorname{det}(A+\delta A) & = \operatorname{det}(U\Sigma V^T + U\Sigma_{\delta}V^T) \\
+    & = \operatorname{det}(U(\Sigma V^T + \Sigma_{\delta}V^T)) \\
+    & = \operatorname{det}(U \left((\Sigma+\Sigma_{\delta})V^T\right)) \\
+    & = \operatorname{det}(U)\operatorname{det}(\Sigma+\Sigma_{\delta})\operatorname{det}(V^T)
+  \end{align*}
+  but $\Sigma$ and $\Sigma_{\delta}$ being diagonal matrices gives us
+    $$\operatorname{det}(\Sigma+\Sigma_{\delta})=(\sigma_{11})(\sigma_{22})\cdots(\sigma_{nn}-\sigma_{nn})=0 $$
+  so $\operatorname{det}(A+\delta A)=0$.
+\end{proof}
+As we have seen in the preceding problems, Theorem 2.9 $\| \delta A\|_2=\max_{\lambda\in\sigma((\delta A)^T\delta A)}\lambda^{\frac{1}{2}}$. Let's find these eigenvalues. We have
+  $$ (\delta A)^T\delta A = \left(U\Sigma_{\delta}V^T\right)^TU\Sigma_{\delta}V^T = V\Sigma_{\delta}U^TU\Sigma_{\delta}V^T = V\Sigma_{\delta}^{2}V^T. $$
+Furthermore
+  \begin{align*}
+     \operatorname{det}(V\Sigma_{\delta}^{2}V^T - \lambda I) & = \operatorname{det}(V\Sigma_{\delta}^{2}V^T - \lambda VV^T) \\
+     & = \operatorname{det}(V(\Sigma_{\delta}^{2}-\lambda I)V^T) \\
+  & = \operatorname{det}(V)\operatorname{det}(\Sigma_{\delta}^{2}-\lambda I)\operatorname{det}(V^T) \\
+  & = \operatorname{det}(\Sigma_{\delta}^{2}-\lambda I)
+ \end{align*}
+  from the fact that $VV^T=I_n$ and it's direct consequence $\operatorname{det}(V)\operatorname{det}(V^T)=1$. Now the fact that $(\delta A)^T\delta A)$ has the same characteristic polynomial as $\Sigma_{\delta}^{2}$ means that the eigenvalues we are after are just the eigenvalues of $\Sigma_{\delta}^{2}$, namely $\{ (-\sigma_{nn})^{2} \}$. Trivially this means $(-\sigma_{nn})^{2}$ is the biggest eigenvalue of $(\delta A)^T\delta A)$
+  making $\| \delta A\|_2=\max_{\lambda\in\sigma((\delta A))^T\delta A)}\lambda^{\frac{1}{2}}=\sigma_{nn}$ which by construction equals the smallest singular value of $A$. To summarize we now have
+    $$ \frac{\| \delta A\|_2}{\|A\|_2} = \frac{\sigma_{nn}}{\sigma_{11}} = \frac{1}{\frac{\sigma_{A_{\max}}}{\sigma_{A_{\min}}}} = \frac{1}{\mathcal{K}_2(A)}. $$
+
+\section{Problem 6 Divided differences}
+\begin{enumerate}[ a)]
+  \item
+We want to interpolate
+\begin{tabular}{c|cccc}
+  \(x\) & -2 & -1 & 0 & 1 \\
+  \hline\(y\) & 1 & 2 & 3 & 0
+\end{tabular}
+using divided differences and the Newton form of the interpolation polynomial, $N(x)$,
+  \begin{equation}\label{Newton} N(x):= \sum_{j=0}^k a_jn_j(x) \end{equation}
+where
+\begin{align}
+   n_j(x) & := \prod_{i=0}^{j-1}(x-x_i) \text{ for } j>0, \quad n_0(x)\equiv 1 \\
+   a_j & := [y_0,\dots,y_j].
+\end{align}
+Combining the definitions we get
+\begin{equation}\label{NewtonPol}
+  N(x)=[y_0]+[y_0,y_1](x-x_0)+\cdots+ [y_0,\dots,y_k](x-x_0)(x-x_1)\cdots(x-x_{k-1}).
+\end{equation}
+We start by calculating all the divided differences needed:
+\begin{align*}
+    [y_0] &=1 \\
+    [y_0,y_1] &= \frac{y_1-y_0}{x_1-x_0} = \frac{2-1}{-1+2} = 1 \\
+    [y_1,y_2] &= \frac{y_2-y_1}{x_2-x_1} = \frac{3-2}{0+1} = 1 \\
+    [y_2,y_3] &= \frac{y_3-y_2}{x_3-x_2}=\frac{0-3}{1-0} = -3 \\
+    [y_0,y_1,y_2] &= \frac{[y_1,y_2]-[y_0,y_1]}{x_2-x_0} = \frac{1-1}{0+2}=0 \\
+    [y_1,y_2,y_3] &= \frac{[y_2,y_3]-[y_1,y_2]}{x_3-x_1} = \frac{-3-1}{1+1}=-2 \\
+    [y_0,y_1,y_2,y_3] &= \frac{[y_1,y_2,y_3]-[y_0,y_1,y_2]}{x_3-x_0} = \frac{-2-0}{1+2)} = -\frac{2}{3}
+\end{align*}
+Inserting in \ref{NewtonPol} yields:
+\begin{align*}
+   N(x) & =1+1(x-x_0)+0(x-x_0)(x-x_1)-\frac{2}{3}(x-x_0)(x-x_1)(x-x_2) \\
+   & = 1+(x-2)-\frac{2}{3}(x+2)(x+1)x \\
+   & = -\frac{2}{3}x^3-2x^2-\frac{1}{3}x+3.
+\end{align*}
+
+  \item
+We will use divided differences to find the polynomial of lowest degree such that
+$$ p(-1)=1 / 2, \quad p^{\prime}(1 / 2)=3, \quad p(1)=-1 / 2. $$
+Let $x_0 = -1, \quad x_1=1$, then by construction $y_0=\frac{1}{2}, \quad y_1=-\frac{1}{2}$. This gives Newton polynomial
+  $$ N(x) = -\frac{1}{2}x $$
+Now, we can easily see that a polynomial of degree won't do the trick, so we expand our polynomial by adding the next term of the Newton interpolation polynomial, namely $a_2(x-x_0)(x-x_1)$:
+\begin{align*}
+  & N(x) = -\frac{1}{2}x+a_2(x-x_0)(x-x_1) \\
+  \Rightarrow \quad & N' \left(x\right)= 2a_2x-\frac{1}{2}  \\
+  \Rightarrow \quad & N' \left(\frac{1}{2}\right) = a_2-\frac{1}{2} \\
+  \Rightarrow \quad & N' \left(\frac{1}{2}\right) = 3 \Leftrightarrow a_2 = \frac{7}{2} \\
+  \Rightarrow \quad & N \left(x\right) = \frac{7}{2}x^2-\frac{1}{2}x-\frac{7}{2}.
+\end{align*}
+
+\end{enumerate}
+
+
+\section{Problem 7 Divided differences}
+\begin{enumerate}[a)]
+  \item
+
+Firstly, let's check that the proposition works for $k=0, \quad k=1$:
+  $$ S_0(n) = \sum_{i=0}^{n}i^0= n $$
+which surely has degree $1=k+1$ as a polynomial in $\R[n]$.
+  $$ S_1(n) = \sum_{i=0}^{n}i^1 = \frac{n(n+1)}{2} = \frac{1}{2}(n^2+n) $$
+which once again has degree $2 = k+1$. This establishes base cases for an induction proof. As we are looking to prove that $S_{k}$ is a polynomial of degree $k+1$, let's assume $S_{j}$ is a polynomial of degree $j+1 \quad \forall j\leq k-1$.
+\newline We are going to need the binomial theorem.
+
+\begin{theorem}\label{BinomThm}
+  Let $n\geq 0$ an integer. Then
+  \begin{equation}
+    \left(x+y\right)^n = \sum_{k=0}^{n}\binom{n}{k}x^{n-k}y^k = \sum_{k=0}^{n}\binom{n}{k}x^ky^{n-k}
+  \end{equation}
+\end{theorem}
+
+As a consequence of the binomial theorem (\ref{BinomThm}) we have
+  \begin{align*}
+   \sum_{i=0}^{n}(i+1)^{k+1} = \sum_{j=0}^{k+1}\binom{l+1}{j}\sum_{i=0}^{n}i^j 1^{k-j} & = \sum_{j=0}^{k+1}\binom{k+1}{j}S_j(n) \\
+      \Longrightarrow (n+1)^{k+1} & = \sum_{i=0}^{n}(i+1)^{k+1} - \sum_{i=0}^{n}i^{k+1} \\
+        & = \sum_{j=0}^{k+1}\binom{k+1}{j}S_j(n) - S_{k+1}(n) \\
+        & = \sum_{j=0}^{k}\binom{k+1}{j}S_j(n) \\
+      \Longrightarrow  \binom{k+1}{k}S_k(n)=(n+1)^{k+1} & -  \sum_{j=0}^{k-1}\binom{k+1}{j}S_j(n) \\
+      \Longrightarrow S_k(n) = \left(n^{k+1} - \sum_{j=0}^{k-1}\binom{k+1}{j}S_j(n) + 1\right)C,
+  \end{align*}
+  with $C=\binom{k+1}{j}^{-1}$.
+By our induction hypothesis this means we can write
+  $$ S_k(n) = \left(n^{k+1} - P(n)\right)C, $$
+where $P(n)$ is just some polynomial of degree $k-1$ or lower, making it clear that $S_k(n)$ is a polynomial of degree $k+1$.
+\qed
+
+  \item
+Using the Newton interpolation polynomial as defined in the preceding problem (see equation  \ref{Newton}), we can now express $S_k(n)$ in Newton form:
+  \begin{equation}\label{S4newt} S_k(n) = \sum_{j=0}^k a_jn_j(x), \end{equation}
+where $a_j = S_k[1,\dots, 1+j], \quad n_j(n) = (n-1)(n-2)\cdots(n-j-1)$. To calculate $S_4(n)$, we simply have to calculate all the required divided differences. First, as $S_4(n)$ will be a polynomial of degree $5$, we will need $6$ nodes:
+  $$ S_4(1) = 1, S_4(2)=17, S_4(3)=98, S_4(4)=354,S_4(5)=979, S_4(6)=2275 $$
+These are now our respective $x$ and $y$ values for the divided differences method. Let's present the differences as an upper triangular matrix for convenience:
+$$
+\begin{bmatrix}
+. [ y_0 ] & [ y_0, y_1 ] & \dots & [y_0, \dots , y_n ] \\
+  0 & [ y_1 ] & \dots & [y_1, \dots, y_n ] \\
+  \vdots & \vdots & \ddots & \vdots \\
+  0 & 0 & \dots & [ y_n ]
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 16 & \frac{65}{2} & \frac{55}{3} & \frac{14}{4} & \frac{1}{5} \\
+0 & 17 & 81 & \frac{175}{2} & \frac{97}{3} & \frac{18}{4} \\
+0 & 0 & 98 & 256 & \frac{369}{2} & \frac{151}{3} \\
+0 & 0 & 0 & 354 & 625 & \frac{671}{2} \\
+0 & 0 & 0 & 0 & 974 & 1296 \\
+0 & 0 & 0 & 0 & 0 & 2275
+\end{bmatrix}$$
+Now we just insert in \ref{S4newt} and get
+
+\begin{align*}
+  S_4(n) & =1+16(n-1)+\frac{65}{2}(n-1)(n-2)+\frac{55}{3}(n-1)(n-2)(n-3) \\
+         & +\frac{14}{4}(n-1)(n-2)(n-3)(n-4)+\frac{1}{5}(n-1)(n-2)(n-3)(n-4)(n-5) \\
+         & = \frac{1}{5}n^5+\frac{1}{2}n^4+\frac{1}{3}n^3-\frac{1}{30}n
+\end{align*}
+
+\end{enumerate}
+
+
+\section{Problem 8 Quadratic formulae}
+\begin{enumerate}[a)]
+  \item
+Extrapolation is mainly about estimation, and unlike interpolation, it allows for those estimates to be outside the range of the original observations. ``Extrapolation may also mean extension of a method''$^{ \ref{Richardson}}$, and a good example is Richardson extrapolation which is the method used in Romberg's algorithm. Richardson extrapolation is a method for improving the rate of convergence of some estimation method -- in our case this is the Trapezoid rule.
+
+
+Romberg's algorithm is a repeated application of Richardson extrapolation on the trapezium rule.(ref boka)
+
+  \item
+We have
+  \begin{equation}
+    f(\tau) = e^{(-\tau)^2}
+  \end{equation}
+and want to approximate the integral $\int_{0}^{1}f(\tau)\tau$, and find $R(3,2)$.
+\newline As is standard for Romberg, we let $h_n =\frac{1}{2^n}(1-0)=\frac{1}{2^n} $.
+
+\begin{alignat*}{2}
+    R(0,0) &= h_1(f(0)+f(1)) = \frac{1}{2} \left(1+\frac{1}{e} \right) \approx 0.68394\\
+    R(1,0) &= \frac{1}{2}R(0,0)+h_1 \sum_{i=1}^{2^{1-1}} f(0+(2i-1)h_1) = \frac{1}{2} R(0,0)+\frac{1}{2} f \left(\frac{1}{2} \right) \approx 0.73137 \\
+    R(2,0) &= \frac{1}{2} R(1,0) + h_2 \sum_{i=1}^{2^{2}} f(0+(2i-1)h_2) = \frac{1}{2} R(1,0) + \frac{1}{2} \sum_{i=1}^2 f\left((2i-1)\frac{1}{4}\right) \approx 0.74298 \\
+    R(3,0) &= \frac{1}{2} R(2,0)+h_3\sum_{i=1}^{2^{2}} f(0+(2i-1)h_3) = \frac{1}{2} R(2,0)+\frac{1}{8}\sum_{i=1}^4 f\left((2i-1)\frac{1}{8} \right) \approx 0.74586\\
+    R(1,1) &= R(1,0) + \frac{1}{4^1-1}\left( R(1,0)-R(0,0) \right) \approx 0.74718 \\
+    R(2,1) &= R(2,0) + \frac{1}{4^{1}-1}\left( R(2,0) - R(1,1) \right) \approx 0.74158 \\
+    R(2,2) &= R(2,1)+\frac{1}{4^2-1}\left(R(2,1)-R(1,1) \right) \approx 0.74121 \\
+    R(3,1) &= R(3,0) + \frac{1}{4^{1}-1}\left(R(3,0)-R(2,0) \right) \approx 0.74682 \\
+    R(3,2) &= R(3,1) + \frac{1}{4^{1}-1}\left(R(3,1)-R(2,1) \right) \approx 0.74507
+\end{alignat*}
+
+\end{enumerate}
+
+
+\section{Problem 9 Convergence of Runge-Kutta methods}
+  Let's start with restating the definitions and assumptions given by the problem description to get a grasp of what we know before we begin the proof.
+  We have the initial value problem
+    $$\dot{y}=f(y), y(0)=y_{0}, \text{ on } [0, T], \quad y(t) \in \R^m .$$
+  We assume $f:\R^m \to \R^m$ continous in $t$ and $y$ and satisfies the Lipschitz condition w.r.t. $y$ on $\R\times \R^m$ with the Lipschitz constant $L$. Let $N$ be the number of steps and consider the one-step method
+  \begin{equation}\label{onestep}
+    y_{n+1}=y_{n}+h \Psi_{f, h}\left(y_{n}\right), \quad h=\frac{T}{N}.
+  \end{equation}
+\begin{enumerate}[a)]
+  \item
+Now we will assume the function $\Psi_{f, h}$ also satisfies the Lipschitz condition on $\R\times\R^m$ with constant $M$ and that \ref{onestep} is consistent of order $p$.
+\begin{proof}
+  We use the hint and follow the proof for convergence of the Euler method given in the lecture notes$^{\ref{onestepnotes}}$, and write $e_N:=y(t_N)-y_N$, wanting to prove $\lim_{\stackrel{N\to \infty}{h\to 0}}\norm{e_N}=0$.
+    \begin{align*}
+      \norm{e_{N+1}}  = y(t_{N+1})-y_{N+1} & \leq \norm{y(t_{N+1})-z_{N+1}}+\norm{z_{N+1}-y_{N+1}} \\
+        & \leq \norm{\sigma_{t_{N+1}}, h} + \norm{e_N+h\Psi_{f,h}(y(t_N))} \\
+        & \leq \norm{\sigma_{t_{N+1}}, h} + \norm{y(t_N)+ h\Psi_{f,h}(y(t_N))-y_N-h\Psi_{f,h}(y_N)} \\
+        & \leq \norm{\sigma_{t_{N+1}}, h} + \norm{e_N}+ h\norm{\Psi_{f,h}(y(t_N))-\Psi_{f,h}(y_N)} \\
+        & \leq \norm{\sigma_{t_{N+1}}, h} + \norm{e_N}+hM\norm{e_N} \\
+        & \leq Ch^{p+1} + (1+hM)\norm{e_N}
+    \end{align*}
+Here we have used the triangle inequality for the first and fourth inequality, before using the Lipschitz condition and the consistency of the method for the final inequality. Now we apply the lemma and corresponding corollary from the lecture notes on the convergence of the Euler method, and get
+  \begin{align*}
+    \norm{e_N} & \leq e^{MT} \norm{e_0}+D\frac{e^{MT}-1}{DM}h^{p+1} \\
+      & = \frac{e^{MT}-1}{M}h^{p+1}
+  \end{align*}
+  \begin{align*}
+     & \norm{e_N} \leq \frac{e^{MT}-1}{M}h^{p+1} \\
+    \Rightarrow \lim_{\stackrel{N\to\infty}{h\to 0}} & \norm{e_N} \leq \lim_{\stackrel{N\to\infty}{h\to 0}} \frac{e^{MT}-1}{M}h^{p+1} \\
+    \Rightarrow \lim_{\stackrel{N\to\infty}{h\to 0}} & \norm{e_N} \leq 0 \\
+    \Rightarrow \lim_{\stackrel{N\to\infty}{h\to 0}} & \norm{e_N} =  0
+  \end{align*}
+We have convergence.
+\end{proof}
+
+  \item
+Now, we assume \ref{onestep} is explicit Runge-Kutta with $2$ stages and order $p$. We want to show
+ \begin{equation}
+   \Psi_{f, h}\left(t_{n}, y_{n}\right)=b_{1} f\left(t_{n}, y_{n}\right)-b_{2} f\left(t_{n}+c h, y_{n}+h a f\left(t_{n}, y_{n}\right)\right)
+ \end{equation}
+is Lipschitz.
+\begin{proof}
+  We begin with applying the triangle inequality like in $a)$:
+    \begin{align*}
+      & \norm{\Psi_{f,h}(t_N, y_N)- \Psi_{f,h}(t_N, z_N)} \\
+      & = \norm{
+      b_1f(t_N, y_N)+b_2f(t_N + ch, y_N + ahf(t_N, y_N))-b_1f(t_N, z_N)-b_2f(t_N+ch, z_N+ahf(t_N, z_N))
+      } \\
+      & =\norm{
+      b_1(f(t_N, y_N)-f(t_N, z_N)) + b_2(f(t_N + ch, y_N + ahf(t_N, y_N))-f(t_N + ch, z_N + ahf(t_N, z_N)))
+      } \\
+      & \leq |b_1|\norm{f(t_N, y_N)-f(t_N, z_N)}{} + |b_2|\norm{f(t_N +ch, y_N + ahf(t_N, y_N))-f(t_N + ch, z_N + ahf(t_N, z_N))} \\
+      & \leq  |b_1|L\norm{y_N-z_N} + |b_2|L\norm{y_N + ahf(t_N, y_N) - z_N -ahf(t_N, z_N)}\\
+      & \leq |b_1|L\norm{y_N-z_N}+|b_2|L\norm{y_N-z_N}+|b_2a|hL_f\norm{f(t_N, y_N)-f(t_N, z_N)} \\
+      & \leq (|b_1|L+|b_2|L+|b_2a|hL^2)\norm{y_N-z_N}
+    \end{align*}
+Here $L$ is the Lipschitz constant of $f$. We see that $K = b_1L+b_2L+b_2ah_L^2$ satisfies the Lipschitz condition for $\Psi_{f,h}$.
+\end{proof}
+
+\end{enumerate}
+
+\section{Problem 10}
+
+See the Jupyter notebook.
+
+\section{Problem 11}
+
+\begin{enumerate}[a)]
+  \item
+\begin{comment}
+  ``We are given the following linearized pendulum equations
+\begin{equation}
+  \theta^{\prime \prime}(t)+\omega^{2} \theta(t)=0, \quad 0<t<1, \quad \theta(0)=\alpha, \theta(1)=\beta
+\end{equation}
+  valid for small oscillations. We discretize with finite differences and obtain the numerical discretization on the grid $t_m=mh, m=0, \dots, M+1, h=\frac{1}{M+1}$ leading to the discretized equations.''
+
+  $$ \frac{1}{h^{2}}\left(\Theta_{m-1}-2 \Theta_{m}+\Theta_{m+1}\right)+\omega^{2} \Theta_{m}=0, \quad m=1,2, \ldots, M $$
+\end{comment}
+
+We are given
+$$ A_{h}:=\frac{1}{h^{2}}\left[\begin{array}{ccccc}
+-2 & 1 & & & \\
+1 & -2 & 1 & & \\
+& \ddots & \ddots & \ddots & \\
+& & 1 & -2 & 1 \\
+& & & 1 & -2
+\end{array}\right] , \quad G_{h}=:A_{h}+\omega^{2} I, \quad \Theta=\left[\begin{array}{c}
+\Theta_{1} \\
+\vdots \\
+\Theta_{M}
+\end{array}\right],$$
+and asked to find
+  $$ G_{h} \Theta=\mathbf{b}$$
+We calculate the matrix product:
+$$
+G_h\Theta = b =
+\begin{bmatrix}
+  \frac{1}{h^2}\left(-2\Theta_1 + \Theta_2 + 0 \cdots + 0 \right) + \omega^2\Theta_1 \\
+  \frac{1}{h^2}\left(\Theta_1 - 2\Theta_2 + \Theta_3 + 0 \cdots + 0 \right) + \omega^2\Theta_2 \\
+  \vdots \\
+  \frac{1}{h^2}\left(0 + \cdots + \Theta_{i-1}-2\Theta_{i}+ \Theta_{i+1} + 0 + \cdots \right) + \omega^2\Theta_{i}\\
+  \vdots \\
+  \frac{1}{h^2}\left(0 + \cdots + \Theta_{M-2} -2\Theta_{M-1} + \Theta_{M}\right) + \omega^2\Theta_{M-1}\\
+  \frac{1}{h^2}\left(0 + \cdots + \Theta_{M-1} -2\Theta_M \right) + \omega^2\Theta_M \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+  \frac{-\alpha}{h^2} \\
+  0 \\
+  \vdots \\
+  0 \\
+  \frac{-\beta}{h^2}
+\end{bmatrix}
+$$
+
+  \item
+$$
+\vec{\tau}_{h}:=G_{h} \vec{\theta}-\mathbf{b}, \qquad
+\vec{\theta}:=\left[\begin{array}{c}
+\theta_{1} \\
+\vdots \\
+\theta_{M}
+\end{array}\right], \quad \theta_{j}:=\theta\left(t_{j}\right)
+$$
+
+Let's write out $\vec{\tau}_{h}$ for clarity:
+\begin{equation}
+  \vec{\tau}_{h} =
+    \begin{bmatrix}
+      \frac{1}{h^2}\left(\alpha - 2\theta_1 + \theta_2 \right) + \omega^2\theta_1 \\
+      \frac{1}{h^2}\left(\theta_1 - 2\theta_2 + \theta_3\right) + \omega^2\theta_2 \\
+      \vdots \\
+      \frac{1}{h^2}\left(\theta_{M-1} - 2\theta_{M} + \beta\right) + \omega^2\theta_M
+    \end{bmatrix}
+\end{equation}
+Observe how $\mathbf{b}$ conveniently completes the divided differences by adding $\alpha , \beta$ in the first and last row, while having no contribution to the rows inbetween. Hence, we write
+  \begin{equation}\label{taui2}
+    \tau_i =
+    \frac{1}{h^2}\bigg(\left(\theta_{i-1}\right)-2\left(\theta_{i}\right)+ \left(\theta_{i+1}\right)  \bigg) + \omega^2\left(\theta_{i}\right)
+  \end{equation}
+
+Want to show:
+  $$
+\tau_{m}=\frac{1}{12} h^{2} \theta^{(4)}\left(t_{m}\right)+\mathcal{O}\left(h^{4}\right), \quad m=1, \ldots, M
+  $$
+The ugly Taylor calculations that follows are very similar to theorem 13.1 in the book$^{\ref{NumAnal}}$ and might not be necessary to include here, but I did a lot of it before discovering the theorem, so I continue.
+\newline We will Taylor expand $\tau_i$, but first observe that $\theta_i=\theta(t_i)=\theta(ih)$, $t_{i-1}=ih-h$, $t_{i+1}=ih+h$. We can use this to get Taylor functions for $\theta_{i-1}, \theta_i, \theta_{i+1}$ to evaluate in the same variable instead of three different ones.
+\newline We assume $\theta(t)$ to be four times differentiable with continuous derivatives on $[a,b]$. Then, by Taylor's theorem, for each value $x$ in $[a,b]$, there exists $\xi=\xi(x)$ in $(a,b)$ such that
+  $$
+f(x)=f(a)+(x-a) f^{\prime}(a)+\cdots+\frac{(x-a)^{n}}{n !} f^{(n)}(a)+\frac{(x-a)^{n+1}}{(n+1) !} f^{(n+1)}(\xi)
+  $$
+Now, observe that choosing intervals $[ih-h, ih]$ and $[ih, ih+h]$ imply, by Taylor's theorem that there exist $\xi_1, \xi_2$ in the two intervals respectively, such that
+
+\begin{equation*}
+  \theta(ih-h)=\theta(ih)-h \theta^{\prime}(ih)+\frac{h^{2}}{2} \theta^{\prime \prime}(ih)-\frac{h^{3}}{6} \theta^{\prime \prime \prime}(ih)+\frac{h^{4}}{24} \theta^{(4)}\left(\xi_{1}\right) - \frac{h^5}{120}
+  \theta^{(5)}\left(ih\right) + \mathcal{O}(h^6)
+\end{equation*}
+
+
+\begin{equation*}
+  \theta(ih+h)=\theta(ih)+h \theta^{\prime}(ih)+\frac{h^{2}}{2} \theta^{\prime \prime}(ih)+\frac{h^{3}}{6} \theta^{\prime \prime \prime}(ih)+\frac{h^4}{24} \theta^{(4)}\left(\xi_{2}\right)
+  + \frac{h^5}{120}
+  \theta^{(5)}\left(ih\right) + \mathcal{O}(h^6)
+\end{equation*}
+
+  Adding the two equations we get:
+  \begin{equation}\label{1/24}
+\theta(ih-h)+\theta(ih-h) =
+2\theta(ih)+h^2\theta^{\prime \prime}(ih)+\frac{1}{24}h^4\bigg(\theta^{(4)}(\xi_1)+\theta^{(4)}(\xi_2)\bigg)
+  \end{equation}
+  We have assumed $\theta^{(4)}$ to be continuous on $[ih-h, ih+h]$, implying there is a number $\xi\in(\xi_1,\xi_2)$, and thus also in $(ih-h,ih+h)$, such that
+  $$ \frac{1}{2}\left(\theta^{(4)}(\xi_1)+\theta^{(4)}(\xi_2)\right) = \theta^{(4)}(\xi) $$
+  This fact inserted in \ref{1/24} yields
+  \begin{equation}\label{thm13.1}
+    \theta(ih-h)+\theta(ih-h) = 2\theta(ih)+h^2\theta^{\prime \prime}(ih)+\frac{1}{12}h^4\theta^{(4)}(\xi)
+  \end{equation}
+
+  Recall the original pendulum equations:
+    $$
+    \theta^{\prime \prime}(t)+\omega^{2} \theta(t)=0, \quad 0<t<1, \quad \theta(0)=\alpha, \theta(1)=\beta
+    $$
+Hence, we can write  $ \theta^{\prime \prime}(t)=-\omega^{2}\theta(t)$. Now we insert \ref{thm13.1} into \ref{taui2} and get
+\begin{align*}
+    \tau_i &=
+    \frac{1}{h^2}\bigg(h^2\theta^{\prime \prime}(ih)+\frac{1}{12}h^4\theta^{(4)}(\xi) + \mathcal{O}(h^6)  \bigg) +   \omega^2\left(\theta_{i}\right) \\
+    & = \theta^{\prime \prime}(ih)+\frac{1}{12}h^2\theta^{(4)}(\xi) + \mathcal{O}(h^4) -\theta^{\prime\prime}(ih) \\
+    & = \frac{1}{12}h^2\theta^{(4)}(\xi) + \mathcal{O}(h^4)
+\end{align*}
+
+By definition of the two-norm, we have
+  \begin{equation}\label{tau2norm}
+    \|\vec{\tau}\|_2 = \left(\sum_{i=1}^{M}|\tau_i|^2\right)^{\frac{1}{2}} = \left(\sum_{i=1}^{M}\left|\frac{\theta^{(4)}}{12}h^2 + \mathcal{O}(h^4)\right|^2\right)^{\frac{1}{2}}
+  \end{equation}
+
+By Taylor's theorem we have the existence of some $X \in (0,1)$ such that
+  $$ \left| \frac{h^2}{12} \theta^{(4)}(ih) + \mathcal{O}(h^4)\right| \leq \left|\frac{h^2}{12}\theta^{(4)}(X)\right| \quad \forall \quad i \quad (\in \N) $$
+which in turn implies
+  $$ \|\vec{\tau}\|_2 \leq \sqrt{X}\left|\frac{\theta^{(4)}(X)}{12}h^2 \right| $$
+Now, let's consider the behaviour of the two-norm when we interpret $\vec{\tau}$ as a piecewise constant function,
+\begin{align} \vec{\tau}_2 = \int_{0}^{1}|\tau_h|^2 dt = \sum_{j=1}^{M}\int_{t_j}^{t_{j+1}}|\tau_j|^2 dt & \leq \sum_{j=1}^{M}\int_{t_j}^{t_{j+1}}\left|\frac{\theta^{(4)}(X)h^2}{12}\right|^2 dt \\
+  & = hX \left|\frac{\theta^{(4)}(X)h^2}{12}\right|^2 \xrightarrow{\stackrel{M\to \infty}{h \to 0}}0
+\end{align}
+
+  \item Here we want to show convergence. A method for a boundary value problem is said to be convergent, if $\vec{E_h}\to 0 $ as $h\to 0$. Observe that $\vec{\tau_h}=G_h(-\vec{E_h})$
+     \begin{equation}
+       \vec{E_h} = -G_h^{-1}\vec{\tau_h}
+     \end{equation}
+Now we can write $\|\vec{E_h}\|_2 = \|-G_h^{-1}\vec{\tau_h}\|_2$, and we know $\|\vec{\tau_h}\|_2$ from $b)$ and hence, finding $\|G_h^{-1}\|_2$ is all we need to find $\|\vec{E_h}\|_2$.
+From this we can rewrite and bound the error-vector
+\begin{equation}\label{Ebound}
+  \begin{aligned}
+    \vec{E_h} = -G_h^{-1}\vec{\tau_h} & \leq \|G_h^{-1}\|_2\|\vec{\tau}_h\|_2 \\
+      & = \max_{\lambda_h\in\sigma(G_h)}\frac{\|\vec{\tau}_h\|_2}{|\lambda_h|} \\
+      & \leq \max_{\lambda_h\in\sigma(G_h)}\frac{h^2|\theta^{(4)}(X)|}{12|\lambda_h|}
+  \end{aligned}
+\end{equation}
+To find the eigenvalues of $G_h$, we want to use that
+  $$ G_h^{-1} = \left(A_h + \omega^2I\right)^{-1} $$
+  and the following lemma.
+\begin{lemma}
+  The eigenvalues of \(\alpha I+B\) are \(\alpha+\lambda(B)\), where $\lambda(B)$ are the eigenvalues of $B$.
+\end{lemma}
+\begin{proof}
+  Let $\lambda$ be any eigenvalue of $B$ with corresponding eigenvector $\vec{v}$, then $B\vec{v}=\lambda\vec{v}$. Now $(\alpha I + B)\vec{v}=\alpha I\vec{v}+\lambda\vec{v}=(\alpha+\lambda)\vec{v}$.
+\end{proof}
+  $G_h$ is clearly symmetric and as seen in problem $3$, we don't need to calculate the inverse of $G_h$ to say find its $2$-norm since $\lambda(G_h^{-1})=\frac{1}{\lambda(G_h)}$. In particular this means that we are looking for the eigenvalues of
+    $$ (A_h + \omega^2I) $$
+  which, by the lemma, reduces to
+    $$\omega^2+\lambda(A_h).$$
+
+
+Lecture note on BVD page xviii state the following eigenvalues for $A_h$:
+    $$ \lambda_{m}=\frac{2}{h^{2}}(\cos (m \pi h)-1), \quad m=1, \ldots, M. $$
+Now because $0<m<M+1$ and $\frac{M+1}{h}=1$ we see that $m=1$ minimizes the above $\cos$-term. Henceforth
+  $$ \lambda_{h,m} = \frac{2}{h^2}\left(\cos(mh\pi)-1\right)+\omega^2 $$
+  \begin{equation}\label{lambdabound}
+     \Longrightarrow \min_{\lambda_h\in\sigma(G_h)}|\lambda_h| = \left|\frac{2}{h^2}\left(\cos(h\pi)-1\right)+\omega^2\right| \end{equation}
+Now let's study what happens when sending $h$ to zero:
+  \begin{align*}
+    \lim_{h\to 0} \min|\lambda_h| & = \lim_{h\to 0}\left|\frac{2(\cos(\pi h)-1)}{h^2}+ \omega^2\right| \\
+      & = \lim_{h\to 0}\left|\frac{-\pi\sin(\pi h)}{h}+\omega^2 \right| \\
+      & = \lim_{h\to 0} \left|-\pi^2\cos(\pi h) + \omega^2 \right| = |\pi^2+\omega^2|
+  \end{align*}
+Here we have first used the bound from \ref{lambdabound} and then the definition of the derivative twice.
+Now we simply insert \ref{lambdabound} into \ref{Ebound} using the fact that minimizing the denominator maximizes the fraction:
+  \begin{align*}
+    \|\vec{E}_h\|_2 \leq \max_{\lambda_h\in\sigma(G_h)} & \frac{h^2|\theta^{(4)}(X)|}{12|\lambda_h|} \\
+      \xrightarrow{h\to 0} \quad & \frac{h^2|\theta{(4)|}(X)}{12|\pi^2-\omega^2|} = 0
+  \end{align*}
+By the assumption $\omega^2\leq \frac{\pi^2}{2}$, $|\pi^2 + \omega^2|\neq 0$, keeping our limit well-defined. As $h=\frac{1}{M+1}$, $h\to 0$ would mean $(M+1)\to \infty$ this completes our proof of convergence -- the error vector goes to zero as the number of discretization points grows big.
+
+  \item
+See the Jupyter notebook.
+
+\end{enumerate}
+
+\newpage
+\begin{thebibliography}{9}
+  \bibitem{}  Endre Suli \& David Mayers. An Introduction to Numerical Analysis. Cambridge University Press, 2003.\label{NumAnal}
+  \bibitem{} S. Fridberg, A.Insel, L.Spence. Linear Algebra. Pearson, 2014. \label{ma1202}
+  \bibitem{} \url{https://en.wikipedia.org/wiki/Extrapolation} \label{Richardson}
+  \bibitem{} Elena Celledoni. Lecture notes on consistency and convergence of one-step methods. \label{onestepnotes}
+\end{thebibliography}

@@ -1,0 +1,87 @@
+\title{Forelesning Week 04 Complex Analysis}
+\maketitle
+\begin{recall}
+  $z_2,z_3,z_4 \in \hat{\C}$ pairwise distinct $\rightarrow$ $D| \cdot,z_2,z_3,z_4|:\hat{\C}\to \hat{\C}$ Mobius transf. with $z_2\mapsto, z_3\mapsto 0,z_4\mapsto \infty$.
+\end{recall}
+
+\begin{proposition}
+  $z_2,z_3,z_4 \in \hat{\C}$ pairwise distinct, $z_1\in \hat{\C}$. then:
+      $$D| \cdot,z_2,z_3,z_4| \subseteq \R\cup\{\infty\} \Leftrightarrow \exists A\in \mathcal{CL}: z_1,z_2,z_3,z_4\in A$$
+\end{proposition}
+\begin{proof}
+  It suffices to show that a Mobius transf. maps $\R\cup\{\infty\}$ onto an element of $\mathcal{CL}$. To this end, consider a Mobius transf.
+    $$T:=T_M:\hat{\C}\to \hat{\C}, M=
+\begin{bmatrix}
+    a & b \\
+    c & d
+\end{bmatrix}
+    \in GL_2(\C)$$
+\begin{enumerate}[Case (1)]
+  \item $c=0 \Rightarrow a,d \neq 0$
+    $$T(\R\cup\{\infty\})=\{\infty\}\cup \{\frac{a}{d} \cdot x+\frac{b}{d}: x\in \R\}\in \mathcal{CL}$$
+  \item $c\neq 0, \frac{-d}{c}\in \R$ \newline
+    $T_M=T_{\frac{1}{c} \cdot M}$, so WLOG $c=1$, so $d\in \R$.
+    \newline $T(\infty)=\frac{a}{c}=a, T(-d)=T(-\frac{d}{c})=\infty$
+    \newline If $x\in \R\setminus\{-d\}$, then
+      $$T(x)=\frac{ax+b}{x+d}=\frac{ax+ad+b-ad}{x+d}=a-\frac{ad-b}{x+d}$$
+    $$T(\R\cup\{\infty\})=\{a\}\cup\{\infty\}\cup\{a-\frac{ad-b}{x+d}:x\in\R,x\neq -d\}$$
+    $$\{a\}\cup\{\infty\}\cup\{a+(b-ad) \cdot t:t\in \R, t\neq 0\}=\{\infty\}\cup\{a+(b-ad) \cdot t:t\in \R\}\in \mathcal{CL}, b-ad\neq 0$$
+  \item $c\neq 0, \frac{-d}{c}\notin \R$.
+  \newline WLOG $c=1$, i.e. $d\notin \R$. Note $T(\infty)=a$. For $x\in \R$:
+    $$T(x)=\frac{ax+b}{x+d}=a+\frac{b-ad}{x+d}$$
+    $$t=x+Re(d): \text{ bijection }\R\to\R$$
+    $$T(\R)=\{a+\frac{b-ad}{x+d}:x\in \R\}=\{a+\frac{b-ad}{t+i \cdot Im(d)}: t\in \R\}, Im(d)\neq 0 \Leftarrow d\notin \R$$
+    $$T(\R\cup\{\infty\})=\{a\}\cup\{a+\frac{b-ad}{t+i \cdot Im(d)}: t\in \R\}$$
+    $$=a+\left(\{0\}\cup\{\frac{b-ad}{t+i \cdot Im(d)}: t\in \R\}\right)$$
+    $$=a+\frac{b-ad}{Im(d)} \cdot \left(\{0\}\cup\{\frac{1}{t/Im(d)+i}:t\in \R\}\right)$$
+    $$y=\frac{t}{Im(d)} \text{ definess bijection }\R\to\R$$
+    $$=a+\frac{b-ad}{Im(d)} \cdot \left(\{0\}\cup \{\frac{1}{y+c}:y\in\R\}\right)$$
+    $a\in \C, \frac{b-ad}{Im(d)}\in \C\setminus\{0\}$.
+    \begin{note}
+      If $c_1,c_2\in \C$, $c_2\neq 0$, then $f:\C\to\C:z\mapsto c_1+c_2 \cdot z$ maps circles to circles:
+        $$f(\{z\in\C: |z-z_0|=r\})=\{w\in \C:|w-(c_1+c_2 \cdot z_0)|=|c_2| \cdot r\}$$
+    \end{note}
+    So, by Note,  it is enough to show that $\{0\}\cup\{\frac{1}{y+i}:y\in\R\}$ is a circle.
+    claim:
+      $$\{0\}\cup\{\frac{1}{y+i}:y\in\R\}=\{z\in\C:|z-(-\frac{i}{2})|=\frac{1}{2}\}$$
+    $(\subseteq)$ $0\in RHS.$, so consider $\frac{1}{y+y},y\in \R$. Have $$|\frac{1}{y+y}-(-\frac{i}{2})|=|\frac{y}{y^2+1}+i \left(\frac{1}{2}-\frac{1}{y^2+1}\right)=\sqrt{\left(\frac{y}{y^2+1}\right)^2+\left(\frac{1}{2}-\frac{1}{y^2+1}\right)^2}=\frac{1}{2}$$
+    $(\supseteq)$ Let $z\in \C$ with $|z-(-\frac{i}{2})|=\frac{1}{2}$. If $z=0$, then $z\in LHS$, so assume $z\neq 0$.
+    \newline \underline{To prove:} $Im(\frac{1}{z})=1$.
+    \newline Let $\theta\in\R$, s.t. $z=-\frac{i}{2}+\frac{1}{2}e^{i\theta}$. We compute: $$Im\left(\frac{1}{z}\right)=Im\left(\frac{2}{e^{i\theta}-i}\right)=Im \left(\frac{2}{\cos \theta+i(\sin \theta -1)}\right)=1.$$
+\end{enumerate}
+\qedhere
+\end{proof}
+\begin{remark}
+  ``Trick'' in the proof: $t=\frac{1}{x+d}$ defines a bijection from $\R\setminus\{0\}$ and $\R\setminus\{-d\}$.
+\end{remark}
+
+\textbf{Notation:} If $Q=[a,b]+[c,d] \subseteq \R^2$ is a box, its boundary is the image of the piecewise $C^1$ curve
+  $$[0,2(b-a)+2(d-c)]\to \R^2: s\mapsto
+    \begin{cases}
+      (a+s,c), \text{ if }0\leq s \leq b-a \\
+      \dots , \dots \\
+      \dots, \dots
+    \end{cases}
+  $$
+By a slight abuse of notation, we denote this curve as $\partial Q$.
+  \begin{itemize}
+    \item counter-clockwise
+    \item can be re-parametrized
+  \end{itemize}
+\begin{theorem}
+  \textbf{Cauchy Integral Theorem}
+  \newline Let $D\subseteq \C$ open, $f:D\to \C$ holomorphic. Further let $Q=[a,b]\times [c,d]\subseteq \R^2$ be a box ahd $\psi:Q\to D$ continuously diferentiable. Then:
+     $$\int_{\psi(\partial Q)}^{}f(z)dz=0.$$
+\end{theorem}
+
+\begin{example}
+  \underline{triangles}
+  \newline $\psi:[0,1]\times[0,1]\to \C: \psi(t,s)=t(1+s \cdot i)$
+    $$\int_{\psi(\partial Q)}^{}f(z)dz=\int_{\gamma_1}f(z)dz+ \int_{\gamma_2}f(z)dz+\int_{\gamma_3}f(z)dz$$
+\end{example}
+\begin{example}
+  \underline{discs}
+  \newline $z_0\in \C, r\in\R_{>0}$
+    $$\psi:[0,r]\times[0,2\pi]\to \C:(t,s)\mapsto z_0+t \cdot e^{is}$$
+    $$\int_{\psi(\partial Q)}^{ }f(z)dz=\int_{|z-z_0|=r}^{}f(z)dz$$
+\end{example}

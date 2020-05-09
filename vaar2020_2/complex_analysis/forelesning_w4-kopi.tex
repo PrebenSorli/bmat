@@ -1,0 +1,185 @@
+\title{Forelesning Week 04 Complex Analysis}
+\maketitle
+\section{28. jan}
+
+\begin{recall}
+  $z_2,z_3,z_4 \in \hat{\C}$ pairwise distinct $\rightarrow$ $D| \cdot,z_2,z_3,z_4|:\hat{\C}\to \hat{\C}$ Mobius transf. with $z_2\mapsto, z_3\mapsto 0,z_4\mapsto \infty$.
+\end{recall}
+
+\begin{proposition}
+  $z_2,z_3,z_4 \in \hat{\C}$ pairwise distinct, $z_1\in \hat{\C}$. then:
+      $$D| \cdot,z_2,z_3,z_4| \subseteq \R\cup\{\infty\} \Leftrightarrow \exists A\in \mathcal{CL}: z_1,z_2,z_3,z_4\in A$$
+\end{proposition}
+\begin{proof}
+  It suffices to show that a Mobius transf. maps $\R\cup\{\infty\}$ onto an element of $\mathcal{CL}$. To this end, consider a Mobius transf.
+    $$T:=T_M:\hat{\C}\to \hat{\C}, M=
+\begin{bmatrix}
+    a & b \\
+    c & d
+\end{bmatrix}
+    \in GL_2(\C)$$
+\begin{enumerate}[Case (1)]
+  \item $c=0 \Rightarrow a,d \neq 0$
+    $$T(\R\cup\{\infty\})=\{\infty\}\cup \{\frac{a}{d} \cdot x+\frac{b}{d}: x\in \R\}\in \mathcal{CL}$$
+  \item $c\neq 0, \frac{-d}{c}\in \R$ \newline
+    $T_M=T_{\frac{1}{c} \cdot M}$, so WLOG $c=1$, so $d\in \R$.
+    \newline $T(\infty)=\frac{a}{c}=a, T(-d)=T(-\frac{d}{c})=\infty$
+    \newline If $x\in \R\setminus\{-d\}$, then
+      $$T(x)=\frac{ax+b}{x+d}=\frac{ax+ad+b-ad}{x+d}=a-\frac{ad-b}{x+d}$$
+    $$T(\R\cup\{\infty\})=\{a\}\cup\{\infty\}\cup\{a-\frac{ad-b}{x+d}:x\in\R,x\neq -d\}$$
+    $$\{a\}\cup\{\infty\}\cup\{a+(b-ad) \cdot t:t\in \R, t\neq 0\}=\{\infty\}\cup\{a+(b-ad) \cdot t:t\in \R\}\in \mathcal{CL}, b-ad\neq 0$$
+  \item $c\neq 0, \frac{-d}{c}\notin \R$.
+  \newline WLOG $c=1$, i.e. $d\notin \R$. Note $T(\infty)=a$. For $x\in \R$:
+    $$T(x)=\frac{ax+b}{x+d}=a+\frac{b-ad}{x+d}$$
+    $$t=x+Re(d): \text{ bijection }\R\to\R$$
+    $$T(\R)=\{a+\frac{b-ad}{x+d}:x\in \R\}=\{a+\frac{b-ad}{t+i \cdot Im(d)}: t\in \R\}, Im(d)\neq 0 \Leftarrow d\notin \R$$
+    $$T(\R\cup\{\infty\})=\{a\}\cup\{a+\frac{b-ad}{t+i \cdot Im(d)}: t\in \R\}$$
+    $$=a+\left(\{0\}\cup\{\frac{b-ad}{t+i \cdot Im(d)}: t\in \R\}\right)$$
+    $$=a+\frac{b-ad}{Im(d)} \cdot \left(\{0\}\cup\{\frac{1}{t/Im(d)+i}:t\in \R\}\right)$$
+    $$y=\frac{t}{Im(d)} \text{ definess bijection }\R\to\R$$
+    $$=a+\frac{b-ad}{Im(d)} \cdot \left(\{0\}\cup \{\frac{1}{y+c}:y\in\R\}\right)$$
+    $a\in \C, \frac{b-ad}{Im(d)}\in \C\setminus\{0\}$.
+    \begin{note}
+      If $c_1,c_2\in \C$, $c_2\neq 0$, then $f:\C\to\C:z\mapsto c_1+c_2 \cdot z$ maps circles to circles:
+        $$f(\{z\in\C: |z-z_0|=r\})=\{w\in \C:|w-(c_1+c_2 \cdot z_0)|=|c_2| \cdot r\}$$
+    \end{note}
+    So, by Note,  it is enough to show that $\{0\}\cup\{\frac{1}{y+i}:y\in\R\}$ is a circle.
+    claim:
+      $$\{0\}\cup\{\frac{1}{y+i}:y\in\R\}=\{z\in\C:|z-(-\frac{i}{2})|=\frac{1}{2}\}$$
+    $(\subseteq)$ $0\in RHS.$, so consider $\frac{1}{y+y},y\in \R$. Have $$|\frac{1}{y+y}-(-\frac{i}{2})|=|\frac{y}{y^2+1}+i \left(\frac{1}{2}-\frac{1}{y^2+1}\right)=\sqrt{\left(\frac{y}{y^2+1}\right)^2+\left(\frac{1}{2}-\frac{1}{y^2+1}\right)^2}=\frac{1}{2}$$
+    $(\supseteq)$ Let $z\in \C$ with $|z-(-\frac{i}{2})|=\frac{1}{2}$. If $z=0$, then $z\in LHS$, so assume $z\neq 0$.
+    \newline \underline{To prove:} $Im(\frac{1}{z})=1$.
+    \newline Let $\theta\in\R$, s.t. $z=-\frac{i}{2}+\frac{1}{2}e^{i\theta}$. We compute: $$Im\left(\frac{1}{z}\right)=Im\left(\frac{2}{e^{i\theta}-i}\right)=Im \left(\frac{2}{\cos \theta+i(\sin \theta -1)}\right)=1.$$
+\end{enumerate}
+\qedhere
+\end{proof}
+\begin{remark}
+  ``Trick'' in the proof: $t=\frac{1}{x+d}$ defines a bijection from $\R\setminus\{0\}$ and $\R\setminus\{-d\}$.
+\end{remark}
+
+\textbf{Notation:} If $Q=[a,b]+[c,d] \subseteq \R^2$ is a box, its boundary is the image of the piecewise $C^1$ curve
+  $$[0,2(b-a)+2(d-c)]\to \R^2: s\mapsto
+    \begin{cases}
+      (a+s,c), \text{ if }0\leq s \leq b-a \\
+      \dots , \dots \\
+      \dots, \dots
+    \end{cases}
+  $$
+By a slight abuse of notation, we denote this curve as $\partial Q$.
+  \begin{itemize}
+    \item counter-clockwise
+    \item can be re-parametrized
+  \end{itemize}
+\begin{theorem}\label{CauchyInt}
+  \textbf{Cauchy Integral Theorem}
+  \newline Let $D\subseteq \C$ open, $f:D\to \C$ holomorphic. Further let $Q=[a,b]\times [c,d]\subseteq \R^2$ be a box ahd $\psi:Q\to D$ continuously diferentiable. Then:
+     $$\int_{\psi(\partial Q)}^{}f(z)dz=0.$$
+\end{theorem}
+
+\begin{example}
+  \underline{triangles}
+  \newline $\psi:[0,1]\times[0,1]\to \C: \psi(t,s)=t(1+s \cdot i)$
+    $$\int_{\psi(\partial Q)}^{}f(z)dz=\int_{\gamma_1}f(z)dz+ \int_{\gamma_2}f(z)dz+\int_{\gamma_3}f(z)dz$$
+\end{example}
+\begin{example}
+  \underline{discs}
+  \newline $z_0\in \C, r\in\R_{>0}$
+    $$\psi:[0,r]\times[0,2\pi]\to \C:(t,s)\mapsto z_0+t \cdot e^{is}$$
+    $$\int_{\psi(\partial Q)}^{ }f(z)dz=\int_{|z-z_0|=r}^{}f(z)dz$$
+\end{example}
+
+\section{31. jan}
+Recall \ref{CauchyInt}.
+\begin{lemma}
+  Let $a\leq b $ be real numbers.
+  \begin{enumerate}[(a)]
+    \item If $g:[a,b]\to \C$ is continuous, then
+      $$\left|\int_{a}^{b}g(t)dt\right|\leq \int_{a}^{b}|g(t)|dt$$
+    \item If $D\subseteq \C$ open, $\gamma:[a,b]\to D$ a $C^1$ path, $f:D\to \C$ continuous, then
+      $$\left|\int_{\gamma}f(z)dz\right|\leq L(\gamma) \cdot max_{z\in \gamma([a,b])}|f(z)|$$
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  \begin{enumerate}[(a)]
+    \item Let $\theta \in \R$, s.t. $e^{i\theta} \cdot \int_{a}^{b}g(t)dt\in \R_{\geq 0}$. Then
+      $$\left|\int_{a}^{b}g(t)dt\right|=\int_{a}^{b}g(t)dt=\left(\int_{a}^{b}Re(e^{i\theta} \cdot g(t))dt\right)+i \left(\int_{a}^{b}Im \left(e^{i\theta}g(t)\right)dt\right)$$
+      $$i \left(\int_{a}^{b}Im \left(e^{i\theta}g(t)\right)dt\right)=0$$
+      $$=\int_{a}^{b}Re \left(e^{i\theta}g(t)\right)dt\leq \int_{a}^{b}|e^{i\theta}g(t)|dt=\int_{a}^{b}|g(t)|dt$$
+    \item
+      $$\left|\int_{\gamma}f(z)dz\right|=\left|\int_{a}^{b}f(\gamma(t)) \cdot \gamma'(t)dt\right|\leq \int_{a}^{b}|f(\gamma(t)) \cdot\gamma'(t)|dt$$
+      $$\leq \int_{a}^{b}\left(max_{z\in \gamma([a,b])}|f(z)|\right) \cdot|\gamma'(t)|dt=\left(max_{z\in \gamma([a,b])}|f(z)|\right)L(\gamma).$$
+  \end{enumerate}
+\end{proof}
+
+\begin{lemma}
+  $Q=[a,b]\times [c,d]\subseteq \R^2$ box, $\psi:Q\to\R^2$ of class $C^1$. Let
+  $$M_{Q,\psi}:=max\{ \| J_{\psi}(w) \cdot
+\begin{bmatrix}
+  x\\
+  y
+\end{bmatrix}
+  \|_{} : w\in Q,
+  \begin{bmatrix}
+    x\\
+    y
+  \end{bmatrix}\in \R^2
+  , \| \begin{bmatrix}
+    x\\
+    y
+  \end{bmatrix} \|_{} = 1\}\in \R_{\geq0}
+    $$
+    Then:
+    \begin{enumerate}[(a)]
+      \item
+        $$L(\psi(\partial Q))\leq M_{Q,\psi} \cdot L(\partial Q)$$
+      \item
+        $$\forall x,x_0 \in Q : \| \psi(x)-\psi(x_0) \|_{}\leq M_{Q,\psi} \cdot \| x-x_0 \|_{} $$
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+  If $\gamma:[\alpha,\beta]\to \C$ is $pw.C^1$ and $\gamma([\alpha,\beta])\subseteq Q$, then
+    \newline tegning 1
+      $$|\psi(\gamma(\beta))-\psi(\gamma(\alpha))|$$
+      $$=\left|\int_{\alpha}^{\beta}\left(\psi \circ \gamma\right)'(t)dt\right|\leq \int_{\alpha}^{\beta}|\left(\psi \circ \gamma \right)'(t)|dt$$
+      $$=\int_{\alpha}^{\beta}|J_{\psi}(\gamma(t)) \cdot\gamma'(t)|dt\leq (*) \int_{\alpha}^{\beta}M_{Q,\psi}|\gamma'(t)|dt$$
+      \begin{enumerate}[Case (1)]
+        \item $\gamma'(t)=0$
+        \item $\gamma'(t)\neq 0$
+          $$\left|J_{\psi}(\gamma(t)) \cdot \gamma'(t)\right|=\left|J_{\psi} \left(\gamma(t)\right)\cdot \frac{\gamma'(t)}{|\gamma'(t)|}\right| \cdot |\gamma'(t)|\leq M_{Q,\psi} \cdot |\gamma'(t)|$$
+      \end{enumerate}
+      \begin{enumerate}[(a)]
+        \item If $\gamma_{\partial Q}[0,2(b-a)+2(d-c)]\to \C$ parametrizes $\partial Q$ as before, then     $$L(\psi(\partial Q))=L(\psi \circ \gamma_{\partial Q})=\int_{0}^{2(b-a)+2(c-d)}|(\psi\circ \gamma_{\partial Q})'(t)|dt$$
+          $$\leq M_{Q,\psi} \cdot L(\gamma_{\partial Q})=M_{Q,\psi} \cdot L(\partial Q).$$
+        \item Let $\gamma:[0,1]\to \C$, $t\mapsto x_0+t(x-x_0)$. Then $\gamma$ is $C^1$ and $\gamma([0,1])\subseteq Q$. We get
+          $$\| \psi(x)-\psi(x_0) \|_{}=|\psi(\gamma(1))-\psi(\gamma(0))|\leq M_{Q,\psi} \cdot L(\gamma)=M_{Q,\psi} \cdot \| x-x_0 \|_{}. $$
+      \end{enumerate}
+\end{proof}
+\begin{proof}
+  Proof of Cauchy Integral Theorem\ref{CauchyInt}
+  \newline We subdivide $Q$ as indicated in the drawing (tegning 2)
+    $$Q=Q_1^1\cup Q_1^2 \cup Q_1^3 \cup Q_1^4,$$
+  where all four boxes are closed in $\R^2$. By cancellation:
+    $$\int_{\psi(\partial Q)}^{}f(z)dz=\int_{\psi(\partial Q_1^1)}^{}f(z)dz+\int_{\psi(\partial Q_1^2)}^{}f(z)dz+\int_{\psi(\partial Q_1^3)}^{}f(z)dz+\int_{\psi(\partial Q_1^4)}^{}f(z)dz$$
+    Let $Q_1\in \{Q_1^1, Q_1^2 , Q_1^3 , Q_1^4\}$, s.t. $\left|\int_{\psi(\partial Q_1)}^{}f(z)dz\right|$ is maximal.
+      $$\Rightarrow \left|\int_{\psi(\partial Q)}^{}f(z)dz\right|\leq 4\left|\int_{\psi(\partial Q_1)}^{}f(z)dz\right|$$
+      Proceeding inductively, we find a sequence $Q:=Q_0\supseteq Q_1 \supseteq Q_2 \supseteq \cdots $ of closed boxes $Q_n \subseteq \R^2, n\in \Z_{\geq 0}$, of dimensions $\frac{b-a}{2^n}\times \frac{d-c}{2^n}$, s.t.
+        $$\left|\int_{\psi(\partial Q)}^{}f(z)dz\right|\leq 4^n\left|\int_{\psi(\partial Q_n)}^{}f(z)dz\right|.$$
+        But $Q_0\supseteq Q_1 \supseteq Q_2 \supseteq \cdots$ is an inclusio-nwise increasing sequence of non-empty (closed) compacts in $\subseteq\R^2$ so $\exists x_0 \in \cap_{n=0}^\infty Q_n$. But due to the sidelength of $Q_n$, this is unique.
+          $$\Rightarrow \cap_{n=0}^\infty Q_n=\{x_0\}$$
+        Set $z_0:=\psi(x_0)\in D$. Define $r:D\to \C:z\mapsto f(z)-\left(f(z_0)+f'(z_0)(z-z_0)\right)$.
+        \newline We compute
+          $$\left|\int_{\psi(\partial Q)}^{}f(z)dz\right|\leq 4^n\left|\int_{\psi(\partial Q_n)}^{}f(z)\right|dz$$
+          $$=4^n\left|\int_{\psi(\partial Q)}^{}\left(r(z)+\left[f(z_0)+f'(z_0)(z-z_0)\right]\right)dz\right|$$
+          brackets has complex antiderivative on all of $\C$, namely
+              $$z\mapsto z \cdot f(z_0)+\frac{1}{2}f'(z_0)(z-z_0)^2$$
+          $$=4^n \cdot \left|\int_{\psi(\partial Q_n)}^{}r(z)dz+0\right|$$
+          $$\leq 4^n\cdot L \left(\psi(\partial Q_n)\right) \cdot max_{z\in \psi(\partial Q_n)}|r(z)|$$
+          Assume WLOG $\psi(\partial Q_n)\neq \{z_0\} \forall n$
+          $$\leq 4^n \cdot L \left(\psi(\partial Q_n)\right) \cdot max_{z_0\neq z\in\psi(\partial Q_n)}|z-z_0| \cdot max_{z_0\neq z\in \psi(\partial Q_n)}\left|\frac{r(z)-r(z_0)}{z-z_0}\right|$$
+          $$\leq 4^n \cdot M_{Q_n,\psi_n} \cdot L(Q_n) \cdot M_{Q_n,\psi_n} \cdot max_{x_0\neq x\in Q_n}|x-x_0| \cdot max_{z_0\neq z\in \psi(\partial Q_n)}\left|\frac{r(z)-r(z_0)}{z-z_0}\right|$$
+          $$\leq 4^n \cdot \left(M_{Q_n,\psi_n} \cdot L(\partial Q_n)\right)^2 \cdot max ...$$
+          $$\leq 4^n \cdot M_{Q,\psi}^2 \cdot \left(\frac{1}{2^n} \cdot L(\partial Q)\right)^2 \cdot max ...$$
+          $$=\left(M_{Q,\psi} \cdot L(\partial Q)\right)^2 \cdot max_{z_0\neq z\in \psi(\partial Q)}\left|\frac{r(z)-r(z_0)}{z-z_0}\right|$$
+          $$n\to \infty \left(M_{Q,\psi}L(\partial Q)\right)^2 \cdot |r'(z_0)|=0$$
+          \qedhere
+\end{proof}

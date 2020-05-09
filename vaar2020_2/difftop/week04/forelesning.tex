@@ -1,0 +1,532 @@
+\title{Lecture Week 04 Differential Topology}
+\maketitle
+\section{28. jan}
+Derivative of a smooth map
+  $$f:X\to Y$$
+$X \subseteq \R^n $ smooth manifold
+\newline
+$Y \subseteq \R^m$ smooth manifold
+\newline define $Df_x:T_xX\to T_{f(x)}Y$
+by selecting cord. systems.
+\newline Diagram1
+\newline
+$f(u)\subseteq V$, $\left(\varphi (0)=x, \psi(0)=y\right)$
+Define $Df_x$ to be
+  $$Df_x=(D\psi)_0\circ(Dh_0)\circ(D\varphi_0) ^{-1}$$
+Diagram 2
+\newline
+Main properties of $Df$.
+\begin{enumerate}[(1)]
+  \item If $U \subseteq \R^n $, $V \subseteq \R^m$ both open subsets,
+    $$f:u\to V \text{ smooth},$$
+    $$\text{then }Df_x(x,v)=(x,df_x(v))$$
+  \item Chain rule:
+  $$X\xrightarrow{f}Y\xrightarrow{g}Z$$
+  $$X \subseteq \R^n , Y \subseteq \R^m, Z \subseteq \R^l$$
+  $X,Y,Z$ all smooth manifolds.
+  Check that
+    $$D(g\circ f)_x=D_{g_{f(x)}}\circ Df_x$$
+  We can take
+    $$x\in X,y=f(x), z=g(y)$$
+  We can find cord. systems
+  \newline Diagram 3
+  \newline Diagram 4
+  \newline $D(g\circ f)_x=D\chi_0\circ Dp_0\circ(D \varphi _0) ^{-1}$
+    $$=D\chi_0\circ D(k\circ h)_0\circ(D \varphi _0) ^{-1}$$
+    $$=D\chi_0\circ Dk_0\circ Dh_0(D \varphi _0) ^{-1}$$
+    $$=\left(D\chi_0\circ Dk_0\circ D\psi_0 ^{-1}\circ \right) \left(D\psi_0\circ Dh_0(D \varphi _0) ^{-1}\right)$$
+    $$Dg_y\circ Df_x.$$
+    Step three follows from the fact that the chain rule holds for open euclidean subsets.
+\end{enumerate}
+\begin{example}
+  $$f:S^1\to S^1$$
+  $$f(x,y)=(x^2-y^2,2xy)$$
+  where $x^2+y^2=1$. Have to check that
+    $$\| f(x,y) \|_{}=1$$
+  What is $Df_{(x,y)}$?
+    $$Df_{(x,y)}=
+    \begin{bmatrix}
+      2x & -2y \\
+      2y & 2x
+    \end{bmatrix}
+    $$
+  $$Df_{(x,y)}:T_{(x,y)}S^1 (1-dim)\to T_{(x,y)}S^1 (1-dim)$$
+  Why do we describe a $1$-dimensional thing with a $2$ by $2$ matrix, so that is wrong.
+  \newline We observe that $f:S^1\to S^1$ can be extended to
+    $$\tilde{f}:\R^2\to\R^2$$
+    $$\tilde{f}(x,y)=(x^2-y^2,2xy)$$
+    $$D\tilde{f}_{(x,y)}=
+    \begin{bmatrix}
+      2x & -2y \\
+      2y & 2x
+    \end{bmatrix}
+    $$
+    is correct though.
+    \newline How does this relate to $Df_{(x,y)}$?
+    To find $df_{(x,y)}$, we need coordinate systems. E.g.
+       $$exp:(0,2\pi)\to S^1\setminus\{(1,0)\}$$
+       $$exp:(-\pi,\pi)\to S^1\setminus\{(-1,0)\}=V$$
+      diagram 5
+      $$f(S^1\setminus\{(-1,0)\})=S^1.$$
+    Pick a good $u$. Try to take $f ^{-1}(V)$. So what maps to $(-1,0)$?
+      $$f(x,y)=(x^2+y^2,2xy)=(-1,0)$$
+    with $x^2+y^2=1$, if $x=0, -y^2=-1$, $y^2= 1, y=\pm 1$.
+    \newline So we take
+      $$u=S^1\setminus\{(0,1),(0,-1)\}$$
+      Illustrasjon 1
+    \newline using trig identities, we see that
+      $$\alpha=2\theta + 2\pi \cdot n \text{ for some }n\in \Z$$
+    So $h$ is the function
+  $$
+  h(\theta)=
+  \begin{cases}
+    2\theta \text{  if }\theta \in (-\pi/2,\pi/2) \\
+    2\theta -2\pi \text{  if }\theta \in (\pi/2,3\pi/2)
+  \end{cases}
+  $$
+    Finally, to determine $Df_{(x,y)}$ where $(x,y)\in u$, we have that
+      $$Df_{(x,y)}=Dexp_{h(\theta)} \circ Dh_{\theta}\circ Dexp ^{-1}_{\theta}$$
+      $$\varphi (\theta)=(x,y)$$
+    if $v\in T_{(x,y)}S^1$ and $(x,y)=(\cos \theta, \sin \theta)$,
+      $$v=\left((x,y), t \cdot
+\begin{bmatrix}
+  -\sin \theta \\
+  \cos \theta
+\end{bmatrix}
+       \right)$$
+       So $Df_{(x,y)}(v)$ is what?
+      $$=Dexp_{h(\theta)} \circ Dh_{\theta}\circ Dexp ^{-1}_{\theta}
+      \left((x,y), t \cdot
+      \begin{bmatrix}
+      -\sin \theta \\
+      \cos \theta
+      \end{bmatrix}\right)
+      $$
+      recall $$
+      Dexp_{\theta}=\begin{bmatrix}
+        -\sin \theta \\
+        \cos \theta
+      \end{bmatrix}
+      $$
+      so $Df_{(x,y)}(v)=Dexp_{h(\theta)}\circ Dh_{\theta}(\theta,t)$
+        $$dh_{\theta}=
+        \begin{cases}
+          2\theta \text{  if }\theta \in (-\pi/2,\pi/2) \\
+          2\theta -2\pi \text{  if }\theta \in (\pi/2,3\pi/2)
+        \end{cases}$$
+      $$\Rightarrow Dexp_{h(\theta)} \cdot \left(h(\theta),2t\right)$$
+      $$=\left((\cos(2\theta),\sin(2\theta)),2t \cdot
+      \begin{bmatrix}
+        -\sin \theta \\
+        \cos \theta
+      \end{bmatrix}
+      \right)$$
+    $$D_{f(x,y)}:T_{(x,y)}S^1 \to T_{f(x,y)}S^1$$
+    $$t\cdot
+    \begin{bmatrix}
+      -\sin (\theta) \\
+      \cos ()\theta)
+    \end{bmatrix}
+    \longmapsto
+    2t \cdot
+    \begin{bmatrix}
+      -\sin (2\theta) \\
+      \cos (2\theta)
+    \end{bmatrix}
+    $$
+     So if we pick a basis for
+        $$T_{(x,y)}S^1=Span\{\left((x,y),
+        \begin{bmatrix}
+          -\sin \theta \\
+          \cos \theta
+        \end{bmatrix}
+        \right)\}$$
+        $$T_{f(x,y)}S^1=Span\{\left(f(x,y),
+        \begin{bmatrix}
+          -\sin 2\theta \\
+          \cos 2\theta
+        \end{bmatrix}
+        \right)\}$$
+        $$Df_{(x,y)}=[2]$$
+\end{example}
+$$X \subseteq \R^n $$
+\begin{remark}
+  \begin{enumerate}
+    \item $$T_xX \subseteq T_x\R^n$$
+    $$
+    \left(
+    \begin{bmatrix}
+      \cos \theta \\
+      \sin\theta
+    \end{bmatrix},
+    \begin{bmatrix}
+      -\sin \theta \\
+      \cos \theta
+    \end{bmatrix}
+    \right)\in T_{\begin{bmatrix}
+      \cos \theta \\
+      \sin\theta
+    \end{bmatrix}}S^1$$
+    \item Pick a good basis for $T_xX$. There is a standard basis for $T_xX$ once we pick a coordinate system.
+    \newline Diagram 6
+    $$\varphi ^{-1} (p)=(x_1(p),x_2(p),\dots,x_k(p))$$
+    if $\varphi (0)=x$
+      $$T_0\tilde{u}=\{(0,v) | v\in \R^k\}\simeq \R^k$$
+    Standard basis.
+      $$(0,e_1),(0,e_2),\dots,(0,e_k) \in T_0\tilde{u}$$
+    So then taking $D \varphi _0$ gives a basis for $T_xX$.
+      $$D \varphi _0(0,e_i)=\left(x,d \varphi _0(e_i)\right)=\frac{\partial }{\partial x_i}\rvert_{x\in X}$$
+    If we use coordinates
+      $$\varphi : \tilde{u}\to u \subseteq X$$
+      $$\psi: \tilde{v}\to V \subseteq Y $$
+      $$\varphi ^{-1}=(x_1,\dots,x_k)$$
+      $$\psi ^{-1}=(y_1,\dots,y_k)$$
+    then the matrix for $Df_x$ with respect to $\{\frac{\partial }{\partial x_i}\rvert_{x}\}$ and $\frac{\partial }{\partial y_i}\rvert_{f(x)}$ is just $dh_0$.
+    \newline Diagram 7
+    $$Df_x= \left(\frac{\partial }{\partial x_i}\rvert_{x}\right)=\sum_{j=1}^l dh_0(i,j)\frac{\partial }{\partial y_i}\rvert_{f(x)}$$
+    \item
+    $$X\xrightarrow{f}Y$$
+    at $x\in X$, find a smooth extension of $f$ to $x\in u' \subseteq \R^n$ open
+    \newline Diagram 8
+    \newline Tegning 2
+    \newline diagram 9
+    \newline thus if $v\in T_xX$
+      $$Df_x(v)=D\tilde{f}_x(v)\in T_{f(x)}Y.$$
+    \textbf{Caution!} $D\tilde{f}_x$ depends on the choice of extension! We could pick another extension $\bar{f}$, and maybe $D\tilde{f}_x\neq D\bar{f}_x$. but
+      $$D\tilde{f}_x\rvert_{T_xX}=D\bar{f}_x\rvert_{TxX}$$
+    E.g. $\tilde{f}(x,y)=(x^2-y^2,2xy)$
+      $$f:S^1 \to S^1$$
+    $$D\tilde{f}_{(x,y)}=
+      \begin{bmatrix}
+        2x & -2y \\
+        2y & 2x
+      \end{bmatrix}
+      $$
+      we can only plug in $$v\in T_{(x,y)}S^1 \Rightarrow \left((x,y),t
+\begin{bmatrix}
+  -y \\
+  x
+\end{bmatrix}
+      \right).$$
+      Then
+        $$Df_{(x,y)}=\left((x,y),t
+  \begin{bmatrix}
+    -y \\
+    x
+  \end{bmatrix}
+        \right)=\left(f(x,y),t
+        \begin{bmatrix}
+          2x & -2y \\
+          2y & 2x
+        \end{bmatrix}\right)
+        $$
+    $$
+\left(f(x,y), t \cdot 2
+\begin{bmatrix}
+  -2xy \\
+  x^2-y^2
+\end{bmatrix}
+\right)
+    $$
+    $$
+    =\left(f(x,y), 2t
+    \begin{bmatrix}
+      -f_y(x,y) \\
+      f_x(x,y)
+    \end{bmatrix}
+    \right)
+    $$
+  This is indeed in $T_{f(x,y)}S^1$.
+  \end{enumerate}
+\end{remark}
+
+$$X=\{(x,0)\in \R^2 | x\in \R\}$$
+$$f:X\to X$$
+$$(x,0)\mapsto (x^2,0)$$
+What is $Df_{(x,0)}$? Extension of $f$:
+  $$\tilde{f}(x,y)=(x^2,0)$$
+  defined on $\R^2$. OR.
+  $$\bar{f}(x,y)=(x^2,y)$$
+only require $\bar{f}$ is smooth,
+  $$\bar{f}(x,0)=f(x,0)=(x^2,0)$$
+  $$D\tilde{f}=
+  \begin{bmatrix}
+    2x & 0 \\
+    0 & 0
+  \end{bmatrix}
+  , D\bar{f}=
+  \begin{bmatrix}
+    2x & 0 \\
+    0 & 1
+  \end{bmatrix}
+  $$
+  $$Df_{(x,0)}\left(
+  \begin{bmatrix}
+    t \\
+    0
+  \end{bmatrix}
+  \right)
+  $$
+  $$=
+  \begin{bmatrix}
+    2x & 0 \\
+    0 & 0
+  \end{bmatrix} \cdot
+  \begin{bmatrix}
+    t \\
+    0
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    2xt \\
+    0
+  \end{bmatrix}
+  $$
+  $$=
+  \begin{bmatrix}
+    2x & 0 \\
+    0 & 1
+  \end{bmatrix} \cdot
+  \begin{bmatrix}
+    t \\
+    0
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    2xt \\
+    0
+  \end{bmatrix}
+  $$
+  $$
+  Df_{(x,0)}\left((x,0)
+  \begin{bmatrix}
+    t \\
+    0
+  \end{bmatrix}  \right)=\left((x^2,0),
+  \begin{bmatrix}
+    2xt \\
+    0
+  \end{bmatrix}
+  \right)
+  .$$
+\begin{definition}
+    Let $X \subseteq \R^n $ be a smooth manifold. The local dimension of $X$ at $x\in X$ is
+      $$dim_xX=dim_{\R}T_xX.$$
+\end{definition}
+
+\begin{proposition}
+  $dimX:X\to \Z$
+  \newline this function is \emph{locally constant}.
+  \newline i.e., ofr any $x\in X$, there exists $u\subseteq X$ open, $x\in u$, with $dim_yX=dim_xX$ for all $y\in u$, i.e., $dimX\rvert_{u}$ is constant.
+\end{proposition}
+\textbf{Consequence:} if $X$ is connected, there is $k\in \Z$ with $\forall x\in X$, $dim_xX=k$.
+\newline When we say $dim X=k$, we implicitly assume $X$ is connected.
+\begin{proof}
+  We show $dim X:X\to \Z$ is continuous. Let $\{k\} \subseteq \Z$. This is an open set, so we need to show
+    $$\{x\in X | dim_xX=k\}$$
+  is an open set in $X$.
+  \newline To see that this is open, we consider $x\in X$ with $dimT_xX=k$. Ther is a coordinate system
+    $$\varphi : \tilde{u}\to u \subseteq X$$
+    with $\tilde{u}$ open $\subseteq \R^k$ and $x\in u$.
+    \newline That gives
+      $$(D \varphi )_{\varphi ^{-1}(x)}: T_{\varphi ^{-1} (x)}\R^k \xrightarrow{\simeq}T_xX$$
+      but for any other $y\in u$, we get
+        $$(D \varphi )_{\varphi ^{-1}(y)}: T_{\varphi ^{-1} (y)}\R^k \xrightarrow{\simeq}T_yX$$
+        therefore $dim_yX=k$ too.
+      \newline hence
+        $$x\in u \subseteq\{x\in X|dim_xX=k\}$$
+      open, so $dimX ^{-1}(\{k\})$ is also open. So oure dimension function is continuous.
+\end{proof}
+\begin{example}
+  $$X=\{(x,y,0) | x^2+y^2=1 \} \cup S^2 \left((10,10,10);1\right)\subseteq \R^3$$
+\end{example}
+
+\section{30. jan}
+What is the local structure of a smooth map
+  $$f:X\to Y?$$
+\textbf{Idea:} Use the derivative $Df_x$ as a local approximation of $f$.
+
+\begin{definition}
+  A smooth map $f: X \to Y  $ is a local diffeomorphism at $x\in X$ if there exist $x\in u$ open $\subseteq X$ and $f(x)\in V $ open $subseteq Y$ so that $f\rvert_{u}:u\xrightarrow{\simeq} V$.
+\end{definition}
+
+\begin{example}
+  $$can: \R^n \to \R^n$$
+  $$=id: x \mapsto x$$
+  obviously a global so local diffeo at all points.
+\end{example}
+\begin{example}
+  $$exp: \R \to S^1$$
+  $$exp\rvert_{((\theta-\varepsilon,\theta+\varepsilon))}(\theta-\varepsilon,\theta+\varepsilon) \xrightarrow{\simeq}I(\theta;\varepsilon)$$
+  $$\text{ and } \varepsilon<\pi$$
+  A local diffeo at all $\theta\in \R$. Not injective, so not a global diffeomorphism.
+\end{example}
+
+Q: Can I use $Df_x$ to see if $f$ is a local diffeo at $x$?
+\begin{theorem}
+  \textbf{Inverse Function Theorem}
+  \newline (Calculus version): $u \subseteq \R^n $ open, $V \subseteq \R^m$ open and
+    $f: u \to V$  smooth. Then $f$ is a local diffeo at $x\in u$ iff $df_x$ is an isomorphism, i.e. $df_x$ is square matrix, $det(df_x)\neq 0$.
+\end{theorem}
+
+\begin{theorem}
+  \textbf{Inverse Function Theorem}
+  \newline  Let $f: X \to Y$ be a smooth map of smooth manifolds, hten $f$ is a local diffeomorpshim at $x\in X$ iff $Df_x:T_xX\to T_{f(x)Y}$ is an isomorphism.
+\end{theorem}
+\begin{proof}
+  At $x\in X$, we can only find local coordinates
+  \newline Diagram 1
+  \newline if $Df_x$ is an iso, then $D\psi \circ Dh_0 \circ D\varphi_0 ^{-1}$ where, $D\varphi_0 ^{-1},D\psi$ are isomorphisms, so $Dh_0$ has to be iso too.
+  \newline Diagram 2
+  \newline diagram 3
+  \qedhere
+\end{proof}
+
+\begin{example}
+  $$Y=\{(x,y)\in \R^2 | y=x^2\}$$
+  Drawing of parabola
+  $$\R \xrightarrow{f}Y$$
+  $$f(x)=(x^2,x^4)$$
+  $f$ is local diffeo at $x\neq 0$.
+  \newline Diagram 4
+  \newline $h$ is how I think of $f$ in coords.
+    $$\psi(h(x))=f(x)=(x^2,x^4)$$
+    $$\left(h(x),h(x)^2\right) \Rightarrow h(x)=x^2$$
+    Pick better coordinates
+    \newline Diagram 5
+      $$\psi(h(x))=\left(h(x),h(x)^2\right)=f(\sqrt{x})=\left(x,x^2\right)$$
+      $$h(x)=x$$
+      Identity map is obviously a diffeomorphism.
+\end{example}
+
+\textbf{Reformulation of IFT}
+\newline
+  $f: X \to Y$ smooth, $Df_x$ is an isomorphism, there are coordinate systems
+  \newline Diagram 6
+  \newline so that in cords., $f$ is the identity map.
+  \newline Diagram 7
+\begin{proof}
+  The IFT gives us
+    \newline Diagram 8
+    \qedhere
+\end{proof}
+if $f: X \to Y$ is local diffeo at \underline{all} x, it need not be a global diffeo.
+\begin{exercise}
+  if $f: X \to Y$ is bijective, smooth, local diffeo, then $f$ is a diffeomorphism.
+\end{exercise}
+
+``Nice maps $f: X \to Y$ where $dim X=dim Y$''
+\newline ``Nice maps $f: X \to Y$ with $dimX\leq dim Y$''
+\newline $Df_x: T_xX \to T_{f(x)}Y$, $T_xX=ndim$, $T_{f(x)}Y mdim, n\leq m$.
+if $Df_x$ is injective, what does it tell us about $f$ locally?
+\newline If $f: X \to Y$ , $df_x$ is injective at $x\in X$, what can we say about $f$?
+\begin{definition}
+  If $f: X \to Y$ is smooth, we say $f$ is an immersion at $x\subseteq X$ is the derivative $Df_x$ is injective.
+\end{definition}
+
+\begin{definition}
+  Canonical immersion:
+    $$can: \R^k \to \R^{k+l}$$
+    $$(x_1,x_2,\dots,x_k) \mapsto (x_1,x_2,\dots,x_k,0,\dots,0)$$
+    $$dcan)_x=
+    $$
+    Matrix 1
+    \newline so $can$ is immersion.
+\end{definition}
+image of $can $ is just the submanifold of $\R^{k+l}$ given by
+  $$\{x\in \R^{k+l} | x_{k+1}=x_{k+2}=\cdots=x_{k+l}=0\}$$
+Hopes: $f: X \to Y$ is an immersion, is the image a submanifold?
+\newline locally does this work?
+$f$ immersion at $x$, is$f$ locally diffeo. to image around $x$?
+\newline we'll show: $f$ immersion at $x$, then locally at $x$, $f$ is just the canonical immersion (in some coords.)
+\begin{lemma}
+  Say $u \subseteq \R^k$ open, $0\in u$, and $h: u\to V \subseteq \R^{k+l}$ is an immersion at $0$.
+  \newline So $dh_0$ is injective.
+  \newline Pick a linear diffeo. $P:\R^{k+l}\to \R^{k+l}$ so that
+  \newline Diagram 9
+  \newline and $dh_0'=$ Matrix 1
+\end{lemma}
+\begin{proof}
+  $dh_0:\R^k\to \R^{k+l}$ is injective. So $rank(dh_0)=k$. Do row operations on $dh_0$ to get:
+  \newline Matrix 2
+  \newline this corresponds to constructing $n+l \times n+l$ invertible matrix $P$ so $p \cdot dh_0= $Matrix 1.
+    $$V'=P(V)$$
+    $$h'0=d(P\circ h)_0=P\circ dh_0= \text{ Matrix 1}$$
+\end{proof}
+
+\begin{theorem}
+    $f: X \to Y$ local immersion at $x$.
+    \newline Diagram 10
+    \newline $dh_0=$ Matrix 1
+    \newline Now we'll get new coords., so $f$ is can in coords.
+\end{theorem}
+\begin{definition}
+  Define $\tilde{u}\in \R^k$
+    $$G: \tilde{u}\times \R^l\to \R^{k+l}$$
+    $$G(x_1,\dots,x_{k+l})=h(x_1,\dots,x_k)+(0,\dots,0,x_{k+1},\dots,x_{k+l})$$
+\end{definition}
+$$dG_0=
+\begin{bmatrix}
+dh_0 &|& 0 \\
+0 & | & I_l
+\end{bmatrix}=
+\begin{bmatrix}
+I_k &|& 0 \\
+0 &|& I_l
+\end{bmatrix}
+$$
+Hence $G$ is a local diffeo. at $0$. So we can pick neighborhoods at $0$ so $G$ is a diffeo.
+  $$G:\supseteq \R^k u'  \times Z (\subseteq \R^l ) \to v'\subseteq \tilde{v}\subseteq \R^{k+l}.$$
+Observe that: $u'\subseteq \tilde{u}$.
+  $$u' \xrightarrow{can }u'\times z \xrightarrow{G}v'$$
+  $$(x_1,\dots,x_k)\mapsto (x_1,\dots,x_k,0,\dots,0)\mapsto (h(x_1,\dots x_k))$$
+Observe we van take $u'\subseteq \tilde{u}$.
+\newline Diagram 11
+\newline $f$ in coords. $\varphi : u'\to \hat{u}$ and $\psi \circ G:G:u'\times z \to \hat{V}$.
+\begin{corollary}
+  $f: X \to Y$ an immersion at $x\in X \Rightarrow \exists u\subseteq X$ open,
+      $\forall y \in u, Df_y$ injective.
+\end{corollary}
+\begin{corollary}
+  $f$ is an immersion at $x\in X$, there is some $u \subseteq X$ where,
+    $$f\rvert_{u}:u\to f(u)$$
+  is a diffeomorphism.
+\end{corollary}
+
+\begin{remark}
+  if $f: X \to Y$ is an immersion, we may not have $f: X \to f(X)$ a diffeo!
+\end{remark}
+What if $f$ is an injection \underline{and} an immersion? Still $f: X \to f(X)$ not a diffeo. in general.
+\newline Illustrasjon 1
+\begin{definition}
+  A map $f: X \to Y$ is called \emph{proper} is for any compact $C \subseteq Y$, $f ^{-1}(C)$ is also compact.
+\end{definition}
+\begin{definition}
+  $f: X \to Y$ is an \emph{embedding} if it is an immersion, injective and proper.
+\end{definition}
+Consequence: if $f$ is an embedding
+  \newline $f(X)\subseteq Y$ is a manifold, and $f: X \to f(X)$ is a diffeomorphism.
+\newline $f$ immersion at $x$
+\newline Diagram 12
+\newline Diagram 13
+
+
+\begin{proposition}
+  if $f$ is proper, injective, immersion then for any $u\subseteq X$ open, $f(u)\subseteq f(X)$ is open.
+\end{proposition}
+\begin{proof}
+  To show $f(u)$ open, we show $f(X)\setminus f(u)$ is closed.
+  \newline Consider a sequence $y_i\in f(X)\setminus f(u)$ converging to: $\lim y_i=y\in f(X)$. We need to show $y\in f(X)\setminus f(u)$ or $y\notin f(u)$.
+    $$\{y_i |i\in \N\} \cup \{y\}$$
+    is compact.
+      $$f ^{-1}\left(\{y_i | i\in N\} \cup \{y\}\right) \text{ compact too.}$$
+      $f$ inj. so we can find $x_i\in X$
+        $$f(x_i)=y_i$$
+        $$f(x)=y$$
+      and $\{x_i|i\in \N\} \cup \{x\}$ is compact. So $X_i$ has a convergent subsequence:
+        $$\lim x_{n_i}=z \in \{x_i|i\in \N\} \cup \{x\}$$
+        We check.
+        $$f(z)=\lim f(x_{n_i})=\lim y_{n_i}=y=f(x)$$
+        $\Rightarrow z=x$ by injectivity. $x_i\notin u$ as $y_i \notin f(u)$. So $x_i\in X\setminus u$ is closed, so $z=x\i X\setminus u$. Hence $y=f(x)\notin f(u)$.
+        \qedhere
+\end{proof}

@@ -1,0 +1,350 @@
+\title{Lecture week 5 DiffTop}
+\maketitle
+\section{4. feb}
+\subsection*{Local properties of smooth maps}
+$f: X \to Y$
+\newline $dimX\geq dimY$.
+\begin{definition}
+  A map $f: X \to Y$ is a submersion at $x\in X$ if $Df_x:T_xX \to T_{f(x)}Y$ is surjective.
+\end{definition}
+\begin{example}
+  Canonical submersion is a projection map
+    $$can:\R^{n+k}\to \R^n$$
+    $$(x_1,\dots,x_m,x_{n+1},\dots,x_{n+k})\mapsto(x_1,\dots,x_n)$$
+  is a submersion at all points.
+    $$D can_x=
+    \begin{bmatrix}
+      I_n | 0
+    \end{bmatrix}$$
+    $n\times(n+k)$.
+\end{example}
+
+\begin{proposition}
+  Let $f: X \to Y$ be a submersion at $x\in X$ , then there are coordinate systems about $x\in X$ and $f(x)\in Y$ so that the map $f$ appears to be the canonical submersion in coordinates.
+\end{proposition}
+\begin{proof}
+  Find some local coordinates
+  \newline Diagram 1
+  \newline Assumption that $Df_x$ is surjective implies $Dh_0$ is surjective.
+  \newline We can find a matrix $Q$ so that
+    $$dh_0 \cdot Q =
+    \begin{bmatrix}
+      I_n | 0
+    \end{bmatrix}$$
+    with $Q$, we can modify our coordinates about $x\in X$. %Diagram 1.2
+    In the new coordinates, $f$ appears to be $h\circ Q$, and so
+      $$d \left(h\circ Q\right)_0=dh_0 \cdot Q =
+      \begin{bmatrix}
+        I_n | 0
+      \end{bmatrix}$$
+    Assume we've done this, redefine our charts so
+    \newline diagram 2
+      $$dh_0=
+      \begin{bmatrix}
+        I_n | 0
+      \end{bmatrix}$$
+      Now define a new map
+        $$G:\tilde{u}\to \tilde{v}\times \R^k$$
+        $$\tilde{u}\subseteq \R^{n+k}, \tilde{v}\subseteq \R^{n+k}$$
+        $$G(x)=\left(h(x),x_{n+1},\dots,x_{n+k}\right)$$
+        $$dG_0
+        \begin{bmatrix}
+            dh_0 | & 0 \\
+            0 | & I_k
+        \end{bmatrix}=
+        \begin{bmatrix}
+          I_n | & 0 \\
+          0 | & I_k
+        \end{bmatrix}=I_{n+k}$$
+      Observe $G$ is a local diffeo at $0$ because $dG_0=I_{n+k}$ by I.F.T. So we can pick $u'\subseteq \tilde{u}$ and $w\subseteq \tilde{v}\times \R^k$ where $G:u'\xrightarrow{\simeq}w$. Use coordinates $\varphi \circ G ^{-1}$ about $x\in X$, then $f$ is just canonical submersion in coordinates.
+\end{proof}
+
+\begin{proposition}
+  If $f: X \to Y$ is a submersion at $x\in X$, then $f$ is a submersion in an open neighborhood around $x$.
+\end{proposition}
+\begin{proof}
+  Find good coordinate systems:
+  \newline Diagram 3
+  \newline for any point $u\in \mathcal{U}$,
+    $$Df_u=D\psi_{can(\varphi (u))}\circ Dcan_{\varphi (u)}\circ D \varphi ^{-1}_{\varphi (u)}$$
+    isos plus just $[I_n | 0]$ so surjective, $\Rightarrow Df_u$ is surjective.
+\end{proof}
+
+\begin{proposition}
+  If $f: X \to Y$ is smooth, and $f(x)=y$, and $f$ is submersion at $x\in X$, then $f ^{-1}(y)$ is locally euclidean.
+\end{proposition}
+\begin{proof}
+  Pick coords so $f$ is the canonical submersion at $x\in X$.
+  \newline diagram 4
+  \newline consider $f ^{-1}(y)\cap \mathcal{U}$ open relative to $f ^{-1}(y)$. I claim this is diffeo to open subset of $\R^k$.
+    $$f ^{-1}(y)\cap \mathcal{U}\simeq \varphi ^{-1}(f ^{-1}(y))$$
+    $$=can ^{-1}(\psi ^{-1}(y))=can ^{-1}(0)=\{x\in \tilde{\mathcal{U}}|x_1=0,x_2=0,\dots,x_n=0\}$$
+    first diffeo is diffeo via $\varphi$.
+  \newline picture 1
+  \newline to get coords for $can ^{-1}(0)$, use another projection map.
+    $$\pi:\R^{n+k}\to \R^k$$
+    $$(x_1,\dots,x_{n+k})\mapsto(x_{n+1},\dots,x_{n+k})$$
+  if we look at
+    $$can ^{-1}(0)=\{x\in \tilde{\mathcal{U}}|x_1=0,x_2=0,\dots,x_n=0\}$$
+    $$can ^{-1}(0) \xrightarrow{\pi}\R^k$$
+  we get $W=\pi(can ^{-1}(0))$ and
+  $$\{x\in \tilde{\mathcal{U}}|x_1=0,x_2=0,\dots,x_n=0\}\simeq W \subseteq \R^k \text{ open}.$$
+    $$can ^{-1}(0) \xrightarrow{\pi, \simeq}W$$
+  is a diffeo.
+\end{proof}
+\begin{example}
+  $$f:\R^{n+1}\to \R$$
+  $$f(x)=x_1^2+x_2^2+\dots +x_{n+1}^2$$
+  $$f ^{-1}(1)=\{x\in \R^{n+1} | \sum x_i^2=1\}=S^n.$$
+\end{example}
+
+\begin{definition}
+  Let $f: X \to Y$ be smooth. $y\in Y$ is a \emph{regular value} of $f$ if:
+    $$\forall x\in f ^{-1}(y), Df_x \text{ is surjective}$$
+    i.e., $f$ is a submersion at $x$.
+\end{definition}
+\begin{theorem}
+  Let $f: X \to Y$ smooth, suppose $X, Y$ connected, $dim X=n, dim Y =k$. If $y\in Y$ is a regular value of $f$, $f ^{-1}(y)$ is a manifold. If $f ^{-1}(y)\neq \emptyset$, then $dim f ^{-1}(y)=dim X-dim Y=n-k$.
+\end{theorem}
+\begin{proof}
+  $$\forall x\in f ^{-1}(y)$$
+  as $f$ is a submersion at $x$, we know $f ^{-1}(y)$ is locally euclidean at $x$. So $f ^{-1}(y)$ is a manifold. And $dim f ^{-1}(y)$ is obtained from previous prop too.
+\end{proof}
+\begin{example}
+  $S^1$ is a smoth manifold.
+    $$f:\R^{n+1}\to \R$$
+    $$f(x)=\sum_{i=1}^{n+1}x_i^2$$
+    $$df_x=[2x_1,2x_2,\dots,2x_{n+1}]$$
+  is surjective when?
+  \newline $x\neq 0$
+  \newline Hence $f ^{-1}(y)\subseteq \R^{n+1}$ is a manifold as long as $0\notin f ^{-1}(y)$, i.e. for all $y\in \R\setminus\{0\}$.
+    $$S^n=f{-1}(1).$$
+    $$\emptyset=f^{-1}(-1)$$
+  Regular values of $f$ are $\R\setminus\{0\}$.
+\end{example}
+Which manifolds can be obtained as the preimage of a regular value?
+\newline Specifically
+  \begin{enumerate}[(1)]
+    \item $$f:\R^n\to \R^k$$
+    When is a manifold $X \subseteq \R^n $ obtained as $X=f^{-1}(0)$ for $0$ a regular value of $f$?
+    \newline One way to think of this is
+      $$f=(f_1,\dots,f_k)$$
+    for $f_i:\R^n\to \R$ is a ``smooth condition'', then $f_i ^{-1}(0)\subseteq \R^n $ are points with $1$ less degree of freedom.
+    \newline So $f ^{-1}(0)=f_1 ^{-1}(0)\cap f_2 ^{-1}(0) \cap \cdots \cap f_k ^{-1}(0)$.
+    \item One modification, which submanifolds of a manifold $X$ are obtained from $f: X\to \R^k$
+    $f ^{-1}(0)$, $0$ a regular value.
+    \newline If we take $k=0$. Consider $f:X\to \R^0$, $\R^0=\{0\}, T_0\R^0=\{0\}$.
+      $$Df_x:T_xX \to T_0\R^0$$
+    is surjective always, so $f ^{-1}(0)=X$.
+    \item ``Partial answers''
+    \newline GP Partial converse 1 not interesting.
+    \item
+      \begin{proposition}
+        Let $Z\subseteq X$ be a submanifold, then there is a smooth function $f: X \to \R^k$ so that $Z$ is locally $f ^{-1}(0)$, i.e., for $x\in Z$, we can find $u\subseteq X$ open and $f: X \to \R^k$, so that $f ^{-1}(0)\cap u=z\cap u$.
+      \end{proposition}
+      \begin{proof}
+        $Z\xrightarrow{i}X, x\mapsto x$ is an immersion.
+        \newline We have
+        \newline Diagram 5
+        \newline Check that
+          $$f ^{-1}(0)=Z\cap V$$
+      \end{proof}
+      \begin{example}
+        $\{(0,0,1)\}\subseteq S^2$, there is no smooth function $f: S^2 \to \R^2$ so that $f ^{-1}(0)=Z$, $0$ a regular value.
+        \newline Proof using degree theory.
+      \end{example}
+  \end{enumerate}
+
+\begin{proposition}
+  $f: X \to Y$ smooth, $Z=f ^{-1}(y)$, $y$ a regular value, then $T_xZ=ker(Df_x:T_xX\to T_yY)$.
+\end{proposition}
+\begin{example}
+  $S^n=f ^{-1}(1)$
+    $$T_xS^n=ker(df_x=[2x_1,\dots,2x_{n+1}])=\{(x,v)| x\cdot v=0\}$$
+\end{example}
+
+$$\C\simeq \R^2$$
+$$x+iy\leftrightarrow (x,y)$$
+We can think of $S^2$ as $\C$ (or $\R^2$) with ``point at infinity''.
+\newline Formula for $\varphi_N(x,y)$
+  $$l(t)=
+\begin{bmatrix}
+  0\\
+  0\\
+  1
+\end{bmatrix}+
+t \left(
+\begin{bmatrix}
+  x\\
+  y\\
+  0
+\end{bmatrix}
+-
+\begin{bmatrix}
+  0\\
+  0\\
+  1
+\end{bmatrix}\right)
+  $$
+$$=
+\begin{bmatrix}
+  tx \\
+  ty\\
+  1-t
+\end{bmatrix}=\varphi_N(x,y)
+$$
+when $t$ is such that $\in S^2$.
+\newline Need that $$(tx)^2+(ty)^2+(1-t)^2=1$$
+$$t^2(x^2+y^2)+1-2t+t^2=1$$
+$$t \left(t(x^2+y^2+1)-2\right)=0$$
+need $t(x^2+y^2+1)=2$
+$$t=\frac{2}{x^2+y^2-1}$$
+$$\varphi _N(x,y)=\frac{1}{x^2+y^2+1} \cdot
+\begin{bmatrix}
+  2x \\
+  2y\\
+  x^2+y^2-1
+\end{bmatrix}$$
+$$\varphi _N ^{-1}\left(
+\begin{bmatrix}
+  x\\
+  y\\
+  z
+\end{bmatrix}
+\right)=\frac{1}{1-z}
+\begin{bmatrix}
+    x\\
+    y
+\end{bmatrix}.$$
+$$\varphi _S,\varphi _S ^{-1}$$
+$$\varphi _S ^{-1} \circ \varphi _N, \varphi_N ^{-1} \circ \varphi _S$$
+
+\section{6. feb}
+Cauchy-Riemann says
+  $$P(x+iy)=u(x,y)+iv(x,y)$$
+is holomorphic implies
+  $$\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y}$$
+  and $$\frac{\partial v}{\partial x}=-\frac{\partial u}{\partial y}$$
+\begin{example}
+  Check this works for $P(z)=z^2=(x^2-y^2)+i(2xy)$
+  $$DP_{(x,y)}=
+  \begin{bmatrix}
+    2x & -2y \\
+    2y & 2x
+  \end{bmatrix}$$
+\end{example}
+
+\subsection*{Outline of proof}
+\begin{remark}
+  $P(z)=\sum_{j=0}^na_jz^j$ of degree $n$, so $a_n\neq 0$, there are at most $n$
+  roots of $P$. If $w_0$ a root of $P$, can factor $P$.
+    $$P(z)=P_1(z)(z-w_0)$$
+    $$deg P_n<n \text{ use I.H.}$$
+\end{remark}
+\begin{enumerate}[(1)]
+  \item  We define from $P(z)=\sum_{j=0}^na_jz^j$ a smooth map
+    $$F:S^2\to S^2$$
+    Diagram 1
+    \newline
+    if $a\in S^2$, $a\neq ((0,0,1)=N)$ then $a=\varphi _N(x,y)= \varphi _N(x+iy)$
+    \newline define $F(a)=\varphi _N(P(x+iy))$.
+    \newline for $N=(0,0,1)\in S^2$, define
+      $$F(N)=\begin{cases}
+        N \text{ if } P \text{ is not constant} \\
+        a_0 \text{ if } P(z)=a_0
+      \end{cases}$$
+\end{enumerate}
+\begin{enumerate}[(1)]
+  \item Construct $F:S^2 \to S^2$
+  \item At any regular value
+    $$y\in S^2, \left(\forall x\in f^{-1}(y), DF_x \text{ is surjective.}\right)$$
+    we know $F ^{-1}(y)\subseteq S^2$ is a manifold of dimension $0$.
+    \newline A $0$-manifold is a \emph{discrete subset of $S^2$}. i.e. $\{x\}\subseteq f^{-1}(y)$ is open for all $x\in f ^{-1}(y)$.
+    \newline $f^{-1}(y)$ is closed set, $\{y\}\subseteq S^2$ is closed, $f ^{-1}(y)\subseteq S^2$ is thus compact. So $f ^{-1}(y)$ is a finite set.
+      $$\{x\}|x\in f^{-1}(y)\}$$
+    open cover imp finite set.
+\end{enumerate}
+\begin{enumerate}[(1)]
+  \item  Construct $F:S^2 \to S^2$
+  \item  At any regular value $y\in S^2$, har $F^{-1}(y)=\{x_1,\dots ,x_N\}$ a finite set.
+  \item What are critical points of $F?$
+  i.e. $DF_P$ not surjective? Possibly $\infty$, otherwise, it is the points where
+    $$P'(z)=0 \leftrightarrow DF_{\varphi _N(z)}=0$$
+  at most $n-1$ points
+    $$z_1,\dots,z_{n-1}$$
+  So regular values of $F$ are at least
+    $$S^2\setminus\{F(\infty),F(\varphi _N(z_1)),\dots,F(\varphi _N(z_{n-1})\}$$
+
+\end{enumerate}
+\begin{enumerate}[(1)]
+  \item  Construct $F:S^2 \to S^2$
+  \item  At any regular value $y\in S^2$, har $F^{-1}(y)=\{x_1,\dots ,x_N\}$ a finite set.
+  \item What are critical points of $F?$
+    $$S^2\setminus\{F(\infty),F(\varphi _N(z_1)),\dots,F(\varphi _N(z_{n-1})\}$$
+  \item Define a function
+    $$C:S^2\setminus\{F(\infty),F(\varphi _N(z_1)),\dots,F(\varphi _N(z_{n-1})\}\to \N$$
+    $$C(y)=\#F^{-1}(y)$$
+  \item Technical Theorem (Stack of Records Thm.)
+  \newline Says $C$ is continuous/locally constant.
+  \item $$S^2\setminus\{F(\infty),F(\varphi _N(z_1)),\dots,F(\varphi _N(z_{n-1})\}$$
+  is connected so $C$ is globally constant
+    $$\forall y, C(y)=c \in \N$$
+  \item
+    \begin{enumerate}[Case (1)]
+      \item $C(y)=0$
+      \newline For almost all $y\in S^2$, $F^{-1}(y)=\emptyset$.
+      So image of $S^2$ is not a regular value.
+        $$F(S^2)\subseteq \{\infty,F(\varphi _N(z_1))\dots F(\varphi _N(z_{n-1}))\}$$
+      So $F(S^2)=\{\varphi _N(a_0)\}$ is a constant function.
+      \item Say $C(y)>0$.
+      \newline Note that $\varphi _N(0)=(0,0,-1)=S$.
+      \newline Either $S\in \{F(\varphi _N(z_1))\dots F(\varphi _N(z_{n-1}))\}$ in which case $S=F(\varphi _N(z_i)) \Rightarrow 0=P(z_i)$.
+      \item $C(y)>0$ but now $S$ is a regular value. So $F^{-1}(S)$ has $C(y)>0$ elements. So there is some point $p\in S^2$, with $F(p)=S, p\neq N$ so
+        $$P(\varphi ^{-1}_N(p))=0$$
+        \qedhere
+    \end{enumerate}
+\end{enumerate}
+
+\begin{lemma}
+  If $X$ is discrete and compact, $X$ is finite.
+\end{lemma}
+\begin{proof}
+  Cover $X$ with
+  %curly u
+    $$u=\{\{x\} |x\in X \}$$
+  only subcover is $u$ itself.
+\end{proof}
+
+\begin{theorem}
+  \textbf{Stack of records theorem}
+  \newline $f: X \to Y$ smooth,
+  \newline $dim X = dim Y$
+  \newline $f$ is a submersion at all points. $X$ is compact. Then for any $y\in Y$, $f^{-1}(y)$ is a finite set, $f^{-1}(y)=\{x_1,\dots,x_N\}$ and there exists open sets
+    $$x_i \in u_i \subseteq X, 1\leq i \leq N$$
+    $$y\in V \subseteq Y$$
+    Drawing
+  \begin{enumerate}[(1)]
+    \item $f\rvert_{u_i}: u_i\to V$ is a diffeo
+    \item $u_i \cap u_j=\emptyset$ if $i\neq j$
+    \item $f^{-1}(V)=\cup_{i=1}^N u_i$
+  \end{enumerate}
+    $$f^{-1}(y)={x_1,\dots, x_N}$$
+    $$\forall z\in V, f^{-1}(z)=\{f^{-1}\rvert_{u_1}(z),f^{-1}\rvert_{u_2}(z),\dots,f^{-1}\rvert_{u_N}(z)\}$$
+\end{theorem}
+\begin{proof}
+  $f^{-1}(y)$ is a $0$-manifold, as $y$ is a regular valure for $f$, $dim X = dim Y$.
+  \newline Compactness of $X \Rightarrow f^{-1}(y)$ is compact, so it's finite, $f^{-1}(y)=\{x_1,\dots,x_N\}$.
+  \newline First off, $Df_{x_i}:T_{x_i}X \to T_yY$ is surjective $\Rightarrow Df_{x_i}$ is isomorphism
+    $$\Rightarrow f \text{ is a local diffeo at }x_i$$
+  So we find $x_i\in u_i\subseteq X$ open, $y\in v_i\subseteq Y$ open
+    $$f\rvert_{u_i}:u_i \to v_i \text{ diffeo.}$$
+  Take $V=\cap_{i=1}^N v_i$. Redefine $u_i=f\rvert_{u_i}^{-1}(V)$.
+  \newline How to ensure $u_i \cap u_j=\emptyset$ when $i\neq j$?
+  \newline There are open balls $B^n(x_i;\varepsilon)$, so that
+    $$B^n(x_i;\varepsilon)\cap B^n(x_j;\varepsilon)=\emptyset \text{ when }i\neq j$$
+    $X$ is compact, $X\setminus \left(\cup_{i=1}^Nu_i\right)$ closed, so compact.
+      $$f(X\setminus \left(\cup_{i=1}^Nu_i\right)) \text{ is compact},$$
+      $$Y\setminus f(X\setminus \left(\cup_{i=1}^Nu_i\right))\text{ open}.$$
+    Redefine $V=V\cap \left(Y\setminus f(X\setminus \left(\cup_{i=1}^Nu_i\right))\right)$
+    \newline Redefine $u_i=f^{-1}\rvert_{u_i}(V)$.
+\end{proof}
