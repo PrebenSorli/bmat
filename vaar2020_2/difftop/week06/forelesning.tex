@@ -72,7 +72,7 @@ Then $f ^{-1}(Z)$ will be a manifold at $x$ if $Image(Df_x)+T_yZ=T_yY$. (entirel
   $$\Gamma(f)^{-1}(Z) \Leftrightarrow \{x\in \R | f(x)=0\}$$
   This is an intersection problem. $\Gamma(f)$ not transverse to $Z$.
   \begin{center}
-  \includegraphics[width=0.30\paperwidth]{vaar2020/difftop/week06/gammaf}
+  \includegraphics[width=0.30\paperwidth]{difftop/week06/gammaf}
   \end{center}
   $$\Gamma(f)^{-1}(Z)=\{x| x^n = 0\} \Leftrightarrow \{(x,x^n) | x\in \R\} \cap \{(x,0)| x\in \R\}$$
   $$\Gamma(f)\cap z_0= \emptyset$$
@@ -105,7 +105,7 @@ In $\R^2$, any teo points $x_0, x_1 \in \R^2$ are connected by $F(t)=x_0+t(x_1-x
   $F(x,t)=(1-t)f(x), F: X\times \R \to \R^n, F(x,0)=f(x), F(x,1)=0$.
 \end{proof}
 \begin{center}
-      \includegraphics[width=0.30\paperwidth]{vaar2020/difftop/week06/s1toR2}
+      \includegraphics[width=0.30\paperwidth]{difftop/week06/s1toR2}
 \end{center}
 \begin{example}
   $f:S^1\to \R^2\setminus\{0\}: (x,y)\mapsto (x,y)$.
@@ -120,7 +120,7 @@ In $\R^2$, any teo points $x_0, x_1 \in \R^2$ are connected by $F(t)=x_0+t(x_1-x
 
 $X$ is contractable if we have
 \begin{center}
-    \includegraphics[width=0.40\paperwidth]{vaar2020/difftop/week06/contraction}
+    \includegraphics[width=0.40\paperwidth]{difftop/week06/contraction}
 \end{center}
 $f \circ 0(x)= f(0)=x_0 \in X$, we need a homotopy
 \newline $F: X\times[0,1] \to X$, $F(x,0)=x$ and $F(x,1)=x_0$
@@ -142,8 +142,8 @@ $$\R^n \sim \R^0 , \forall n$$
 \end{remark}
 
   \begin{center}
-    \includegraphics[width=0.40\paperwidth]{vaar2020/difftop/week06/equivrel}
-    \includegraphics[width=0.40\paperwidth]{vaar2020/difftop/week06/equivrel2}
+    \includegraphics[width=0.40\paperwidth]{difftop/week06/equivrel}
+    \includegraphics[width=0.40\paperwidth]{difftop/week06/equivrel2}
   \end{center}
 
 \begin{definition}
@@ -152,14 +152,14 @@ $$\R^n \sim \R^0 , \forall n$$
 \begin{example}
   $\mathcal{T}=\{f: \R^1 \to \R^2 | f(\R^1) \cap \{(x,0) | x\in \R \} \neq \emptyset \}$ Stable family?
     \begin{center}
-      \includegraphics[width=0.30\paperwidth]{vaar2020/difftop/week06/stableEx}
+      \includegraphics[width=0.30\paperwidth]{difftop/week06/stableEx}
     \end{center}
 \end{example}
 
 \begin{example}
   $f(x)=(x,0)$
   \begin{center}
-    \includegraphics[width=0.30\paperwidth]{vaar2020/difftop/week06/stableEx2}
+    \includegraphics[width=0.30\paperwidth]{difftop/week06/stableEx2}
   \end{center}
   $f \in \mathcal{T}$ but $F(x,t)=(x,t)$ wich is smooth. Then if $t\neq 0, f_t(\R^1)= \{(x,t) | x\in \R \}$ is disjoint from $x$-axis.
 \end{example}
@@ -186,7 +186,7 @@ $$\R^n \sim \R^0 , \forall n$$
   \newline The idea is $(Df_t)_x: T_xX \to Tf_t(x)Y$
   \newline We know that in some coords around $(x,0) \in X \times [0,1]$, (basically looks like $u \times [0, \varepsilon), x \in u\subseteq X$ open).
   \begin{center}
-    \includegraphics[width=0.30\paperwidth]{vaar2020/difftop/week06/coords}
+    \includegraphics[width=0.30\paperwidth]{difftop/week06/coords}
   \end{center}
   , get coords around $f(x)\in Y, V\subseteq Y.$).
   \newline So $(Df_t)_x$ is expressible as a matrix in this open set $(Df_0)_x$ is injective if $f_0$ is an immerison. So we can capture this as there is a $k \times k$-submatrix of $(Df_0)_x$ that has nonzero determinant.
@@ -204,7 +204,7 @@ $$\R^n \sim \R^0 , \forall n$$
      \newline \textbf{Modification:}
      $V_x \times [0, \varepsilon_x) \subseteq u_x$, so $V_x \subseteq X$ open.
         \begin{center}
-          \includegraphics[width=0.30\paperwidth]{vaar2020/difftop/week06/illustr}
+          \includegraphics[width=0.30\paperwidth]{difftop/week06/illustr}
         \end{center}
       $X\times \{0\} \subseteq \cup_{x\in X} V_x \times [0, \varepsilon_x)$, so $X \times \{0\} \subseteq \cup_{i=1}^n V_i \times[0, \varepsilon_i)$. Conclusion $ \varepsilon = min\{\varepsilon_i | 1 \leq i \leq n \}$ then for all $t<\varepsilon Df_t$ is injective. \qedhere
 \end{proof}
